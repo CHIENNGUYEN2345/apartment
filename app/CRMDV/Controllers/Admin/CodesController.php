@@ -20,7 +20,7 @@ class CodesController extends CURDBaseController
     protected $module = [
         'code' => 'codes',
         'table_name' => 'codes',
-        'label' => 'Code',
+        'label' => 'Bảng hàng',
         'modal' => '\App\CRMDV\Models\Codes',
         'list' => [
             ['name' => 'image', 'type' => 'image', 'label' => 'Ảnh'],
@@ -35,6 +35,21 @@ class CodesController extends CURDBaseController
         ],
         'form' => [
             'general_tab' => [
+                ['name' => 'loai_hinh', 'type' => 'select', 'options' => [
+                    '' => '',
+                    'Loại hình 1' => 'Loại hình 1',
+                    'Loại hình 2' => 'Loại hình 2',
+
+//                    'Đã ký HĐ' => 'Đã ký HĐ',
+                ], 'label' => 'Loại hình', 'group_class' => 'col-md-6'],
+                ['name' => 'loai_nha_dat', 'type' => 'select', 'options' => [
+                    '' => '',
+                    'Loại  1' => 'Loại  1',
+                    'Loại  2' => 'Loại  2',
+
+//                    'Đã ký HĐ' => 'Đã ký HĐ',
+                ], 'label' => 'Loại nhà đất', 'group_class' => 'col-md-6'],
+                ['name' => 'service_id', 'type' => 'select2_model', 'label' => 'Dự án', 'model' => \App\CRMDV\Models\Service::class, 'object' => 'service', 'display_field' => 'name_vi', 'class' => ''],
                 ['name' => 'name', 'type' => 'text', 'class' => '', 'label' => 'Tên', 'group_class' => 'col-md-6'],
                 ['name' => 'link', 'type' => 'text', 'class' => 'required', 'label' => 'Link', 'des' => 'Link website. VD: https://dienmayxanh.vn', 'group_class' => 'col-md-6'],
                 ['name' => 'multi_cat', 'type' => 'custom', 'field' => 'CRMDV.form.fields.multi_cat', 'label' => 'Danh mục sản phẩm', 'model' => Category::class,
@@ -72,7 +87,7 @@ class CodesController extends CURDBaseController
                 ['name' => 'image_extra', 'type' => 'multiple_image_dropzone', 'count' => '6', 'label' => 'Thêm nhiều ảnh khác'],
             ],
             'des_tab' => [
-                ['name' => 'intro', 'type' => 'textarea_editor', 'class' => '', 'label' => 'Mô tả qua về tính năng'],
+                ['name' => 'intro', 'type' => 'textarea_editor', 'class' => '', 'label' => 'Nội dung chi tiết'],
                 ['name' => 'content', 'type' => 'textarea_editor', 'class' => '', 'label' => 'Mô tả chi tiết tính năng'],
             ],
         ]

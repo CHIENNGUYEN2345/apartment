@@ -14,4 +14,7 @@ class Codes extends Model
         return $this->belongsTo(Bill::class, 'bill_id', 'id');
     }
 
+    public function service() {
+        return $this->belongsTo(Service::class, 'service_id', 'id');
+    }
 }
