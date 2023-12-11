@@ -15,7 +15,7 @@ class ServiceController extends CURDBaseController
     protected $module = [
         'code' => 'service',
         'table_name' => 'services',
-        'label' => 'Dịch vụ',
+        'label' => 'Dự án',
         'modal' => '\App\CRMDV\Models\Service',
         'list' => [
             ['name' => 'name_vi', 'type' => 'text_edit', 'label' => 'Tên', 'sort' => true],

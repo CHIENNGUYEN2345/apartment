@@ -697,22 +697,22 @@ class CodesController extends CURDBaseController
     {
         //  lấy id các đơn hàng đang làm
         $bill_ids_dang_lam = BillProgress::whereNotIn('status', ['Kết thúc', 'Tạm dừng', 'Khách xác nhận xong', '', null])
-            ->where('status', '!=', null)->pluck('bill_id')->toArray();
+                                    ->where('status', '!=', null)->pluck('bill_id')->toArray();
 
 
         //  Lấy các bill chua duoc update sang codes
         $count_bill_create = 0;
         $bills = \App\CRMDV\Models\Bill::select('id', 'domain', 'service_id', 'update_to_codes')
-            ->where('update_to_codes', 0)
-            ->whereNotIn('id', $bill_ids_dang_lam)  //  không lấy các đơn đang làm
-            ->where(function ($query) { //  chỉ lấy các tên miền chuẩn
-                $query->orWhere('domain', 'like', '%.com%');
-                $query->orWhere('domain', 'like', '%.vn%');
-                $query->orWhere('domain', 'like', '%.com.vn%');
-                $query->orWhere('domain', 'like', '%.edu.vn%');
-                $query->orWhere('domain', 'like', '%.net%');
-            })
-            ->get();
+                                ->where('update_to_codes', 0)
+                                ->whereNotIn('id', $bill_ids_dang_lam)  //  không lấy các đơn đang làm
+                                ->where(function ($query) { //  chỉ lấy các tên miền chuẩn
+                                    $query->orWhere('domain', 'like', '%.com%');
+                                    $query->orWhere('domain', 'like', '%.vn%');
+                                    $query->orWhere('domain', 'like', '%.com.vn%');
+                                    $query->orWhere('domain', 'like', '%.edu.vn%');
+                                    $query->orWhere('domain', 'like', '%.net%');
+                                })
+                                ->get();
 
         foreach ($bills as $bill) {
             if (Codes::where('link', 'like', '%' . $bill->domain . '%')->count() == 0) {
@@ -751,7 +751,7 @@ class CodesController extends CURDBaseController
                     $file_name = explode('//', $code->link)[1];
                     $file_name = str_replace('/', '', $file_name);
                     $file_name = str_replace('.', '_', $file_name);
-                    //                dd($file_name);
+    //                dd($file_name);
                     if (!file_exists(base_path() . '/public_html/ldp-template/' . $file_name . '.html')) {
 
                         //  Nếu chưa có lưu file .html thì lưu lại
@@ -764,15 +764,15 @@ class CodesController extends CURDBaseController
                             fwrite($myfile, $txt);
                             fclose($myfile);
 
-                            //                        $v = file_get_contents($code->link);
-                            //                        file_put_contents(base_path() . '/public_html/ldp-template/' . $file_name . '.html', $v);
+    //                        $v = file_get_contents($code->link);
+    //                        file_put_contents(base_path() . '/public_html/ldp-template/' . $file_name . '.html', $v);
                             $count ++;
                         } catch (\Exception $ex) {
                             dd($ex->getMessage());
                         }
                     }
                 }
-
+                
             } else {
 //                dd($code);
             }
