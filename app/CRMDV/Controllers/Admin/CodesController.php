@@ -37,58 +37,71 @@ class CodesController extends CURDBaseController
             'general_tab' => [
                 ['name' => 'loai_hinh', 'type' => 'select', 'options' => [
                     '' => '',
-                    'Loại hình 1' => 'Loại hình 1',
-                    'Loại hình 2' => 'Loại hình 2',
+                    'Mua bán' => 'Mua bán',
+                    'Cho thuê' => 'Cho thuê',
 
 //                    'Đã ký HĐ' => 'Đã ký HĐ',
                 ], 'label' => 'Loại hình', 'group_class' => 'col-md-6'],
                 ['name' => 'loai_nha_dat', 'type' => 'select', 'options' => [
                     '' => '',
-                    'Loại  1' => 'Loại  1',
-                    'Loại  2' => 'Loại  2',
+                    'Loại  1' => 'Nhà đất riêng lẻ',
+                    'Loại  2' => 'Liền kề - biệt thự',
+                    'Loại  3' => 'Chung cư',
 
 //                    'Đã ký HĐ' => 'Đã ký HĐ',
                 ], 'label' => 'Loại nhà đất', 'group_class' => 'col-md-6'],
                 ['name' => 'service_id', 'type' => 'select2_model', 'label' => 'Dự án', 'model' => \App\CRMDV\Models\Service::class, 'object' => 'service', 'display_field' => 'name_vi', 'class' => ''],
-                ['name' => 'name', 'type' => 'text', 'class' => '', 'label' => 'Tên', 'group_class' => 'col-md-6'],
-                ['name' => 'link', 'type' => 'text', 'class' => 'required', 'label' => 'Link', 'des' => 'Link website. VD: https://dienmayxanh.vn', 'group_class' => 'col-md-6'],
-                ['name' => 'multi_cat', 'type' => 'custom', 'field' => 'CRMDV.form.fields.multi_cat', 'label' => 'Danh mục sản phẩm', 'model' => Category::class,
-                    'object' => 'category_product', 'where' => 'type in (10)', 'display_field' => 'name', 'multiple' => true, 'group_class' => 'col-md-6', 'des' => 'Danh mục đầu tiên chọn là danh mục chính'],
-                ['name' => 'tags', 'type' => 'tags', 'label' => 'Ngành hàng', 'model' => Tag::class, 'where' => "type = 'code'", 'group_class' => 'col-md-6'],
-                ['name' => 'source', 'type' => 'checkbox_multiple', 'options' =>
-                    [
-                        'wordpress' => 'Wordpress',
-                        'ladipage' => 'Ladipage',
-                        'laravel' => 'Laravel',
-                        // 'magento' => 'Magento',
-                        'react native' => 'react native',
-                        'native' => 'native',
-                        'flutter' => 'flutter',
-                        'khác' => 'Khác',
-                    ], 'class' => 'required', 'multiple' => true, 'label' => 'Mã nguồn', 'group_class' => 'col-md-12',],
-                ['name' => 'price_setup', 'type' => 'price_vi', 'class' => 'required', 'group_class' => 'col-md-4', 'label' => 'Giá bán code', 'des' => 'Bán code, setup lên hosting cho khách'],
-                ['name' => 'price_interface_change', 'type' => 'price_vi', 'class' => '', 'group_class' => 'col-md-4', 'label' => 'Giá thay giao diện  1 chút', 'des' => 'Sửa màu, di chuyển khối, làm cho khác web cũ đi 1 chút'],
-                ['name' => 'price_interface_change_all', 'type' => 'price_vi', 'class' => '', 'group_class' => 'col-md-4', 'label' => 'Giá thay giao diện toàn bộ', 'des' => 'Tìm theme trên mạng và thay vào'],
-                ['name' => 'owned', 'type' => 'radio', 'class' => '', 'label' => 'Lưu trữ tại', 'value' => 'server mình', 'options' => [
-                    'server mình' => 'Trên server mình',
-                    'Mẫu nước ngoài' => 'Mẫu nước ngoài',
-                    'trên mạng' => 'Kiếm trên mạng',
-                    'asite.vn' => 'asite.vn',
-                    'bizhostvn.com' => 'bizhostvn.com',
-                    'mauwebsitedep.net' => 'mauwebsitedep.net',
-                    'webrt.vn' => 'webrt.vn',
-                ]],
-                ['name' => 'status', 'type' => 'checkbox', 'label' => 'admin.active', 'value' => 1, 'group_class' => 'col-md-4'],
-                ['name' => 'created_by_name', 'type' => 'text', 'class' => '', 'label' => 'Tác giả', 'group_class' => 'col-md-4'],
-                ['name' => 'link_ios', 'type' => 'text', 'class' => '', 'label' => 'Link ios', 'group_class' => 'col-md-4'],        
+                ['name' => 'province_id', 'type' => 'select_location', 'label' => 'Chọn địa điểm', 'group_class' => 'col-md-9'],
+                ['name' => 'name', 'type' => 'text', 'class' => '', 'label' => 'Đường', 'group_class' => 'col-md-12'],
+                ['name' => 'link', 'type' => 'text', 'class' => 'required', 'label' => 'Địa chỉ', 'group_class' => 'col-md-12'],
+//                ['name' => 'multi_cat', 'type' => 'custom', 'field' => 'CRMDV.form.fields.multi_cat', 'label' => 'Danh mục sản phẩm', 'model' => Category::class,
+//                    'object' => 'category_product', 'where' => 'type in (10)', 'display_field' => 'name', 'multiple' => true, 'group_class' => 'col-md-6', 'des' => 'Danh mục đầu tiên chọn là danh mục chính'],
+//                ['name' => 'tags', 'type' => 'tags', 'label' => 'Ngành hàng', 'model' => Tag::class, 'where' => "type = 'code'", 'group_class' => 'col-md-6'],
+//                ['name' => 'source', 'type' => 'checkbox_multiple', 'options' =>
+//                    [
+//                        'wordpress' => 'Wordpress',
+//                        'ladipage' => 'Ladipage',
+//                        'laravel' => 'Laravel',
+//                        // 'magento' => 'Magento',
+//                        'react native' => 'react native',
+//                        'native' => 'native',
+//                        'flutter' => 'flutter',
+//                        'khác' => 'Khác',
+//                    ], 'class' => 'required', 'multiple' => true, 'label' => 'Mã nguồn', 'group_class' => 'col-md-12',],
+//                ['name' => 'price_setup', 'type' => 'price_vi', 'class' => 'required', 'group_class' => 'col-md-4', 'label' => 'Giá bán code', 'des' => 'Bán code, setup lên hosting cho khách'],
+//                ['name' => 'price_interface_change', 'type' => 'price_vi', 'class' => '', 'group_class' => 'col-md-4', 'label' => 'Giá thay giao diện  1 chút', 'des' => 'Sửa màu, di chuyển khối, làm cho khác web cũ đi 1 chút'],
+//                ['name' => 'price_interface_change_all', 'type' => 'price_vi', 'class' => '', 'group_class' => 'col-md-4', 'label' => 'Giá thay giao diện toàn bộ', 'des' => 'Tìm theme trên mạng và thay vào'],
+//                ['name' => 'owned', 'type' => 'radio', 'class' => '', 'label' => 'Lưu trữ tại', 'value' => 'server mình', 'options' => [
+//                    'server mình' => 'Trên server mình',
+//                    'Mẫu nước ngoài' => 'Mẫu nước ngoài',
+//                    'trên mạng' => 'Kiếm trên mạng',
+//                    'asite.vn' => 'asite.vn',
+//                    'bizhostvn.com' => 'bizhostvn.com',
+//                    'mauwebsitedep.net' => 'mauwebsitedep.net',
+//                    'webrt.vn' => 'webrt.vn',
+//                ]],
+//                ['name' => 'status', 'type' => 'checkbox', 'label' => 'admin.active', 'value' => 1, 'group_class' => 'col-md-4'],
+//                ['name' => 'created_by_name', 'type' => 'text', 'class' => '', 'label' => 'Tác giả', 'group_class' => 'col-md-4'],
+//                ['name' => 'link_ios', 'type' => 'text', 'class' => '', 'label' => 'Link ios', 'group_class' => 'col-md-4'],
             ],
             'remind_tab' => [
                 ['name' => 'image', 'type' => 'file_image', 'label' => 'Ảnh đại diện'],
                 ['name' => 'image_extra', 'type' => 'multiple_image_dropzone', 'count' => '6', 'label' => 'Thêm nhiều ảnh khác'],
             ],
             'des_tab' => [
+                ['name' => 'created_by_name', 'type' => 'price_vi', 'class' => '', 'label' => 'Giá bán niêm yết', 'group_class' => 'col-md-4'],
+                ['name' => 'link_ios', 'type' => 'price_vi', 'class' => '', 'label' => 'Giá hạ chào', 'group_class' => 'col-md-4'],
                 ['name' => 'intro', 'type' => 'textarea_editor', 'class' => '', 'label' => 'Nội dung chi tiết'],
-                ['name' => 'content', 'type' => 'textarea_editor', 'class' => '', 'label' => 'Mô tả chi tiết tính năng'],
+//                ['name' => 'content', 'type' => 'textarea_editor', 'class' => '', 'label' => 'Mô tả chi tiết tính năng'],
+                ['name' => 'profile', 'type' => 'text', 'label' => 'Họ tên chủ nhà', 'group_class' => 'col-md-6'],
+                ['name' => 'need', 'type' => 'text', 'label' => 'Số điện thoại chủ nhà', 'group_class' => 'col-md-6'],
+                ['name' => 'reason_refusal', 'type' => 'text', 'label' => 'Số giấy chứng nhận vào sổ', 'group_class' => 'col-md-6'],
+                ['name' => 'advise_suggest', 'type' => 'text', 'label' => 'Số seri', 'group_class' => 'col-md-6'],
+                ['name' => 'dia_chi_tren_so', 'type' => 'text', 'label' => 'Địa chỉ trên số', 'group_class' => 'col-md-12'],
+                ['name' => 'so_do_va_hop_dong_chu_nha', 'type' => 'multiple_image_dropzone', 'count' => '1', 'label' => 'Sơ đồ và hợp đồng chủ nhà'],
+                ['name' => 'trang_thai_1', 'type' => 'checkbox', 'label' => 'Trạng thái tin xác thực', 'value' => 1, 'group_class' => 'col-md-4'],
+                ['name' => 'trang_thai_2', 'type' => 'checkbox', 'label' => 'Trạng thái tin xác thực', 'value' => 1, 'group_class' => 'col-md-4'],
+                ['name' => 'da_ban', 'type' => 'checkbox', 'label' => 'Đã bán', 'value' => 1, 'group_class' => 'col-md-4'],
             ],
         ]
     ];
@@ -684,22 +697,22 @@ class CodesController extends CURDBaseController
     {
         //  lấy id các đơn hàng đang làm
         $bill_ids_dang_lam = BillProgress::whereNotIn('status', ['Kết thúc', 'Tạm dừng', 'Khách xác nhận xong', '', null])
-                                    ->where('status', '!=', null)->pluck('bill_id')->toArray();
+            ->where('status', '!=', null)->pluck('bill_id')->toArray();
 
 
         //  Lấy các bill chua duoc update sang codes
         $count_bill_create = 0;
         $bills = \App\CRMDV\Models\Bill::select('id', 'domain', 'service_id', 'update_to_codes')
-                                ->where('update_to_codes', 0)
-                                ->whereNotIn('id', $bill_ids_dang_lam)  //  không lấy các đơn đang làm
-                                ->where(function ($query) { //  chỉ lấy các tên miền chuẩn
-                                    $query->orWhere('domain', 'like', '%.com%');
-                                    $query->orWhere('domain', 'like', '%.vn%');
-                                    $query->orWhere('domain', 'like', '%.com.vn%');
-                                    $query->orWhere('domain', 'like', '%.edu.vn%');
-                                    $query->orWhere('domain', 'like', '%.net%');
-                                })
-                                ->get();
+            ->where('update_to_codes', 0)
+            ->whereNotIn('id', $bill_ids_dang_lam)  //  không lấy các đơn đang làm
+            ->where(function ($query) { //  chỉ lấy các tên miền chuẩn
+                $query->orWhere('domain', 'like', '%.com%');
+                $query->orWhere('domain', 'like', '%.vn%');
+                $query->orWhere('domain', 'like', '%.com.vn%');
+                $query->orWhere('domain', 'like', '%.edu.vn%');
+                $query->orWhere('domain', 'like', '%.net%');
+            })
+            ->get();
 
         foreach ($bills as $bill) {
             if (Codes::where('link', 'like', '%' . $bill->domain . '%')->count() == 0) {
@@ -738,7 +751,7 @@ class CodesController extends CURDBaseController
                     $file_name = explode('//', $code->link)[1];
                     $file_name = str_replace('/', '', $file_name);
                     $file_name = str_replace('.', '_', $file_name);
-    //                dd($file_name);
+                    //                dd($file_name);
                     if (!file_exists(base_path() . '/public_html/ldp-template/' . $file_name . '.html')) {
 
                         //  Nếu chưa có lưu file .html thì lưu lại
@@ -751,15 +764,15 @@ class CodesController extends CURDBaseController
                             fwrite($myfile, $txt);
                             fclose($myfile);
 
-    //                        $v = file_get_contents($code->link);
-    //                        file_put_contents(base_path() . '/public_html/ldp-template/' . $file_name . '.html', $v);
+                            //                        $v = file_get_contents($code->link);
+                            //                        file_put_contents(base_path() . '/public_html/ldp-template/' . $file_name . '.html', $v);
                             $count ++;
                         } catch (\Exception $ex) {
                             dd($ex->getMessage());
                         }
                     }
                 }
-                
+
             } else {
 //                dd($code);
             }
