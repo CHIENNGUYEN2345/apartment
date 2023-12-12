@@ -28,6 +28,7 @@ class BaoCaoDanKhachController extends CURDBaseController
         ],
         'form' => [
             'general_tab' => [
+                ['name' => 'code_id', 'type' => 'select2_ajax_model', 'label' => 'Bảng hàng', 'model' => Codes::class, 'object' => 'codes', 'display_field' => 'name'],
                 ['name' => 'khach_name', 'type' => 'text', 'class' => 'required', 'label' => 'Tên khách', 'group_class' => 'col-md-6'],
                 ['name' => 'khach_tel', 'type' => 'text', 'class' => 'required', 'label' => 'SĐT', 'group_class' => 'col-md-4'],
                 ['name' => 'note', 'type' => 'textarea', 'class' => '', 'label' => 'Ghi chú', 'group_class' => 'col-md-12'],
