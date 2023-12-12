@@ -51,8 +51,9 @@ class TimekeeperController extends CURDBaseController
             'label' => 'Thời gian chấm',
             'type' => 'select',
             'options' => [
-                'thang_truoc' => 'Tháng trước',
                 'thang_nay' => 'Tháng này',
+                'thang_truoc' => 'Tháng trước',
+
                 'khong' => 'Không lọc',
             ],
             'query_type' => 'custom',
@@ -101,8 +102,8 @@ class TimekeeperController extends CURDBaseController
 
         if (@$request->choose_time != null) {
             if ($request->choose_time == 'thang_truoc') {
-                $query = $query->where('time', '>', date('Y-m-01 00:00:00', strtotime(date('Y-m')." -1 month")))
-                                ->where('time', '<', date('Y-m-t 23:59:00', strtotime(date('Y-m')." -1 month")));
+                $query = $query->where('time', '>', date('Y-m-01 00:00:00', strtotime(date('Y-m')." -0 month")))
+                                ->where('time', '<', date('Y-m-t 23:59:00', strtotime(date('Y-m')." -0 month")));
             } elseif ($request->choose_time == 'thang_nay') {
                 $query = $query->where('time', '>', date('Y-m-01 00:00:00'))
                                 ->where('time', '<', date('Y-m-t 23:59:00'));
@@ -125,8 +126,8 @@ class TimekeeperController extends CURDBaseController
         
         if (@$request->choose_time == null) {
             //  Nếu không lọc theo thời gian thì mặc định chọn tháng trước
-            $query = $query->where('time', '>', date('Y-m-01 00:00:00', strtotime(date('Y-m')." -1 month")))
-                                ->where('time', '<', date('Y-m-t 23:59:00', strtotime(date('Y-m')." -1 month")));
+            $query = $query->where('time', '>', date('Y-m-01 00:00:00', strtotime(date('Y-m')." -0 month")))
+                                ->where('time', '<', date('Y-m-t 23:59:00', strtotime(date('Y-m')." -0 month")));
         }
 
 

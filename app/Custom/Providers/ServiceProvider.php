@@ -87,7 +87,9 @@ class ServiceProvider
         \Eventy::addFilter('permission.check', function ($per_check) {
             $per_check = array_merge($per_check, [
                 'landingpage_view', 'landingpage_add', 'landingpage_edit', 'landingpage_delete', 'landingpage_publish',
-                ]);
+                'bao_cao_dan_khach_view', 'bao_cao_dan_khach_add', 'bao_cao_dan_khach_edit', 'bao_cao_dan_khach_delete',
+
+            ]);
             return $per_check;
         }, 1, 1);
     }

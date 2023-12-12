@@ -66,6 +66,7 @@ class CRMDVServiceProvider
                 'receipt_payment_view',
                 'dhbill_view', 'dhbill_edit', 
                 // 'service_view', 'service_add', 'service_edit', 'service_delete',
+                'service',
                 'codes_view', 'codes_add', 'codes_edit', 'codes_delete',
                 'dashboard','remind',
                 'bill_histories_delete',

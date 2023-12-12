@@ -105,16 +105,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
 
     //  Dịch vụ
     Route::group(['prefix' => 'service'], function () {
-        Route::get('', '\App\CRMDV\Controllers\Admin\ServiceController@getIndex')->name('service')->middleware('permission:service_view');
-        Route::match(array('GET', 'POST'), 'add', '\App\CRMDV\Controllers\Admin\ServiceController@add')->middleware('permission:service_add');
-        Route::get('delete/{id}', '\App\CRMDV\Controllers\Admin\ServiceController@delete')->middleware('permission:service_delete');
-        Route::post('multi-delete', '\App\CRMDV\Controllers\Admin\ServiceController@multiDelete')->middleware('permission:service_delete');
-        Route::get('search-for-select2', '\App\CRMDV\Controllers\Admin\ServiceController@searchForSelect2')->name('service.search_for_select2')->middleware('permission:service_view');
+        Route::get('', '\App\CRMDV\Controllers\Admin\ServiceController@getIndex')->name('service')->middleware('permission:service');
+        Route::match(array('GET', 'POST'), 'add', '\App\CRMDV\Controllers\Admin\ServiceController@add')->middleware('permission:service');
+        Route::get('delete/{id}', '\App\CRMDV\Controllers\Admin\ServiceController@delete')->middleware('permission:service');
+        Route::post('multi-delete', '\App\CRMDV\Controllers\Admin\ServiceController@multiDelete')->middleware('permission:service');
+        Route::get('search-for-select2', '\App\CRMDV\Controllers\Admin\ServiceController@searchForSelect2')->name('service.search_for_select2')->middleware('permission:service');
 
-        Route::get('get-info', '\App\CRMDV\Controllers\Admin\ServiceController@get_info')->middleware('permission:service_view');
+        Route::get('get-info', '\App\CRMDV\Controllers\Admin\ServiceController@get_info')->middleware('permission:service');
 
-        Route::get('edit/{id}', '\App\CRMDV\Controllers\Admin\ServiceController@update')->middleware('permission:service_view');
-        Route::post('edit/{id}', '\App\CRMDV\Controllers\Admin\ServiceController@update')->middleware('permission:service_edit');
+        Route::get('edit/{id}', '\App\CRMDV\Controllers\Admin\ServiceController@update')->middleware('permission:service');
+        Route::post('edit/{id}', '\App\CRMDV\Controllers\Admin\ServiceController@update')->middleware('permission:service');
     });
 
     //  Thống kê

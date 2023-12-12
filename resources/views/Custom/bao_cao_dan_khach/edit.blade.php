@@ -21,7 +21,7 @@
                                 <span class="kt-hidden-mobile">Quay lại</span>
                             </a>
                             <div class="btn-group">
-                                @if(in_array($module['code'] . '_edit', $permissions))
+                                @if(in_array('super_admin', $permissions))
                                     <button type="submit" class="btn btn-brand">
                                         <i class="la la-check"></i>
                                         <span class="kt-hidden-mobile">Lưu</span>
@@ -75,7 +75,6 @@
                     <!--begin::Form-->
                     <div class="kt-form">
                         <div class="kt-portlet__body">
-
                             <div class="kt-section kt-section--first">
                                 @foreach($module['form']['general_tab'] as $field)
                                     @php
@@ -86,7 +85,7 @@
                                         @if($field['type'] == 'custom')
                                             @include($field['field'], ['field' => $field])
                                         @else
-                                            <label for="{{ $field['name'] }}">{{ @$field['label'] }} @if(strpos(@$field['class'], 'require') !== false)
+                                            <label for="{{ $field['name'] }}">{{ trans(@$field['label']) }} @if(strpos(@$field['class'], 'require') !== false)
                                                     <span class="color_btd">*</span>@endif</label>
                                             <div class="col-xs-12">
                                                 @include(config('core.admin_theme').".form.fields.".$field['type'], ['field' => $field])
@@ -104,92 +103,10 @@
                 <!--end::Portlet-->
             </div>
             <div class="col-xs-12 col-md-4">
-                <div class="kt-portlet" data-ktportlet="true" id="kt_portlet_tools_1">
-                    <div class="kt-portlet__head">
-                        <div class="kt-portlet__head-label">
-                            <h3 class="kt-portlet__head-title">
-                                Ảnh
-                            </h3>
-                        </div>
-                        <div class="kt-portlet__head-group pt-3">
-                            <a title="Xem thêm" href="#" data-ktportlet-tool="toggle"
-                               class="btn btn-sm btn-icon btn-clean btn-icon-md"><i class="la la-angle-down"></i></a>
-                        </div>
-                    </div>
-                    <!--begin::Form-->
-                    <div class="kt-form">
-                        <div class="kt-portlet__body">
-                            <div class="kt-section kt-section--first">
-                                @foreach($module['form']['remind_tab'] as $field)
-                                    @php
-                                        $field['value'] = @$result->{$field['name']};
-                                    @endphp
-                                    <div class="form-group-div form-group {{ @$field['group_class'] }}"
-                                         id="form-group-{{ $field['name'] }}">
-                                        @if($field['type'] == 'custom')
-                                            @include($field['field'], ['field' => $field])
-                                        @else
-                                            <label for="{{ $field['name'] }}">{{ @$field['label'] }} @if(strpos(@$field['class'], 'require') !== false)
-                                                    <span class="color_btd">*</span>@endif</label>
-                                            <div class="col-xs-12">
-                                                @include(config('core.admin_theme').".form.fields.".$field['type'], ['field' => $field])
-                                                <span class="form-text text-muted">{!! @$field['des'] !!}</span>
-                                                <span class="text-danger">{{ $errors->first($field['name']) }}</span>
-                                            </div>
-                                        @endif
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    <!--end::Form-->
 
-                </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-xs-12 col-md-12">
-                <!--begin::Portlet-->
-                <div class="kt-portlet">
-                    <div class="kt-portlet__head">
-                        <div class="kt-portlet__head-label">
-                            <h3 class="kt-portlet__head-title">
-                                Mô tả
-                            </h3>
-                        </div>
-                    </div>
-                    <!--begin::Form-->
-                    <div class="kt-form">
-                        <div class="kt-portlet__body">
-                            <div class="kt-section kt-section--first">
-                                @foreach($module['form']['des_tab'] as $field)
-                                    @php
-                                        $field['value'] = @$result->{$field['name']};
-                                    @endphp
-                                    <div class="form-group-div form-group {{ @$field['group_class'] }}"
-                                         id="form-group-{{ $field['name'] }}">
-                                        @if($field['type'] == 'custom')
-                                            @include($field['field'], ['field' => $field])
-                                        @else
-                                            <label for="{{ $field['name'] }}">{{ @$field['label'] }} @if(strpos(@$field['class'], 'require') !== false)
-                                                    <span class="color_btd">*</span>@endif</label>
-                                            <div class="col-xs-12">
-                                                @include(config('core.admin_theme').".form.fields.".$field['type'], ['field' => $field])
-                                                <span class="form-text text-muted">{!! @$field['des'] !!}</span>
-                                                <span class="text-danger">{{ $errors->first($field['name']) }}</span>
-                                            </div>
-                                        @endif
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    <!--end::Form-->
-                </div>
-                <!--end::Portlet-->
-            </div>
-        </div>
     </form>
 @endsection
 @section('custom_head')
