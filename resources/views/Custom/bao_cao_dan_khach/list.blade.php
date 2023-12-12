@@ -43,7 +43,7 @@
                                                 <span class="kt-nav__link-text">Xuất Excel</span>
                                             </a>
                                         </li>
-                                        @if(in_array('super_admin', $permissions))
+                                        @if(in_array($module['code'].'_delete', $permissions))
                                             <li class="kt-nav__item">
                                                 <a href="#" class="kt-nav__link" onclick="multiDelete();"
                                                    title="Xóa tất cả các dòng đang được tích chọn">
@@ -55,11 +55,13 @@
                                     </ul>
                                 </div>
                             </div>
+                            @if(in_array($module['code'].'_add', $permissions))
                                 <a href="{{ url('/admin/'.$module['code'].'/add/') }}"
                                    class="btn btn-brand btn-elevate btn-icon-sm">
                                     <i class="la la-plus"></i>
                                     Tạo mới
                                 </a>
+                            @endif
                         </div>
                     </div>
                 </div>

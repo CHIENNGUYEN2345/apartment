@@ -21,7 +21,7 @@
                                 <span class="kt-hidden-mobile">Quay lại</span>
                             </a>
                             <div class="btn-group">
-                                @if(in_array('super_admin', $permissions))
+                                @if(in_array($module['code'].'_add', $permissions))
                                     <button type="submit" class="btn btn-brand">
                                         <i class="la la-check"></i>
                                         <span class="kt-hidden-mobile">Lưu</span>

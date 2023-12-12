@@ -2,7 +2,7 @@
 @section('main')
 
     <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
-        <a href="https://youtu.be/nl33Q5z3xaA" target="_blank">Hướng dẫn cập nhật thông tin & kich hoạt mẫu giao diện các dự án đã làm vào kho giao diện</a>
+
         <div class="kt-portlet kt-portlet--mobile">
             <div class="kt-portlet__head kt-portlet__head--lg">
                 <div class="kt-portlet__head-label">

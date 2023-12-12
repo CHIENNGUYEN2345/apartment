@@ -20,15 +20,17 @@ class BaoCaoDanKhachController extends CURDBaseController
         'label' => 'Báo cáo dẫn khách',
         'modal' => '\App\Custom\Models\BaoCaoDanKhach',
         'list' => [
-            ['name' => 'khach_name', 'type' => 'text_edit', 'label' => 'Tên khách'],
+            ['name' => 'code_id', 'type' => 'relation_edit', 'label' => 'Sản phẩm', 'object' => 'code', 'display_field' => 'address'],
+            ['name' => 'khach_name', 'type' => 'text', 'label' => 'Tên khách'],
             ['name' => 'khach_tel', 'type' => 'text', 'label' => 'SĐT'],
             ['name' => 'note', 'type' => 'text', 'label' => 'Ghi chú'],
+            ['name' => 'image_extra', 'type' => 'image_extra',  'label' => 'Ảnh'],
+            ['name' => 'created_at', 'type' => 'datetime_vi', 'label' => 'Ngày tạo'],
             ['name' => 'admin_id', 'type' => 'relation', 'label' => 'Người tạo', 'object' => 'admin', 'display_field' => 'name'],
-            ['name' => 'code_id', 'type' => 'relation', 'label' => 'Bảng hàng', 'object' => 'code', 'display_field' => 'name'],
         ],
         'form' => [
             'general_tab' => [
-                ['name' => 'code_id', 'type' => 'select2_ajax_model', 'label' => 'Bảng hàng', 'model' => Codes::class, 'object' => 'codes', 'display_field' => 'name'],
+                ['name' => 'code_id', 'type' => 'select2_ajax_model', 'label' => 'Bảng hàng', 'model' => Codes::class, 'object' => 'codes', 'display_field' => 'address'],
                 ['name' => 'khach_name', 'type' => 'text', 'class' => 'required', 'label' => 'Tên khách', 'group_class' => 'col-md-6'],
                 ['name' => 'khach_tel', 'type' => 'text', 'class' => 'required', 'label' => 'SĐT', 'group_class' => 'col-md-4'],
                 ['name' => 'note', 'type' => 'textarea', 'class' => '', 'label' => 'Ghi chú', 'group_class' => 'col-md-12'],
@@ -54,7 +56,7 @@ class BaoCaoDanKhachController extends CURDBaseController
         'code_id' => [
             'label' => 'Bảng hàng',
             'type' => 'select2_ajax_model',
-            'display_field' => 'name',
+            'display_field' => 'address',
             'model' => Codes::class,
             'object' => 'codes',
             'query_type' => '='
@@ -110,6 +112,10 @@ class BaoCaoDanKhachController extends CURDBaseController
                     //  Tùy chỉnh dữ liệu insert
 
                     $data['admin_id'] = \Auth::guard('admin')->user()->id;
+                    if ($request->has('image_extra')) {
+                        $data['image_extra'] = implode('|', $request->image_extra);
+                    }
+
 
                     foreach ($data as $k => $v) {
                         $this->model->$k = $v;
@@ -170,11 +176,16 @@ class BaoCaoDanKhachController extends CURDBaseController
 //                    'link.unique' => 'Web này đã đăng!',
                 ]);
 
+
+
                 if ($validator->fails()) {
                     return back()->withErrors($validator)->withInput();
                 } else {
                     $data = $this->processingValueInFields($request, $this->getAllFormFiled());
 
+                    if ($request->has('image_extra')) {
+                        $data['image_extra'] = implode('|', $request->image_extra);
+                    }
                     foreach ($data as $k => $v) {
                         $item->$k = $v;
                     }
