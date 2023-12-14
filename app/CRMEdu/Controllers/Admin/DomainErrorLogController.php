@@ -24,7 +24,8 @@ class DomainErrorLogController extends CURDBaseController
            	['name' => 'error_messenger', 'type' => 'text', 'label' => 'Chi tiết lỗi'],
            	['name' => 'edit_status', 'type' => 'status', 'label' => 'Trạng thái sửa'],
            	['name' => 'created_at', 'type' => 'datetime_vi', 'label' => 'Thời gian phát hiện'],
-            ['name' => 'registration_date', 'type' => 'datetime_vi', 'label' => 'Ngày ký'],
+
+
         ],
         'form' => [
             'general_tab' => [

@@ -19,7 +19,7 @@ class CodesController extends CURDBaseController
     protected $module = [
         'code' => 'codes',
         'table_name' => 'codes',
-        'label' => 'Code',
+        'label' => 'Code ',
         'modal' => '\App\CRMBDS\Models\Codes',
         'list' => [
             ['name' => 'image', 'type' => 'image', 'label' => 'Ảnh'],

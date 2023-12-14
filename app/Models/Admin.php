@@ -62,4 +62,15 @@ class Admin extends Model implements AuthenticatableContract, CanResetPasswordCo
 
         return $this->api_token;
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            // Lấy giá trị của cột id từ bảng admin và chèn vào cột may_cham_cong_id
+            $adminId = Admin::max('id');
+            $model->may_cham_cong_id = $adminId;
+        });
+    }
 }

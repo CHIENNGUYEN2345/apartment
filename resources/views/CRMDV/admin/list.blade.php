@@ -213,7 +213,7 @@
         </div>
     </div>
 @endsection
- 
+
 @section('custom_head')
     <link type="text/css" rel="stylesheet" charset="UTF-8"
           href="{{ asset(config('core.admin_asset').'/css/list.css') }}">

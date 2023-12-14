@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/Modules/CheckErrorLink/" isTestSource="false" packagePrefix="Modules\CheckErrorLink\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/EduMarketing/" isTestSource="false" packagePrefix="Modules\EduMarketing\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/LandingPage/" isTestSource="false" packagePrefix="Modules\LandingPage\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/Plugin/" isTestSource="false" packagePrefix="Modules\Plugin\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/PluginRepository/" isTestSource="false" packagePrefix="Modules\PluginRepository\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/STBDAutoUpdatePriceWSS/" isTestSource="false" packagePrefix="Modules\STBDAutoUpdatePriceWSS\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/STBDProduct/" isTestSource="false" packagePrefix="Modules\STBDProduct\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/Ticket/" isTestSource="false" packagePrefix="Modules\Ticket\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/WebBill/" isTestSource="false" packagePrefix="Modules\WebBill\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/WebDashboard/" isTestSource="false" packagePrefix="Modules\WebDashboard\" />
+      <sourceFolder url="file://$MODULE_DIR$/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/Feature" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/Unit" isTestSource="true" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

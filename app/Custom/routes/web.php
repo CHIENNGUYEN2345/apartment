@@ -10,48 +10,28 @@ Route::get('/', function () {
     return redirect('/admin');
 });
 
-
-Route::get('data-cty', function (\Illuminate\Http\Request $r) {
-    $cty_data = $r->data;
-//    dd($data);
-    $cty_data = (array) json_decode($cty_data);
-
-    $cty_exist = App\CRMDV\Models\CompanyProfile::where('crawl_link', @$cty_data['cty_link'])->count();
-    if ($cty_exist > 0) {
-        dd('đã có sẵn');
+Route::get('diem-danh', function(\Illuminate\Http\Request $r) {
+    $admin = App\Models\Admin::select('id', 'name', 'code', 'may_cham_cong_id')->where('id', $r->admin_id)
+        ->where('status', 1)->first();
+    if (!is_object($admin)) {
+        CommonHelper::one_time_message('error', 'Không tìm thấy thành viên!');
+        return back();
     }
 
-    //  ngành nghề
-    if (isset($cty_data['nganh_nghe']) && $cty_data['nganh_nghe'] != '') {
-        $career = App\CRMDV\Models\CompanyCategory::where('name', trim($cty_data['nganh_nghe']))->first();
-        if (!is_object($career)) {
-            $career = new App\CRMDV\Models\CompanyCategory();
-            $career->name = trim($cty_data['nganh_nghe']);
-            $career->save();
-        }
-        $cty_data['career_id'] = $career->id;
+    $timekeeper = \App\CRMDV\Models\Timekeeper::where('may_cham_cong_id', $admin->may_cham_cong_id)->where('time', '>=', date('Y-m-d 00:00:00'))->first();
+
+    if (!is_object($timekeeper)) {
+        $timekeeper = new \App\CRMDV\Models\Timekeeper();
+        $timekeeper->admin_id = $r->admin_id;
+        $timekeeper->may_cham_cong_id = $admin->may_cham_cong_id;
+        $timekeeper->time = date('Y-m-d H:i:s');
+        $timekeeper->create_by = $r->admin_id;
+        $timekeeper->save();
+
     }
 
-
-
-    $cty = new App\CRMDV\Models\CompanyProfile();
-    foreach ($cty_data as $k => $v) {
-        $cty->{$k} = $v;
-    }
-    $cty->save();
-    if ($cty) {
-        print "        + đã tạo cty " . @$cty_data['name'] . "\n";
-    }
-});
-Route::get('kt-cty', function (\Illuminate\Http\Request $r) {
-    return App\CRMDV\Models\CompanyProfile::where('crawl_link', $r->crawl_link)->count();
-});
-Route::get('page-cty', function (\Illuminate\Http\Request $r) {
-    $companyprofile = App\CRMDV\Models\CompanyProfile::orderBy('page_id', 'desc');
-    if ($r->has('province_id')) {
-        $companyprofile = $companyprofile->where('province_id', $r->province_id);
-    }
-    return $companyprofile->first()->page_id;
+    CommonHelper::one_time_message('success', 'Điểm danh thành công!');
+    return back();
 });
 
 
@@ -104,6 +84,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
         Route::get('delete/{id}', '\App\Custom\Controllers\Admin\CompanyController@delete')->middleware('permission:super_admin');
         Route::post('multi-delete', '\App\Custom\Controllers\Admin\CompanyController@multiDelete')->middleware('permission:super_admin');
         Route::get('publish', '\App\Custom\Controllers\Admin\CompanyController@getPublish')->name('company.publish')->middleware('permission:lead_view');
+    });
+
+    //  báo cáo dẫn khách
+    Route::group(['prefix' => 'bao_cao_dan_khach'], function () {
+        Route::get('', '\App\Custom\Controllers\Admin\BaoCaoDanKhachController@getIndex')->name('bao_cao_dan_khach')->middleware('permission:bao_cao_dan_khach_view');
+        Route::match(array('GET', 'POST'), 'add', '\App\Custom\Controllers\Admin\BaoCaoDanKhachController@add')->middleware('permission:bao_cao_dan_khach_view');
+        Route::get('edit/{id}', '\App\Custom\Controllers\Admin\BaoCaoDanKhachController@update')->middleware('permission:bao_cao_dan_khach_view');
+        Route::post('edit/{id}', '\App\Custom\Controllers\Admin\BaoCaoDanKhachController@update')->middleware('permission:bao_cao_dan_khach_view');
+        Route::get('delete/{id}', '\App\Custom\Controllers\Admin\BaoCaoDanKhachController@delete')->middleware('permission:super_admin');
+        Route::post('multi-delete', '\App\Custom\Controllers\Admin\BaoCaoDanKhachController@multiDelete')->middleware('permission:super_admin');
+        Route::get('publish', '\App\Custom\Controllers\Admin\BaoCaoDanKhachController@getPublish')->name('bao_cao_dan_khach.publish')->middleware('permission:bao_cao_dan_khach_view');
     });
 
     //  ngành nghề

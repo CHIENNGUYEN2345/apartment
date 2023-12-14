@@ -46,8 +46,7 @@ class CrawlHSCtyBase extends Base
 
 
         $flag = true;
-//        $page_id = round(4769/12) - 1;
-        $page_id = 664;
+        $page_id = 1;
         while ($flag) {
             $url_crawl = str_replace('{i}', $page_id, $link);
 
@@ -77,12 +76,9 @@ class CrawlHSCtyBase extends Base
                                 $cty_link = 'https://hosocongty.vn/' . $cty_link;
                             }
 
-//                            $cty_exist = CompanyProfile::where('crawl_link', $cty_link)->first();
-//                            if (is_object($cty_exist)) {
-
-                            $x = file_get_contents('https://khoweb.top/kt-cty?crawl_link=' . $cty_link);
-                            if($x != '0') {
-
+//                        dd($cty_link);
+                            $cty_exist = CompanyProfile::where('crawl_link', $cty_link)->first();
+                            if (is_object($cty_exist)) {
                                 print "        => Đã có\n";
 //                                if (!$this->crawlCty('update', $cty_link, $province_id, $cty_exist)) {
 //                                }
@@ -91,7 +87,7 @@ class CrawlHSCtyBase extends Base
 
                                 break;  //  nếu đã tồn tài rồi thì thoát luôn sang trang sau
                             } else {
-                                if (!$this->crawlCty('insert', $cty_link, $province_id, null)) {
+                                if (!$this->crawlCty('insert', $cty_link, $province_id, $cty_exist)) {
 //                                $flag = false;
                                 }
                             }

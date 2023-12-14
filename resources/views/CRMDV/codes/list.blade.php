@@ -2,7 +2,7 @@
 @section('main')
 
     <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
-        <a href="https://youtu.be/nl33Q5z3xaA" target="_blank">Hướng dẫn cập nhật thông tin & kich hoạt mẫu giao diện các dự án đã làm vào kho giao diện</a>
+
         <div class="kt-portlet kt-portlet--mobile">
             <div class="kt-portlet__head kt-portlet__head--lg">
                 <div class="kt-portlet__head-label">
@@ -215,6 +215,77 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade modal-view-code" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="width: 1200px; margin-left: -200px">
+                <div class="modal-header">
+                    <h4 class="modal-title">Xem bảng hàng</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>
+                                        Thông tin cơ bản
+                                    </h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <div>
+                                                    Loại Hình
+                                                </div>
+                                                <div class="loai_hinh">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <div>
+                                                    Loại Nhà Đất
+                                                </div>
+                                                <div class="loai_nha_dat">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <div>
+                                                    Dự án
+                                                </div>
+                                                <div class="loai_nha_dat">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>
+                                        Ảnh
+                                    </h4>
+                                </div>
+                                <div class="card-body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('custom_head')
@@ -231,4 +302,22 @@
 @endsection
 @push('scripts')
     @include(config('core.admin_theme').'.partials.js_common_list')
+    <script>
+        $(document).ready(function (){
+           $('.btn-view').click(function (){
+               var id = $(this).data('id');
+
+                $.ajax({
+                     url: '/admin/codes/view/' + id,
+                     type: 'GET',
+                     success: function (res){
+                         var response = res.data;
+                         $('.modal-view-code').modal('show');
+                         $('.loai_hinh').html(response.loai_hinh);
+                            $('.loai_nha_dat').html(response.loai_nha_dat);
+                     }
+                });
+           });
+        });
+    </script>
 @endpush

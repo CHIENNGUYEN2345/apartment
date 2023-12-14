@@ -86,20 +86,13 @@ class HRAdminController extends CURDBaseController
                 ['name' => 'skype', 'type' => 'text', 'class' => '', 'label' => 'skype'],
                 ['name' => 'zalo', 'type' => 'text', 'class' => '', 'label' => 'zalo'],
                 ['name' => 'invite_by', 'type' => 'select2_ajax_model', 'label' => 'Người tuyển', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'tel', 'class' => 'required'],
-                ['name' => 'room_id', 'type' => 'select', 'options' => [
-                    '' => '',
-                    1 => 'Phòng kinh doanh 1',
-                    2 => 'Phòng kinh doanh 2',
-                    3 => 'Phòng kinh doanh 3',
-                    4 => 'Phòng kinh doanh 4',
-                    5 => 'Phòng kinh doanh 5',
-                    6 => 'Phòng Telesale',
-                    10 => 'Kỹ thuật',
-                    15 => 'Điều hành',
-                    20 => 'Marketing',
-                    25 => 'Tuyển dụng',
-                    30 => 'CSKH',
-                ], 'label' => 'Phòng', 'group_class' => 'col-md-12'],
+                ['name' => 'phong_ban_id',
+                    'type' => 'select2_model',
+                    'object' => 'room',
+                    'label' => 'Phòng',
+                    'model' => \App\CRMDV\Models\Phong_ban::class,
+                    'display_field' => 'name',
+                    'group_class' => 'col-md-12'],
                 ['name' => 'work_time', 'type' => 'select', 'options' => [
                     '' => '',
                     1 => 'Fulltime',
@@ -117,7 +110,7 @@ class HRAdminController extends CURDBaseController
                 //     178 => 'Điều hành',
                 //     179 => 'CSKH',
                 //     180 => 'HR Tuyển dụng',
-                // ], 'label' => 'Phân quyền'],
+                // ], 'label' => 'Phân quyền'],Quyền
             ],
         ]
     ];

@@ -54,7 +54,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            @if(in_array($module['code'] . '_add', $permissions))
+                            @if(in_array($module['code'] , $permissions))
                                 <a href="{{ url('/admin/'.$module['code'].'/add/') }}"
                                    class="btn btn-brand btn-elevate btn-icon-sm">
                                     <i class="la la-plus"></i>

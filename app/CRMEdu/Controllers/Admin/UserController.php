@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Mail;
 use Session;
 use Validator;
-use App\CRMEdu\Models\Tag;
 
 class UserController extends CURDBaseController
 {
@@ -23,7 +22,6 @@ class UserController extends CURDBaseController
             ['name' => 'name', 'type' => 'text_admin_edit', 'label' => 'admin.name'],
             ['name' => 'tel', 'type' => 'text', 'label' => 'admin.phone'],
             ['name' => 'email', 'type' => 'text', 'label' => 'admin.email'],
-            ['name' => 'tick', 'type' => 'custom','td'=> 'CRMEdu.list.td.multi_tick', 'label' => 'Đánh dấu khách hàng', 'object' => 'tick', 'display_field' => 'name', 'sort' => true],
             ['name' => 'status', 'type' => 'status', 'label' => 'admin.status'],
             ['name' => 'updated_at', 'type' => 'text', 'label' => 'admin.update']
 
@@ -39,19 +37,16 @@ class UserController extends CURDBaseController
                 ['name' => 'province_id', 'type' => 'select_location', 'label' => 'admin.choose_place', 'group_class' => 'col-md-9'],
                 ['name' => 'intro', 'type' => 'textarea', 'class' => '', 'label' => 'admin.introduce'],
                 ['name' => 'note', 'type' => 'textarea', 'class' => '', 'label' => 'admin.note', 'inner' => 'rows=10'],
-                ['name' => 'tick', 'type' => 'select2_model', 'label' => 'Đánh dấu khách hàng', 'model' => Tag::class, 'where' => 'type="user_tick"'
-                    , 'object' => 'tick','orderByRaw' => 'order_no desc', 'display_field' => 'name', 'class' => '','multiple' => true, 'group_class' => 'col-md-6'],
-
             ],
             'more_info_tab' => [
                 ['name' => 'invite_by', 'type' => 'select2_ajax_model', 'label' => 'admin.presenter', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'tel'],
                 ['name' => 'sale_id', 'type' => 'select2_ajax_model', 'label' => 'admin.sale', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'tel', 'class' => ''],
-
+                
                 ['name' => 'image', 'type' => 'file_editor', 'label' => 'Ảnh đại diện'],
                 ['name' => 'facebook', 'type' => 'text', 'class' => '', 'label' => 'admin.facebook'],
                 ['name' => 'skype', 'type' => 'text', 'class' => '', 'label' => 'admin.skype'],
                 ['name' => 'zalo', 'type' => 'text', 'class' => '', 'label' => 'admin.zalo'],
-
+                
             ],
         ]
     ];
@@ -66,16 +61,6 @@ class UserController extends CURDBaseController
                 0 => 'admin.hidden',
                 1 => 'admin.active'
             ]
-        ],
-        'tick' => [
-            'label' => 'Đánh dấu khách hàng',
-            'type' => 'select2_model',
-            'model' => Tag::class,
-            'display_field' => 'name',
-            'where' => 'type="user_tick"',
-            'orderByRaw' => 'order_no desc',
-
-            'query_type' => 'like',
         ],
     ];
 
@@ -137,16 +122,14 @@ class UserController extends CURDBaseController
                     //  Tùy chỉnh dữ liệu insert
 
 //                    $data['role_id']=1;
-
+                    
                     unset($data['role_id']);
-
+                    
 
                     $data['district_id'] = $request->get('district_id', null);
                     $data['ward_id'] = $request->get('ward_id', null);
 
-                    if ($request->has('tick')) {
-                        $data['tick'] = '|' . implode('|', $request->tick) . '|';
-                    }
+                    $data['company_id'] = \Auth::guard('admin')->user()->last_company_id;
 
                     #
                     foreach ($data as $k => $v) {
@@ -154,7 +137,7 @@ class UserController extends CURDBaseController
                     }
 
                     if ($this->model->save()) {
-
+                        
                         \DB::commit();
                         CommonHelper::one_time_message('success', 'Tạo mới thành công!');
 
@@ -200,7 +183,7 @@ class UserController extends CURDBaseController
                 $data = $this->getDataUpdate($request, $item);
                 return view('CRMEdu.user.edit')->with($data);
             } else if ($_POST) {
-
+                
                 \DB::beginTransaction();
 
                 if ($item->id == \Auth::guard('admin')->user()->id) {
@@ -216,12 +199,10 @@ class UserController extends CURDBaseController
                 }
                 $data = $this->processingValueInFields($request, $this->getAllFormFiled());
                 //  Tùy chỉnh dữ liệu edit
-                if ($request->has('tick')) {
-                    $data['tick'] = '|' . implode('|', $request->tick) . '|';
-                }
 
+               
                 unset($data['role_id']);
-
+                
 
                 $data['district_id'] = $request->get('district_id', null);
                 $data['ward_id'] = $request->get('ward_id', null);
@@ -230,7 +211,7 @@ class UserController extends CURDBaseController
                     $item->$k = $v;
                 }
                 if ($item->save()) {
-
+                    
                     \DB::commit();
                     CommonHelper::one_time_message('success', 'Cập nhật thành công!');
                 } else {
@@ -356,39 +337,6 @@ class UserController extends CURDBaseController
             CommonHelper::one_time_message('error', 'Lỗi hệ thống! Vui lòng liên hệ kỹ thuật viên.');
             return back();
         }
-    }
-
-    public function checkExist(Request $request) {
-        if ($request->has('email')) {
-            $user = User::select('email', 'name', 'tel', 'id')->where('email', $request->email);
-            if ($request->has('id')) {
-                $user = $user->where('id', '!=', $request->id)->first();
-            }
-            $user = $user->first();
-            if (is_object($user)) {
-                return response()->json([
-                    'status' => false,
-                    'html' => 'Email này đã được tạo cho <a  target="_blank" href="/admin/user/edit/'.$user->id.'">'.$user->name .' - email: ' . $user->email.' - sđt: ' . $user->tel.'</a>'
-                ]);
-            }
-        }
-        if ($request->has('tel')) {
-            $user = User::select('id', 'email', 'name', 'tel')->where('tel', $request->tel);
-            if ($request->has('id')) {
-                $user = $user->where('id', '!=', $request->id)->first();
-            }
-            $user = $user->first();
-            if (is_object($user)) {
-                return response()->json([
-                    'status' => false,
-                    'html' => 'SĐT này đã được tạo cho <a target="_blank" href="/admin/user/edit/'.$user->id.'">'.$user->name .' - email: ' . $user->email.' - sđt: ' . $user->tel.'</a>'
-                ]);
-            }
-        }
-        return response()->json([
-            'status' => true,
-            'html' => ''
-        ]);
     }
 }
 

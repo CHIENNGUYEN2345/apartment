@@ -26,13 +26,9 @@ class AppServiceProvider extends ServiceProvider
 
 //        $this->QueueMailAfter();
 
-        $provider = new \App\CoreERP\Providers\ServiceProvider();
-        $provider->boot();
 
-
-//        $provider = new \App\CRMDV\Providers\CRMDVServiceProvider();
-        $module = '\App\\' . env('CRM_CORE') . '\Providers\ServiceProvider';
-        $provider = new $module;
+        $provider = new \App\CRMDV\Providers\CRMDVServiceProvider();
+//        $provider = new \App\CRMEdu\Providers\CRMEduServiceProvider();
         $provider->boot();
 
         $provider = new \App\Custom\Providers\ServiceProvider();

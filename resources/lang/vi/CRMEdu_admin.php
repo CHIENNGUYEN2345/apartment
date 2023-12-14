@@ -18,7 +18,7 @@ return [
     'tai_lieu_cho_dich_vu' => 'Bộ phận',
     'quan_ly_dich_vu' => 'Khóa học',
     'tag' => 'Tag',
-    'hoc_vien_tiem_nang' => 'Data học viên',
+    'hoc_vien_tiem_nang' => 'Học viên tiềm năng',
     'product' => 'Lớp học',
     'contract_time' => 'Thời gian học',
     'customer_legal' => 'Phụ huynh',
@@ -68,7 +68,7 @@ return [
     'class_lecturers'=>'Giảng viên',
     'class_tutors'=>'Trợ giảng',
     'class_student'=>'Học viên',
-    'class_start_date'=>'Ngày khai giảng',
+    'class_start_date'=>'Ngày bắt đầu',
     'class_end_date'=>'Ngày kết thúc',
     'class_course'=>'Khóa học',
     'class_note'=>'Ghi chú',
@@ -107,8 +107,6 @@ return [
     'dhbill_lecturers'=>'Giảng viên',
     'dhbill_contract_signing_date'=>'Ngày ký',
     'dhbill_evaluate' =>'Đánh giá',
-    'lead' => 'Data học viên',
-    'lead_product' => 'Ưu đãi',
-    'bill' => 'Hợp đồng',
-    'bills_dating' => 'Ngày hẹn đóng $',
+
+
 ];

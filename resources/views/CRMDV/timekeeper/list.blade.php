@@ -44,7 +44,7 @@ require base_path('resources/views/CRMDV/timekeeper/funtions.php');
                                         </li>
                                         @if(in_array('timekeeper_edit', $permissions))
                                         <li class="kt-nav__item">
-                                            <a href="/admin/import/add?table=timekeeper&table_label=Dữ liệu chấm công" class="kt-nav__link" 
+                                            <a href="/admin/import/add?table=timekeeper&table_label=Dữ liệu chấm công" class="kt-nav__link"
                                                 title="Nhập file excel lên để đẩy dữ liệu vào hệ thống">
                                                 <i class="kt-nav__link-icon la la-copy"></i>
                                                 <span class="kt-nav__link-text">Import excel</span>
@@ -144,7 +144,7 @@ require base_path('resources/views/CRMDV/timekeeper/funtions.php');
                                                 type="checkbox"
                                                 class="checkbox-master">&nbsp;<span></span></label></span></th>
                             <th>STT</th>
-                       
+
                             @php $count_sort = 0; @endphp
                             @foreach($module['list'] as $field)
                                 <th data-field="{{ $field['name'] }}"
@@ -169,14 +169,14 @@ require base_path('resources/views/CRMDV/timekeeper/funtions.php');
                         </tr>
                         </thead>
                         <tbody class="kt-datatable__body ps ps--active-y" style="max-height: 496px;">
-                            <?php 
+                            <?php
                             $di_muon = [];
                             $tong_cong = [];
                             $ls_cham_cong = [];
                             $stt = 1;
                             ?>
                         @foreach($listItem as $item)
-                            <?php 
+                            <?php
                             $cham_cong_trung = false;
                             $val = checkChamCong($item, $ls_cham_cong, $tong_cong, $di_muon, $cau_hinh);
                             $ls_cham_cong = $val['ls_cham_cong'];
@@ -202,7 +202,7 @@ require base_path('resources/views/CRMDV/timekeeper/funtions.php');
                                         <?php $stt++; ?>
                                     @endif
                                 </td>
-                       
+
                                 @foreach($module['list'] as $field)
                                     <td data-field="{{ @$field['name'] }}"
                                         class="kt-datatable__cell item-{{ @$field['name'] }}">

@@ -5,7 +5,7 @@
                value="{{ @$_GET['from_date'] }}" title="Từ ngày">
     </div>
     <div style="width: 50%; float: left;">
-        <input name="to_date" class="form-control kt-input" placeholder="Đến ngày" type="date"
+        <input name="to_date" class="form-control kt-input" placeholder="Đế ngày" type="date"
                style="padding: 6px 1px;"
                value="{{ @$_GET['to_date'] }}" title="Đến ngày">
     </div>

@@ -31,11 +31,11 @@ class BillController extends CURDBaseController
     protected $module = [
         'code' => 'bill',
         'table_name' => 'bills',
-        'label' => 'CRMEdu_admin.bills',
+        'label' => 'Hợp đồng',
         'modal' => '\App\CRMEdu\Models\Bill',
         'list' => [
 //            ['name' => 'domain', 'type' => 'text_edit', 'label' => 'Tên miền', 'sort' => true],
-            ['name' => 'customer_id', 'type' => 'relation_edit', 'label' => 'CRMEdu_admin.bills_client', 'object' => 'customer', 'display_field' => 'name'],
+            ['name' => 'customer_id', 'type' => 'relation_edit', 'label' => 'CRMEdu_admin.bills_client', 'object' => 'user', 'display_field' => 'name'],
             ['name' => 'total_price', 'type' => 'price_vi', 'label' => 'CRMEdu_admin.bills_total_price', 'sort' => true],
             ['name' => 'total_price_contract', 'type' => 'price_vi', 'label' => 'CRMEdu_admin.bills_total_money'],
             ['name' => 'total_received', 'type' => 'price_vi', 'label' => 'CRMEdu_admin.bills_money_received'],
@@ -56,25 +56,25 @@ class BillController extends CURDBaseController
                     1 => 'Kích hoạt',
                 ], 'sort' => true
             ],
-//            ['name' => 'dating', 'type' => 'date_vi', 'label' => 'CRMEdu_admin.bills_dating', 'sort' => true],
+            ['name' => 'dating', 'type' => 'date_vi', 'label' => 'CRMEdu_admin.bills_dating', 'sort' => true],
         ],
         'form' => [
             'general_tab' => [
-                ['name' => 'total_price', 'type' => 'price_vi', 'class' => 'required', 'label' => 'CRMEdu_admin.bills_total_price', 'group_class' => 'col-md-3'],
-                ['name' => 'total_price_contract', 'type' => 'price_vi', 'class' => 'required', 'label' => 'CRMEdu_admin.bills_total_price_contract', 'group_class' => 'col-md-3'],
+                ['name' => 'total_price', 'type' => 'price_vi', 'class' => 'required', 'label' => 'CRMEdu_admin.bills_total_price', 'group_class' => 'col-md-4'],
+                ['name' => 'total_price_contract', 'type' => 'price_vi', 'class' => 'required', 'label' => 'CRMEdu_admin.bills_total_price_contract', 'group_class' => 'col-md-4'],
 //                ['name' => 'domain', 'type' => 'text', 'label' => 'Tên miền', 'group_class' => 'col-md-4'],
                 ['name' => 'service_id', 'type' => 'select2_model', 'class' => '',  'label' => 'CRMEdu_admin.service', 'multiple' => true,
-                    'model' => Service::class, 'display_field' => 'name_vi', 'group_class' => 'col-md-6'],
+                    'model' => Service::class, 'display_field' => 'name_vi', 'group_class' => 'col-md-4'],
                 ['name' => 'registration_date', 'type' => 'date', 'label' => 'CRMEdu_admin.bills_registration_date', 'class' => 'required',
                     'value' => 'now', 'group_class' => 'col-md-3'],
-                ['name' => 'contract_time', 'type' => 'number', 'label' => 'CRMEdu_admin.contract_time', 'class' => '', 'group_class' => 'col-md-3'],
+                ['name' => 'contract_time', 'type' => 'number', 'label' => 'CRMEdu_admin.contract_time', 'class' => '', 'group_class' => 'col-md-2'],
 
                 ['name' => 'status', 'type' => 'checkbox', 'label' => 'CRMEdu_admin.bills_activated', 'value' => 1, 'group_class' => 'col-md-4'],
                 ['name' => 'dating', 'type' => 'date', 'label' => 'CRMEdu_admin.bills_dating', 'class' => '', 'group_class' => 'col-md-3'],
                 ['name' => 'note', 'type' => 'textarea', 'label' => 'CRMEdu_admin.bills_note', 'group_class' => 'col-md-12'],
 
-
-
+                
+                
                 // ['name' => 'curator_ids', 'type' => 'select2_ajax_model', 'label' => 'Người KH phụ trách', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'email', 'multiple' => true, 'group_class' => 'col-md-6'],
                 // ['name' => 'staff_care', 'type' => 'select2_ajax_model', 'label' => 'Nhân viên phụ trách', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'email', 'multiple' => true, 'group_class' => 'col-md-6'],
                 /*['name' => 'retention_time', 'type' => 'select', 'options' =>
@@ -92,10 +92,10 @@ class BillController extends CURDBaseController
             'customer_tab' => [
                 ['name' => 'marketer_ids', 'type' => 'select2_ajax_model', 'label' => 'CRMEdu_admin.bills_marketing', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'code', 'multiple' => true, 'group_class' => 'col-md-6'],
                 ['name' => 'saler_id', 'type' => 'custom', 'field' => 'CRMEdu.form.fields.select_sale','label' => 'CRMEdu_admin.bills_sale', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'code', 'class' => 'required'],
-                ['name' => 'customer_id', 'type' => 'custom', 'type_history' => 'relation_multiple', 'field' => 'CRMEdu.form.fields.select_customer',
-                    'label' => 'CRMEdu_admin.bill_client', 'model' => User::class, 'object' => 'user', 'display_field' => 'name', 'display_field2' => 'tel', 'class' => 'required'],
-                ['name' => 'customer_legal_id', 'type' => 'custom', 'type_history' => 'relation_multiple', 'field' => 'CRMEdu.form.fields.select_customer',
-                    'label' => 'CRMEdu_admin.bill_legal', 'model' => User::class, 'object' => 'user', 'display_field' => 'name', 'display_field2' => 'tel', 'class' => ''],
+                ['name' => 'customer_id', 'type' => 'custom', 'type_history' => 'relation_multiple', 'field' => 'CRMDV.form.fields.select_customer',
+                    'label' => 'Khách hàng', 'model' => User::class, 'object' => 'user', 'display_field' => 'name', 'display_field2' => 'tel', 'class' => 'required'],
+                ['name' => 'customer_legal_id', 'type' => 'custom', 'type_history' => 'relation_multiple', 'field' => 'CRMDV.form.fields.select_customer',
+                    'label' => 'Đại diện pháp lý', 'model' => User::class, 'object' => 'user', 'display_field' => 'name', 'display_field2' => 'tel', 'class' => ''],
             ],
             'gia_han_tab' => [
 //                ['name' => 'expiry_date', 'type' => 'date', 'field' => 'CRMEdu.form.fields.expiry_date', 'label' => 'Ngày hết hạn', 'class' => '', 'group_class' => 'col-md-6', 'inner' => ''],
@@ -145,7 +145,7 @@ class BillController extends CURDBaseController
             'query_type' => '='
         ],
         'service_id' => [
-            'label' => 'CRMEdu_admin.service',
+            'label' => 'Khóa học',
             'type' => 'select2_model',
             'display_field' => 'name_vi',
             'model' => Service::class,
@@ -196,7 +196,7 @@ class BillController extends CURDBaseController
 
     public function getIndex(Request $request)
     {
-
+        
         $data = $this->getDataList($request);
 
         return view('CRMEdu.list')->with($data);
@@ -210,7 +210,7 @@ class BillController extends CURDBaseController
                 }
 
                 //  Tìm kiếm nhanh theo khách hàng
-                $customer_ids = User::select('id')->where(function ($query) use ($r) {
+                $customer_ids = Admin::select('id')->where(function ($query) use ($r) {
                     $query->orWhere('name', 'like', "%".$r->quick_search."%");
                     $query->orWhere('tel', 'like', "%".$r->quick_search."%");
                     $query->orWhere('email', 'like', "%".$r->quick_search."%");
@@ -378,7 +378,7 @@ class BillController extends CURDBaseController
                     'classify' => $request->customer_classify,
                 ]);
 
-
+                
 
                 // //  nếu thuê tên miền bên mình thì tạo 1 hóa đơn cho tên miền đó
                 // if ($data['domain_owner'] == 'hobasoft') {
@@ -442,7 +442,7 @@ class BillController extends CURDBaseController
 
 
             \DB::beginTransaction();
-
+            
             $data = $this->processingValueInFields($request, $this->getAllFormFiled());
 
             //  Tùy chỉnh dữ liệu insert
@@ -852,7 +852,7 @@ class BillController extends CURDBaseController
                     $k++;
                 }
             });
-        })->download('xlsx');
+        })->download('xlsx'); 
     }
 
     /**

@@ -15,12 +15,7 @@ class DashboardController extends Controller
 {
     public function getIndex()
     {
-        $data['module'] = [
-            'code' => 'dashboard',
-        ];
-        $data['page_title'] = 'Trang thống kê theo công ty';
-        $data['page_type'] = 'list';
-        return view(config('core.admin_theme') . '.dashboard', $data);
+       dd(1);
     }
 
     public function changeTheme(Request $request)

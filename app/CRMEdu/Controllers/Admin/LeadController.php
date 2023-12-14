@@ -4,13 +4,11 @@ namespace App\CRMEdu\Controllers\Admin;
 
 use App\Http\Helpers\CommonHelper;
 use App\Models\RoleAdmin;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\CRMEdu\Models\Service;
 use Validator;
 use App\CRMEdu\Models\LeadContactedLog;
 use App\CRMEdu\Models\Lead;
-use App\CRMEdu\Models\Classroom;
 use App\Models\Admin;
 use App\CRMEdu\Models\Bill;
 use DB;
@@ -23,7 +21,7 @@ class LeadController extends CURDBaseController
     protected $module = [
         'code' => 'lead',
         'table_name' => 'leads',
-        'label' => 'CRMEdu_admin.lead',
+        'label' => 'Đầu mối',
         'modal' => '\App\CRMEdu\Models\Lead',
         'list' => [
             ['name' => 'name', 'type' => 'custom', 'td' => 'CRMEdu.lead.list.name', 'label' => 'CRMEdu_admin.lead_name', 'sort' => true],
@@ -31,13 +29,10 @@ class LeadController extends CURDBaseController
             ['name' => 'email', 'type' => 'text', 'label' => 'Email', 'sort' => true],
             ['name' => 'source', 'type' => 'relation', 'label' => 'CRMEdu_admin.lead_source', 'object' => 'source_tag', 'display_field' => 'name', 'sort' => true],
             ['name' => 'product', 'type' => 'text', 'label' => 'CRMEdu_admin.product', 'sort' => true],
-
             ['name' => 'dating', 'type' => 'custom', 'td' => 'CRMEdu.lead.list.dating', 'label' => 'CRMEdu_admin.lead_appointment', 'sort' => true],
             ['name' => 'contacted_log_last', 'type' => 'custom', 'td' => 'CRMEdu.lead.list.contacted_log_last', 'label' => 'CRMEdu_admin.lead_last-interaction', 'sort' => true],
             ['name' => 'rate', 'type' => 'tag', 'td' => 'CRMEdu.lead.list.rate', 'label' => 'CRMEdu_admin.lead_evaluate', 'sort' => true],
-            ['name' => 'service', 'type' => 'relation', 'label' => 'CRMEdu_admin.service', 'object' => 'service', 'display_field' => 'name_vi', 'sort' => true],
-            ['name' => 'classroom_id', 'type' => 'text', 'label' => 'Lớp học', 'model' => Classroom::class,
-                'object' => 'classroom', 'display_field' => 'name', 'class' => '', 'group_class' => 'col-md-4'],
+
         ],
         'form' => [
             'general_tab' => [
@@ -46,27 +41,24 @@ class LeadController extends CURDBaseController
                 ['name' => 'email', 'type' => 'text', 'label' => 'CRMEdu_admin.lead_email', 'group_class' => 'col-md-6'],
 
 
-                ['name' => 'service', 'type' => 'select2_model', 'label' => 'CRMEdu_admin.service', 'model' => Service::class
+                ['name' => 'service', 'type' => 'select2_model', 'label' => 'CRMEdu_admin.service', 'model' => Service::class, 'multiple' => true
                     , 'object' => 'service_obj', 'display_field' => 'name_vi', 'class' => '', 'group_class' => 'col-md-6'],
-                ['name' => 'product', 'type' => 'text', 'label' => 'CRMEdu_admin.lead_product', 'group_class' => 'col-md-6'],
+                ['name' => 'product', 'type' => 'text', 'label' => 'CRMEdu_admin.Lead_product', 'group_class' => 'col-md-6'],
                 ['name' => 'status', 'type' => 'select', 'options' => [
                     'Thả nổi' => 'Thả nổi',
                     'Đang chăm sóc' => 'Đang chăm sóc',
                     // 'Tạm dừng' => 'Tạm dừng',
 //                    'Đã ký HĐ' => 'Đã ký HĐ',
-                ], 'label' => 'CRMEdu_admin.lead_status', 'group_class' => 'col-md-6', 'value' => 'Đang chăm sóc'],
+                ], 'label' => 'CRMEdu_admin.lead_status', 'group_class' => 'col-md-3', 'value' => 'Đang chăm sóc'],
                 ['name' => 'rate', 'type' => 'select2_model', 'label' => 'CRMEdu_admin.lead_evaluate', 'model' => Tag::class, 'where' => 'type="lead_rate"'
                     , 'object' => 'rate','orderByRaw' => 'order_no desc', 'display_field' => 'name', 'class' => '', 'group_class' => 'col-md-6'],
 
-                ['name' => 'source', 'type' => 'select2_model_tag', 'label' => 'CRMEdu_admin.lead_source-of-customers', 'model' => Tag::class, 'where' => "type = 'lead_source'", 'group_class' => 'col-md-6', 'inner' => 'maxTags: 1,'],
+                ['name' => 'source', 'type' => 'select2_model_tag', 'label' => 'CRMEdu_admin.lead_source-of-customers', 'model' => Tag::class, 'where' => "type = 'lead_source'", 'group_class' => 'col-md-3', 'inner' => 'maxTags: 1,'],
 //                ['name' => 'test_dau_vao', 'type' => 'select', 'options' => [
 //                    '' => '',
 //                    'Chờ test' => 'Chờ test',
 //                    'Đã test' => 'Đã test',
 //                ], 'label' => 'Tình hình TEST', 'group_class' => 'col-md-3'],
-                ['name' => 'classroom_id', 'type' => 'select2_model', 'label' => 'Lớp học', 'model' => Classroom::class,
-                    'object' => 'classroom', 'display_field' => 'name', 'class' => '', 'group_class' => 'col-md-6'],
-
             ],
             'tab_2' => [
                 ['name' => 'profile', 'type' => 'textarea', 'label' => 'CRMEdu_admin.lead_profile', 'group_class' => 'col-md-12', 'inner' => 'rows=5'],
@@ -166,25 +158,10 @@ class LeadController extends CURDBaseController
             ],
             'query_type' => 'custom'
         ],
-        'filter_date' => [
-            'label' => 'Lọc theo',
-            'type' => 'filter_date',
-            'options' => [
-                '' => '',
-                'created_at' => 'Ngày tạo',
-                'received_date' => 'Ngày nhận',
-                'dating' => 'Ngày hẹn',
-            ],
-            'query_type' => 'filter_date'
-        ],
-        'classroom_id' => [
-            'label' => 'Lớp học',
-            'type' => 'select2_model',
-            'display_field' => 'name',
-            'display_field2' => 'code',
-            'model' => Classroom::class,
-            'object' => 'class',
-            'query_type' => 'custom'
+        'contacted_log_last' => [
+            'label' => 'CRMEdu_admin.lead_interactive-day',
+            'type' => 'from_to_date',
+            'query_type' => 'from_to_date'
         ],
         /*'check_tel' => [
             'label' => 'Check SĐT',
@@ -195,7 +172,7 @@ class LeadController extends CURDBaseController
 
     public function appendWhere($query, $request)
     {
-
+        
 //        if(strpos($request->url(), '/tha-noi') == false && strpos($request->url(), '/quan-tam-moi') == false && $request->status == null) {
 //            //  Khi ko dùng bộ lọc trạng thái thì mặc định ko hiện ra các khách đã ký hđ
 //            $query = $query->where('status', '!=', 'Đã ký HĐ');
@@ -207,7 +184,7 @@ class LeadController extends CURDBaseController
                 $query->orWhere('admin_id', $request->marketer_ids);
             });
         }
-
+        
         if (@$request->saler_ids != null) {
             $query = $query->where('saler_ids', 'like', '%|' . $request->saler_ids . '|%');
         }
@@ -247,7 +224,7 @@ class LeadController extends CURDBaseController
 
             //  Nếu vào trang thả nổi
             //  Truy vấn ra lead thả nổi
-
+         
             $query = $query->where(function ($query) {
                             $query->orWhereIn('status', ['Thả nổi', '']);
                             $query->orWhereRaw('status is NULL');
@@ -256,7 +233,7 @@ class LeadController extends CURDBaseController
         } elseif (strpos($request->url(), '/telesale') !== false) {
 
             //  Nếu vào trang khách do telesale gọi
-
+         
             $query = $query->whereNotNull('telesale_id');
 
         } elseif (strpos($request->url(), '/quan-tam-moi') !== false) {
@@ -304,7 +281,7 @@ class LeadController extends CURDBaseController
                 }
             });
         } else {
-            //  Lọc theo ngày tương tác
+            //  Lọc theo ngày tương tác 
             // if (@$request->lead_status != null) {
             //     if ($request->lead_status == 'Ngày TT: Cũ -> mới') {
             //         $query = $query->where('saler_ids', '!=', '|')->where('saler_ids', '!=', '||')
@@ -319,7 +296,7 @@ class LeadController extends CURDBaseController
                 //  Khi có dùng bộ lọc & ko lọc trạng thái thì mặc định ko tìm trạng thái thả nổi
                 $query = $query->where('status', '!=', 'Thả nổi');
             }
-
+            
             //  Truy vấn lead đang chăm
             $query = $query->where(function ($query) {
                     $query->orWhereIn('status', ['Đang chăm sóc', 'Tạm dừng', 'Đã ký HĐ', '']);
@@ -331,15 +308,15 @@ class LeadController extends CURDBaseController
                 $query = $query->where(function ($query) use ($request) {
                     $query->orWhere('saler_ids', 'like', '%|'.\Auth::guard('admin')->user()->id.'|%');
 
-
+                    
 //                     $query->orWhere('admin_id', \Auth::guard('admin')->user()->id);
                 });
             } else {
             }
-
+            
         }
 
-
+        
         return $query;
     }
 
@@ -355,8 +332,8 @@ class LeadController extends CURDBaseController
             } elseif ($request->lead_status == 'Ngày nhận: Mới -> cũ') {
                 $model = $model->orderBy('received_date', 'desc');
             } elseif ($request->lead_status == 'Đến ngày TT') {
-                $model = $model->orderBy('dating', 'asc');
-//                ->where('dating', '<=', date('Y-m-d 23:59:59'));
+                $model = $model->orderBy('dating', 'asc')
+                ->where('dating', '<=', date('Y-m-d 23:59:59'));
             }
         }
         if ($request->sorts != null) {
@@ -379,7 +356,7 @@ class LeadController extends CURDBaseController
                     $query->orWhere(trim($field), 'LIKE', '%' . $r->quick_search . '%');    //  truy vấn các tin thuộc các danh mục con của danh mục hiện tại
                 }
 
-                //  Tìm theo sđt
+                //  Tìm theo sđt 
                 $search_tel = str_replace('.', '', $r->quick_search);
                 $search_tel = str_replace(',', '', $search_tel);
                 $search_tel = trim($search_tel);
@@ -450,130 +427,7 @@ class LeadController extends CURDBaseController
 
         return view('CRMEdu.lead.list')->with($data);
     }
-    public function add_test(Request $request)
-    {
-        try {
 
-
-            if (!$_POST) {
-                $data = $this->getDataAdd($request);
-                return view('CRMEdu.lead.add_test')->with($data);
-            } else if ($_POST) {
-                DB::beginTransaction();
-
-                $validator = Validator::make($request->all(), [
-                    'name' => 'required',
-                    'tel' => 'required',
-                ], [
-                    'name.required' => 'Bắt buộc phải nhập tên',
-                    'tel.required' => 'Bắt buộc phải nhập sđt',
-                ]);
-                if ($validator->fails()) {
-                    return back()->withErrors($validator)->withInput();
-                } else {
-                    //  Check trùng đầu mối
-                    if (Lead::where(function ($query) use ($request) {
-                            $query->orWhere('tel', $request->tel);  //  trùng sđt
-                        })->count() > 0) {
-                        CommonHelper::one_time_message('error', 'Số điện thoại '.$request->tel.' bị trùng');
-                        return back()->withErrors($validator)->withInput();
-                    }
-
-                    $data = $this->processingValueInFields($request, $this->getAllFormFiled());
-                    //  Tùy chỉnh dữ liệu insert
-                    if (CommonHelper::has_permission(\Auth::guard('admin')->user()->id, 'lead_assign')) {
-                        //  Nếu được phép gắn sale
-                        $data['marketer_ids'] = '|' . implode('|', $request->get('marketer_ids', [])) . '|';
-                        $data['saler_ids'] = '|' . implode('|', $request->get('saler_ids', [])) . '|';
-                        $data['service'] = '|' . implode('|', $request->get('service', [])) . '|';
-
-
-                        //  Nếu là nv tạo & gán cho sale khác chăm thì đặt ngay trạng thái là Đang chăm sóc
-                        if (\Auth::guard('admin')->user()->super_admin != 1 && @$request->saler_ids != null) {
-                            $data['status'] = 'Đang chăm sóc';
-                        }
-                    }
-                    if (!isset($data['marketer_ids']) || $data['marketer_ids'] == '||') {
-                        //  Nếu không gắn người mkt thì lấy người tạo làm mkt
-                        $data['marketer_ids'] = '|'.\Auth::guard('admin')->user()->id.'|';
-                    }
-                    if (!isset($data['saler_ids']) || $data['saler_ids'] == '||') {
-                        //  Nếu không gắn người sale thì lấy người tạo làm sale
-                        $data['saler_ids'] = '|'.\Auth::guard('admin')->user()->id.'|';
-                    }
-                    $data['admin_id'] = \Auth::guard('admin')->user()->id;
-                    $data['received_date'] = date('Y-m-d H:i:s');
-
-                    if (in_array(CommonHelper::getRoleName(\Auth::guard('admin')->user()->id, 'name'), ['sale'])) {
-                        //  Nếu là sale tạo thì mặc định status là đang chăm sóc
-                        // $data['status'] = 'Đang chăm sóc';
-                    }
-
-                    $data['dating'] = $request->dating;
-
-                    if ($request->has('service')) {
-                        $data['service'] = '|' . implode('|', $data['service']) . '|';
-                    } else {
-                        $data['service'] = '';
-                    }
-
-                    // Gắn nhanh người sale_ctv khác dành cho sale cty
-                    /*if ($request->has('select_marketer_id')) {
-                        $data['status'] = 'Đang chăm sóc';
-                        $data['saler_ids'] = '|'.$request->select_marketer_id.'|';
-                    }*/
-
-                    foreach ($data as $k => $v) {
-                        $this->model->$k = $v;
-                    }
-
-                    if ($this->model->save()) {
-                        $this->afterAddLog($request, $this->model);
-
-                        //  Xử lý tag
-                        $this->xulyTag($this->model->id, $data);
-
-                        if ($request->log_name != null || $request->log_note != null) {
-                            //  Nếu có viết vào lịch sử tư vấn thì tạo lịch sử tư vấn
-                            $this->LeadContactedLog([
-                                'title' => $request->log_name,
-                                'note' => $request->log_note,
-                                'lead_id' => $this->model->id,
-                                'type' => 'lead',
-                            ]);
-                        }
-
-                        $this->logQuanTam($data, $this->model, 'add');
-
-                        //  đánh dấu là đối tác nếu được tích chọn
-                        $this->luuDoiTac($request, $this->model);
-
-                        /*LeadContactedLog::create([
-                            'title' => '',
-                            'admin_id' => \Auth::guard('admin')->user()->id,
-                            'lead_id' => $this->model->id,
-                            'note' => 'Tạo mới'
-                        ]);*/
-
-                        CommonHelper::one_time_message('success', 'Tạo mới thành công!');
-                    } else {
-                        CommonHelper::one_time_message('error', 'Lỗi tao mới. Vui lòng load lại trang và thử lại!');
-                    }
-
-                    \DB::commit();
-
-                    return view('CRMEdu.lead.Notification')->with($data);
-
-
-                }
-            }
-        } catch (\Exception $ex) {
-            \DB::rollback();
-
-            CommonHelper::one_time_message('error', $ex->getMessage());
-            return redirect()->back()->withInput();
-        }
-    }
     public function add(Request $request)
     {
         try {
@@ -609,9 +463,8 @@ class LeadController extends CURDBaseController
                         //  Nếu được phép gắn sale
                         $data['marketer_ids'] = '|' . implode('|', $request->get('marketer_ids', [])) . '|';
                         $data['saler_ids'] = '|' . implode('|', $request->get('saler_ids', [])) . '|';
-                        $data['service'] = '|' . implode('|', $request->get('service', [])) . '|';
 
-                        //  Nếu là nv tạo & gán cho sale khác chăm thì đặt ngay trạng thái là Đang chăm sóc
+                        //  Nếu là nv tạo & gán cho sale khác chăm thì đặt ngay trạng thái là Đang chăm sóc 
                         if (\Auth::guard('admin')->user()->super_admin != 1 && @$request->saler_ids != null) {
                             $data['status'] = 'Đang chăm sóc';
                         }
@@ -622,7 +475,7 @@ class LeadController extends CURDBaseController
                     }
                     if (!isset($data['saler_ids']) || $data['saler_ids'] == '||') {
                         //  Nếu không gắn người sale thì lấy người tạo làm sale
-                        $data['saler_ids'] = '|'.\Auth::guard('admin')->user()->id.'|';
+                        $data['saler_ids'] = '|'.\Auth::guard('admin')->user()->id.'|';   
                     }
                     $data['admin_id'] = \Auth::guard('admin')->user()->id;
                     $data['received_date'] = date('Y-m-d H:i:s');
@@ -672,8 +525,8 @@ class LeadController extends CURDBaseController
                         $this->luuDoiTac($request, $this->model);
 
                         /*LeadContactedLog::create([
-                            'title' => '',
-                            'admin_id' => \Auth::guard('admin')->user()->id,
+                            'title' => '', 
+                            'admin_id' => \Auth::guard('admin')->user()->id, 
                             'lead_id' => $this->model->id,
                             'note' => 'Tạo mới'
                         ]);*/
@@ -775,8 +628,8 @@ class LeadController extends CURDBaseController
                                 return back();
                             }
                         }
-
-
+                        
+                        
                     }
 
 
@@ -791,7 +644,7 @@ class LeadController extends CURDBaseController
                         }
                     }
 
-
+                    
                     //  Tùy chỉnh dữ liệu insert
                     if (\Auth::guard('admin')->user()->super_admin == 1 || \Auth::guard('admin')->user()->id == $item->admin_id) {
                         //  Nếu là super admin hoặc là người tạo đầu mối thì được phép sửa mkt
@@ -799,7 +652,7 @@ class LeadController extends CURDBaseController
                     }
 
                     if (\Auth::guard('admin')->user()->super_admin == 1 || strpos($item->saler_ids, '|'.\Auth::guard('admin')->user()->id.'|') !== false) {
-
+                        
                         //  Nếu là super admin hoặc đầu mối của mình là sale thì được phép sửa sale
                         $data['saler_ids'] = '|' . implode('|', $request->get('saler_ids', [])) . '|';
                     } else {
@@ -816,10 +669,10 @@ class LeadController extends CURDBaseController
                     }
 
                     $data['dating'] = $request->dating;
-
+                    
                     //  Nếu thay đổi sale thì tạo log
                     $data = $this->changeSale($data, $item);
-
+                    
                     //  Nếu thay đổi trạng thái thì tạo log
                     $this->changeStatus($data, $item);
 
@@ -857,7 +710,7 @@ class LeadController extends CURDBaseController
                                 'type' => 'lead',
                             ]);
                         }
-
+                        
                         //  đánh dấu là đối tác nếu được tích chọn
                         $this->luuDoiTac($request, $item);
 
@@ -903,7 +756,7 @@ class LeadController extends CURDBaseController
         if (@$request->doi_tac_cua_toi == 'on') {
             //  nếu có tích chọn đối tác
             if (strpos(@$lead->partner, '|'.\Auth::guard('admin')->user()->id.'|') == false) {
-
+            
                 if ($lead->partner == '') {
                     $lead->partner = '|'.\Auth::guard('admin')->user()->id.'|';
                 } else {
@@ -935,8 +788,8 @@ class LeadController extends CURDBaseController
                 $txt .= $v . ', ';
             }
             $log_create = [
-                'title' => '',
-                'admin_id' => \Auth::guard('admin')->user()->id,
+                'title' => '', 
+                'admin_id' => \Auth::guard('admin')->user()->id, 
                 'lead_id' => $item->id,
                 'note' => 'Đổi sale ' . $txt,
                 'type' => 'lead',
@@ -976,8 +829,8 @@ class LeadController extends CURDBaseController
     public function changeStatus($data, $item) {
         if (@$data['status'] != $item->status) {
             $log_create = [
-                'title' => '',
-                'admin_id' => \Auth::guard('admin')->user()->id,
+                'title' => '', 
+                'admin_id' => \Auth::guard('admin')->user()->id, 
                 'lead_id' => $item->id,
                 'note' => 'Đổi trạng thái: từ "' . $item->status . '" sang "'.$data['status'].'"',
                 'type' => 'lead',
@@ -997,7 +850,7 @@ class LeadController extends CURDBaseController
             CommonHelper::one_time_message('error', 'Đường dẫn không tồn tại');
             return redirect('/admin');
         }
-
+        
 
         $data = $this->getDataUpdate($request, $item);
         return view('CRMEdu.lead.view')->with($data);
@@ -1213,7 +1066,7 @@ class LeadController extends CURDBaseController
         die('xong!');
     }
 
-
+    
 
 
     public function checkExist(Request $request) {
@@ -1243,7 +1096,7 @@ class LeadController extends CURDBaseController
             'status' => true,
             'html' => $txt,
         ]);
-    }
+    } 
 
     public function adminSearchForSelect2(Request $request)
     {
@@ -1254,7 +1107,7 @@ class LeadController extends CURDBaseController
                         $query->orWhere('code', 'like', '%' . $request->keyword . '%');
                         $query->orWhere('email', 'like', '%' . $request->keyword . '%');
                         $query->orWhere('tel', 'like', '%' . $request->keyword . '%');
-
+                         
                     });
 
         if ($request->where != '') {
@@ -1318,12 +1171,12 @@ class LeadController extends CURDBaseController
                     $lead->save();
                     $str .= $lead->id . ',';
                 }
-
+                
             }
         }
         CommonHelper::one_time_message('success', 'Chuyển thành công đầu mối: ' . $str);
         return redirect()->back();
-        return response()->json([
+        return response()->json([   
             'status' => true,
             'msg' => 'Chuyển thành công: ' . $str
         ]);
@@ -1415,7 +1268,7 @@ class LeadController extends CURDBaseController
                     if (isset($result['msg'])) {
                         echo '&nbsp;&nbsp;&nbsp;&nbsp; => '.$result['msg'].'<br>';
                     }
-
+                    
                     if (@$result['status'] == true) {
                         $record_total++;
                     }
@@ -1435,7 +1288,7 @@ class LeadController extends CURDBaseController
                         }
                     });
                 }
-
+                
             });
             dd($reader->getSheetCount());
         });
@@ -1460,7 +1313,7 @@ class LeadController extends CURDBaseController
             $tel = str_replace('.', '', $tel);
             $tel = str_replace(' ', '', $tel);
             $tel = trim($tel);
-
+            
             //  Kiểm tra trường dữ liêu bắt buộc có
             /*$fields_require = ['tel'];
             foreach ($fields_require as $field_require) {
@@ -1512,7 +1365,7 @@ class LeadController extends CURDBaseController
                 $data['received_date'] = date('Y-m-d H:i:s');    //  reset lai ngay nhan lead
                 $data['dating'] = date('Y-m-d H:i:s');
 
-
+                
 
                 if ($tel == '0') {
                     return [
@@ -1521,12 +1374,12 @@ class LeadController extends CURDBaseController
                         'msg' => 'Sđt trống',
                     ];
                 }
-
+                
 
                 //  Chèn các dữ liệu lấy vào từ excel
                 foreach ($row->all() as $key => $value) {
                     switch ($key) {
-
+                        
                         default: {
                             if (\Schema::hasColumn($r->table, $key)) {
                                 $data[$key] = $value;
@@ -1536,7 +1389,7 @@ class LeadController extends CURDBaseController
                 }
 
                 $data['tel'] = $tel;
-
+                
                 if (!isset($data['name'])) {
                     $data['name'] = '-';
                 }
@@ -1547,9 +1400,9 @@ class LeadController extends CURDBaseController
                 //  nhập dịch vụ - service
                 if (isset($data['service']) && $data['service'] != '' && $data['service'] != null) {
                     $string = preg_replace('/\s+/', '', $data['service']);
-                    $service = Service::whereIn('name_vi', explode('|',$string))->pluck('id')->toArray();
-                    if(!empty($service)) {
-                        $data['service'] = '|' . implode('|', $service) . '|';
+                    $service_ids = Service::whereIn('name_vi', explode('|',$string))->pluck('id')->toArray();
+                    if(!empty($service_ids)) {
+                        $data['service'] = '|' . implode('|', $service_ids) . '|';
                     }
                 }
 
@@ -1657,6 +1510,11 @@ class LeadController extends CURDBaseController
                 $nv->admin_id = \Auth::guard('admin')->user()->id;
                 $nv->save();
 
+                //   gán quyền sale
+                RoleAdmin::create([
+                    'admin_id' => $nv->id,
+                    'role_id' => 2,
+                ]);
             }
             $data['saler_ids'] = '|' . $nv->id . '|';
         }

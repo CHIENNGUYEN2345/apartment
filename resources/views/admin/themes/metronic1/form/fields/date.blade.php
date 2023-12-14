@@ -7,15 +7,10 @@ if (old($field['name']) != null) {
               $value = date('Y-m-d', strtotime($field['value']));
        } else {
               $value = '';
-
        }
-} elseif (@$field['value'] == 'now') {
-       $value = date('Y-m-d');
 } else {
-       $value = '';
+       $value = date('Y-m-d');
 }
-
-
 ?>
 <input type="date" name="{{ $field['name'] }}" class="form-control {{ @$field['class'] }}"
        {{ strpos(@$field['class'], 'require') !== false ? 'required' : '' }} {!! @$field['inner'] !!}

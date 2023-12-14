@@ -15,7 +15,7 @@ class ServiceController extends CURDBaseController
     protected $module = [
         'code' => 'service',
         'table_name' => 'services',
-        'label' => 'Dịch vụ',
+        'label' => 'Dự án',
         'modal' => '\App\CRMDV\Models\Service',
         'list' => [
             ['name' => 'name_vi', 'type' => 'text_edit', 'label' => 'Tên', 'sort' => true],
@@ -25,13 +25,13 @@ class ServiceController extends CURDBaseController
         'form' => [
             'general_tab' => [
                 ['name' => 'name_vi', 'type' => 'text', 'class' => 'required', 'label' => 'Tên'],
-                ['name' => 'code', 'type' => 'text', 'class' => 'required', 'label' => 'Mã'],
-                ['name' => 'expiry_date', 'type' => 'number', 'label' => 'Hết hạn'],
+//                ['name' => 'code', 'type' => 'text', 'class' => 'required', 'label' => 'Mã'],
+//                ['name' => 'expiry_date', 'type' => 'number', 'label' => 'Hết hạn'],
                 ['name' => 'intro', 'type' => 'textarea', 'label' => 'Mô tả'],
-                ['name' => 'checkbox', 'type' => 'checkbox_multiple', 'label' => 'Chọn thứ', 'options' => [
-                    'Tuesday' => 3,
-                    'Friday' => 6
-                ]],
+//                ['name' => 'checkbox', 'type' => 'checkbox_multiple', 'label' => 'Chọn thứ', 'options' => [
+//                    'Tuesday' => 3,
+//                    'Friday' => 6
+//                ]],
             ],
         ]
     ];

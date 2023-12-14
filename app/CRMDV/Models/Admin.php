@@ -18,14 +18,16 @@
 
 namespace App\CRMDV\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Admin extends Model
 {
 
+    use SoftDeletes;
     protected $table = 'admin';
 
     protected $fillable = [
-        'name', 'email', 'password', 'address', 'tel', 'image', 'gender', 'birthday', 'api_token', 'password_md5', 'fb_id', 'role_id'
+        'name', 'email', 'password', 'address', 'tel', 'image', 'gender', 'birthday', 'api_token', 'password_md5', 'fb_id', 'role_id','phong_ban_id'
     ];
 
     protected $hidden = ['password', 'remember_token'];
@@ -41,5 +43,8 @@ class Admin extends Model
 
     public function invite() {
         return $this->belongsTo($this, 'invite_by', 'id');
+    }
+    public function room() {
+        return $this->belongsTo(Phong_ban::class, 'phong_ban_id', 'id');
     }
 }

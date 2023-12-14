@@ -6,7 +6,6 @@ use App\Http\Helpers\CommonHelper;
 use App\Mail\MailServer;
 use App\Models\Admin;
 use App\Models\Setting;
-use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use App\CRMEdu\Controllers\Helpers\CRMEduHelper;
@@ -24,11 +23,11 @@ class CSKHBillController extends CURDBaseController
     protected $module = [
         'code' => 'cskh-bill',
         'table_name' => 'bills',
-        'label' => 'CRMEdu_admin.cskh-bill',
+        'label' => 'CSKH - Hợp đồng',
         'modal' => '\App\CRMEdu\Models\Bill',
         'list' => [
-//            ['name' => 'domain', 'type' => 'text_edit', 'label' => 'CRMEdu_admin.cskh-bill_domain'],
-            ['name' => 'customer_id', 'type' => 'relation', 'label' => 'CRMEdu_admin.cskh_customer', 'object' => 'customer', 'display_field' => 'name'],
+            ['name' => 'domain', 'type' => 'text_edit', 'label' => 'CRMEdu_admin.cskh-bill_domain'],
+            ['name' => 'customer_id', 'type' => 'relation', 'label' => 'CRMEdu_admin.cskh_customer', 'object' => 'admin', 'display_field' => 'name'],
             ['name' => 'total_price', 'type' => 'price_vi', 'label' => 'CRMEdu_admin.cskh_total_price'],
             ['name' => 'service_id', 'type' => 'relation', 'label' => 'CRMEdu_admin.cskh_service', 'object' => 'service', 'display_field' => 'name_vi'],
 //            ['name' => 'count_product', 'type' => 'custom', 'td' => 'CRMEdu.cskh_bill.list.td.count_product', 'label' => 'Tổng SP'],
@@ -39,23 +38,14 @@ class CSKHBillController extends CURDBaseController
         ],
         'form' => [
             'general_tab' => [
-                ['name' => 'total_price', 'type' => 'price_vi', 'class' => 'required', 'label' => 'CRMEdu_admin.bills_total_price', 'group_class' => 'col-md-4'],
-                ['name' => 'total_price_contract', 'type' => 'price_vi', 'class' => 'required', 'label' => 'CRMEdu_admin.bills_total_price_contract', 'group_class' => 'col-md-4'],
-//                ['name' => 'domain', 'type' => 'text', 'label' => 'Tên miền', 'group_class' => 'col-md-4'],
-                ['name' => 'service_id', 'type' => 'select2_model', 'class' => '',  'label' => 'CRMEdu_admin.service', 'multiple' => true,
-                    'model' => Service::class, 'display_field' => 'name_vi', 'group_class' => 'col-md-4'],
-                ['name' => 'registration_date', 'type' => 'date', 'label' => 'CRMEdu_admin.bills_registration_date', 'class' => 'required',
-                    'value' => 'now', 'group_class' => 'col-md-3'],
-                ['name' => 'contract_time', 'type' => 'number', 'label' => 'CRMEdu_admin.contract_time', 'class' => '', 'group_class' => 'col-md-2'],
-
-                ['name' => 'status', 'type' => 'checkbox', 'label' => 'CRMEdu_admin.bills_activated', 'value' => 1, 'group_class' => 'col-md-4'],
-                ['name' => 'dating', 'type' => 'date', 'label' => 'CRMEdu_admin.bills_dating', 'class' => '', 'group_class' => 'col-md-3'],
-                ['name' => 'note', 'type' => 'textarea', 'label' => 'CRMEdu_admin.bills_note', 'group_class' => 'col-md-12'],
-
-
-
-                // ['name' => 'curator_ids', 'type' => 'select2_ajax_model', 'label' => 'Người KH phụ trách', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'email', 'multiple' => true, 'group_class' => 'col-md-6'],
-                // ['name' => 'staff_care', 'type' => 'select2_ajax_model', 'label' => 'Nhân viên phụ trách', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'email', 'multiple' => true, 'group_class' => 'col-md-6'],
+                ['name' => 'total_price', 'type' => 'text', 'class' => 'number_price required', 'label' => 'Tổng tiền', 'group_class' => 'col-md-6'],
+                ['name' => 'registration_date', 'type' => 'date', 'label' => 'Ngày ký HĐ', 'class' => 'required', 'group_class' => 'col-md-6'],
+                ['name' => 'status', 'type' => 'checkbox', 'label' => 'Kích hoạt', 'value' => 1, 'group_class' => 'col-md-6'],
+                ['name' => 'note', 'type' => 'textarea', 'label' => 'Ghi chú'],
+                ['name' => 'customer_note', 'type' => 'textarea', 'label' => 'Ghi chú của khách'],
+                ['name' => 'domain', 'type' => 'text', 'label' => 'Tên miền', 'group_class' => 'col-md-6'],
+                ['name' => 'curator_ids', 'type' => 'select2_ajax_model', 'label' => 'Người KH phụ trách', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'tel', 'multiple' => true, 'group_class' => 'col-md-6'],
+                ['name' => 'staff_care', 'type' => 'select2_ajax_model', 'label' => 'Nhân viên phụ trách', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'code', 'multiple' => true, 'group_class' => 'col-md-6'],
                 /*['name' => 'retention_time', 'type' => 'select', 'options' =>
                     [
                         0 => 'Không bảo hành',
@@ -69,38 +59,115 @@ class CSKHBillController extends CURDBaseController
 
             ],
             'customer_tab' => [
-                ['name' => 'marketer_ids', 'type' => 'select2_ajax_model', 'label' => 'CRMEdu_admin.bills_marketing', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'code', 'multiple' => true, 'group_class' => 'col-md-6'],
-                ['name' => 'saler_id', 'type' => 'custom', 'field' => 'CRMEdu.form.fields.select_sale','label' => 'CRMEdu_admin.bills_sale', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'code', 'class' => 'required'],
+                ['name' => 'marketer_ids', 'type' => 'select2_ajax_model', 'label' => 'Marketing', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'code', 'multiple' => true, 'group_class' => 'col-md-6'],
+                ['name' => 'saler_id', 'type' => 'select2_ajax_model', 'label' => 'Người sale', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'code'],
                 ['name' => 'customer_id', 'type' => 'custom', 'type_history' => 'relation_multiple', 'field' => 'CRMEdu.form.fields.select_customer',
-                    'label' => 'Khách hàng', 'model' => User::class, 'object' => 'user', 'display_field' => 'name', 'display_field2' => 'tel', 'class' => 'required'],
+                    'label' => 'Khách hàng', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'tel', 'class' => 'required'],
                 ['name' => 'customer_legal_id', 'type' => 'custom', 'type_history' => 'relation_multiple', 'field' => 'CRMEdu.form.fields.select_customer',
-                    'label' => 'Đại diện pháp lý', 'model' => User::class, 'object' => 'user', 'display_field' => 'name', 'display_field2' => 'tel', 'class' => ''],
+                'label' => 'Đại diện pháp lý', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'tel', 'class' => ''],
             ],
             'gia_han_tab' => [
-//                ['name' => 'expiry_date', 'type' => 'date', 'field' => 'CRMEdu.form.fields.expiry_date', 'label' => 'Ngày hết hạn', 'class' => '', 'group_class' => 'col-md-6', 'inner' => ''],
-//                ['name' => 'exp_price', 'type' => 'price_vi', 'class' => ' required', 'label' => 'Giá gia hạn', 'group_class' => 'col-md-6', 'des' => 'Thuê hosting bên mình thì. 1,4tr cho 3G, 1,76tr cho 6G'],
-//                ['name' => 'auto_extend', 'type' => 'checkbox', 'label' => 'Kích hoạt tự động gia hạn', 'value' => 1, 'group_class' => 'col-md-6'],
+                ['name' => 'expiry_date', 'type' => 'custom', 'field' => 'CRMEdu.form.fields.expiry_date', 'label' => 'Ngày hết hạn', 'class' => 'required', 'group_class' => 'col-md-6'],
+                ['name' => 'exp_price', 'type' => 'text', 'class' => 'number_price required', 'label' => 'Giá gia hạn', 'group_class' => 'col-md-6'],
+                ['name' => 'auto_extend', 'type' => 'checkbox', 'label' => 'Kích hoạt tự động gia hạn', 'value' => 1, 'group_class' => 'col-md-6'],
             ],
             'domain_tab' => [
-
+//                ['name' => 'domain', 'type' => 'text', 'label' => 'Tên miền', 'class' => 'required', 'group_class' => 'col-md-6'],
+                // ['name' => 'domain_owner', 'type' => 'select', 'options' =>
+                //     [
+                //         'customer' => 'Thuê bên khác',
+                //         'hobasoft' => 'Thuê bên mình'
+                //     ], 'class' => '', 'label' => 'Nơi thuê tên miền', 'group_class' => 'col-md-6'],
+                // ['name' => 'domain_expiry_date', 'type' => 'custom', 'field' => 'CRMEdu.form.fields.expiry_date', 'label' => 'Ngày hết hạn'],
+                // ['name' => 'domain_expiry_price', 'type' => 'text', 'class' => 'number_price', 'label' => 'Giá gia hạn'],
+                // ['name' => 'domain_auto_extend', 'type' => 'checkbox', 'label' => 'Kích hoạt tự động gia hạn', 'value' => 1, 'group_class' => 'col-md-6'],
             ],
             'hosting_tab' => [
+                // ['name' => 'hosting_link', 'type' => 'text', 'label' => 'Đường dẫn hosting', 'group_class' => 'col-md-6'],
+                // ['name' => 'hosting_username', 'type' => 'text', 'label' => 'Tài khoản hosting', 'group_class' => 'col-md-6'],
+                // ['name' => 'hosting_password', 'type' => 'text', 'label' => 'Mật khẩu hosting', 'group_class' => 'col-md-6'],
+                // ['name' => 'web_username', 'type' => 'text', 'label' => 'Tài khoản website', 'group_class' => 'col-md-6'],
+                // ['name' => 'web_password', 'type' => 'text', 'label' => 'Mật khẩu website', 'group_class' => 'col-md-6'],
 
+                // ['name' => 'hosting_owner', 'type' => 'select', 'options' =>
+                //     [
+                //         'customer' => 'Thuê bên khác',
+                //         'hobasoft' => 'Thuê bên mình'
+                //     ], 'class' => '', 'label' => 'Nơi thuê hosting', 'group_class' => 'col-md-6'],
+                // ['name' => 'hosting_expiry_date', 'type' => 'custom', 'field' => 'CRMEdu.form.fields.expiry_date', 'label' => 'Ngày hết hạn'],
+                // ['name' => 'hosting_expiry_price', 'type' => 'text', 'class' => 'number_price', 'label' => 'Giá gia hạn'],
+                // ['name' => 'hosting_auto_extend', 'type' => 'checkbox', 'label' => 'Kích hoạt tự động gia hạn', 'value' => 1, 'group_class' => 'col-md-6'],
             ],
             'ldp_tab' => [
+                // ['name' => 'hosting_link', 'type' => 'text', 'label' => 'Đường dẫn hosting', 'class' => 'required', 'group_class' => 'col-md-4', 'value' => 'http://103.48.82.186:2222/'],
+                // ['name' => 'hosting_username', 'type' => 'text', 'label' => 'Tài khoản hosting', 'class' => 'required', 'group_class' => 'col-md-4'],
+                // ['name' => 'hosting_password', 'type' => 'text', 'label' => 'Mật khẩu hosting', 'class' => 'required', 'group_class' => 'col-md-4'],
 
+                // ['name' => 'web_link', 'type' => 'text', 'label' => 'Đường dẫn website', 'class' => 'required', 'group_class' => 'col-md-4', 'value' => 'https://service.lamlandingpage.com/admin'],
+                // ['name' => 'web_username', 'type' => 'text', 'label' => 'Tài khoản website', 'class' => 'required', 'group_class' => 'col-md-4'],
+                // ['name' => 'web_password', 'type' => 'text', 'label' => 'Mật khẩu website', 'class' => 'required', 'group_class' => 'col-md-4'],
+
+                ['name' => 'file_ldp', 'type' => 'custom', 'field' => 'CRMEdu.form.fields.file_ldp', 'label' => 'File .ladipage', ],
+
+//                ['name' => 'domain', 'type' => 'text', 'label' => 'Tên miền', 'class' => 'required', 'group_class' => 'col-md-6'],
+                // ['name' => 'domain_owner', 'type' => 'select', 'options' =>
+                //     [
+                //         'customer' => 'Thuê bên khác',
+                //         'hobasoft' => 'Thuê bên mình'
+                //     ], 'class' => 'required', 'label' => 'Nơi thuê tên miền', 'group_class' => 'col-md-6'],
             ],
             'wp_tab' => [
+                ['name' => 'service_name', 'type' => 'select', 'label' => 'Tên dịch vụ', 'class' => '', 'options' => [
+                    'Web tiết kiệm' => 'Web tiết kiệm',
+                    'Web khởi nghiệp' => 'Web khởi nghiệp',
+                    'Web trung cấp' => 'Web trung cấp',
+                    'Web cao cấp' => 'Web cao cấp',
 
+                ]],
+//                 ['name' => 'hosting_link', 'type' => 'text', 'label' => 'Đường dẫn hosting', 'class' => '', 'group_class' => 'col-md-4', 'value' => 'http://103.48.82.186:2222/'],
+//                 ['name' => 'hosting_username', 'type' => 'text', 'label' => 'Tài khoản hosting', 'class' => '', 'group_class' => 'col-md-4'],
+//                 ['name' => 'hosting_password', 'type' => 'text', 'label' => 'Mật khẩu hosting', 'class' => '', 'group_class' => 'col-md-4'],
+//                 ['name' => 'hosting_plan', 'type' => 'select', 'options' =>
+//                     [
+//                         1 => '1.000Mb - 750.000đ',
+//                         2 => '2.000Mb - 950.000đ',
+//                         3 => '3.500Mb - 1.500.000đ',
+//                         4 => '5.000Mb - 2.000.000đ',
+//                     ], 'class' => 'required', 'label' => 'Gói hosting', 'group_class' => 'col-md-6'],
+//                 ['name' => 'hosting_owner', 'type' => 'select', 'options' =>
+//                     [
+//                         'customer' => 'Thuê bên khác',
+//                         'hobasoft' => 'Thuê bên mình'
+//                     ], 'class' => 'required', 'label' => 'Nơi thuê hosting', 'group_class' => 'col-md-6'],
+
+// //                ['name' => 'domain', 'type' => 'text', 'label' => 'Tên miền', 'class' => '', 'group_class' => 'col-md-6'],
+//                 ['name' => 'domain_owner', 'type' => 'select', 'options' =>
+//                     [
+//                         'customer' => 'Thuê bên khác',
+//                         'hobasoft' => 'Thuê bên mình'
+//                     ], 'class' => '', 'label' => 'Nơi thuê tên miền', 'group_class' => 'col-md-6'],
+
+//                 ['name' => 'web_link', 'type' => 'text', 'label' => 'Đường dẫn website', 'class' => 'required', 'group_class' => 'col-md-4', 'value' => 'https://service.lamlandingpage.com/admin'],
+//                 ['name' => 'web_username', 'type' => 'text', 'label' => 'Tài khoản website', 'class' => 'required', 'group_class' => 'col-md-4'],
+//                 ['name' => 'web_password', 'type' => 'text', 'label' => 'Mật khẩu website', 'class' => 'required', 'group_class' => 'col-md-4'],
             ],
             'service_tab' => [
-//                ['name' => 'status', 'type' => 'checkbox', 'label' => 'Kích hoạt', 'value' => 1, ],
-//                ['name' => 'note', 'type' => 'textarea', 'label' => 'Ghi chú'],
-//                ['name' => 'customer_note', 'type' => 'textarea', 'class' => 'required', 'label' => 'Ghi chú của Khách'],
+                ['name' => 'service_id', 'type' => 'radio_model', 'class' => '', 'label' => 'Dịch vụ', 'model' => Service::class, 'display_field' => 'name_vi'],
             ],
             'account_tab' => [
+                // ['name' => 'hosting_link', 'type' => 'text', 'label' => 'Đường dẫn hosting', 'group_class' => 'col-md-6'],
+                // ['name' => 'web_link', 'type' => 'text', 'label' => 'Đường dẫn website', 'group_class' => 'col-md-6'],
+                // ['name' => 'hosting_username', 'type' => 'text', 'label' => 'Tài khoản hosting', 'group_class' => 'col-md-6'],
+                // ['name' => 'web_username', 'type' => 'text', 'label' => 'Tài khoản website', 'group_class' => 'col-md-6'],
+                // ['name' => 'hosting_password', 'type' => 'text', 'label' => 'Mật khẩu hosting', 'group_class' => 'col-md-6'],
+                // ['name' => 'web_password', 'type' => 'text', 'label' => 'Mật khẩu website', 'group_class' => 'col-md-6'],
 
             ],
+//            'histories_bill_tab' => [
+//                ['name' => 'account_max', 'type' => 'number', 'label' => 'Số thành viên tôi đa', 'inner' => 'disabled', 'group_class' => 'col-md-6'],
+//                ['name' => 'exp_date', 'type' => 'datetimepicker', 'label' => 'Ngày hết hạn', 'inner' => 'disabled',
+//                    'date_format' => 'd-m-Y', 'group_class' => 'col-md-6'],
+//            ],
         ],
     ];
 
@@ -181,37 +248,37 @@ class CSKHBillController extends CURDBaseController
     public function appendWhere($query, $request)
     {
         
-//        if (@$request->marketer_ids != null) {
-//            $query = $query->where('marketer_ids', 'like', '%|' . $request->marketer_ids . '|%');
-//        }
-//
-//        if (\Auth::guard('admin')->user()->super_admin != 1) {
-//            //  Nếu ko phải super_admin thì truy vấn theo dữ liệu cty đó
-//            // $query = $query->where('company_id', \Auth::guard('admin')->user()->last_company_id);
-//        }
-//
-//
-//        $query = $query->where('domain', 'LIKE', '%.%')    //  lấy hđ có tên miền có dấu .
-//                            ->whereNotIn('service_id', [    //   ko lấy tên miền ở các  hợp đồng cho các dịch vụ sau:
-//                                4,  //  dv mail
-//                                7,  //  dv duy trì
-//                                8,  // dv nâng cấp hosting
-//                                9,  // dv nâng cấp web
-//
-//                            ])
-//                            ->where('status', 1);    //  chỉ lấy các dự án đang kich hoạt
-//
-//        $query = $query->where('registration_date', '<', date("Y-m-d H:i:s",strtotime("-1 month")))  //  Lấy HĐ đã ký cách đây 1 tháng
-//                        ->where(function ($query) {
-////                            $query->orWhere('contacted_log_last', '<', date("Y-m-d H:i:s",strtotime("-3 month")));  //  Lấy HĐ đã chăm sóc cách đây lâu hơn 3 tháng
-//                            $query->orWhere('contacted_log_last', null);
-//                        })
-//                        ->where('expiry_date', '>', date("Y-m-d H:i:s",strtotime("+1 month")))  //  Lấy HĐ không gần với thời gian gia hạn
-//                        ->where('status', 1)    //  HĐ đang kich hoạt
-////                        ->whereNotIn('service_id', [3, 4, 6])    //  HĐ đang kich hoạt
-//                        ->orderBy('contacted_log_last', 'asc')->orderBy('id', 'asc');   //  Lấy HĐ tương tác lâu nhất & cũ nhất lên trước
-//
-//        $query = $query->groupBy('customer_id');
+        if (@$request->marketer_ids != null) {
+            $query = $query->where('marketer_ids', 'like', '%|' . $request->marketer_ids . '|%');
+        }
+
+        if (\Auth::guard('admin')->user()->super_admin != 1) {
+            //  Nếu ko phải super_admin thì truy vấn theo dữ liệu cty đó
+            // $query = $query->where('company_id', \Auth::guard('admin')->user()->last_company_id);
+        }
+
+
+        $query = $query->where('domain', 'LIKE', '%.%')    //  lấy hđ có tên miền có dấu .
+                            ->whereNotIn('service_id', [    //   ko lấy tên miền ở các  hợp đồng cho các dịch vụ sau:
+                                4,  //  dv mail
+                                7,  //  dv duy trì
+                                8,  // dv nâng cấp hosting
+                                9,  // dv nâng cấp web
+
+                            ])
+                            ->where('status', 1);    //  chỉ lấy các dự án đang kich hoạt
+
+        $query = $query->where('registration_date', '<', date("Y-m-d H:i:s",strtotime("-1 month")))  //  Lấy HĐ đã ký cách đây 1 tháng
+                        ->where(function ($query) {
+                            $query->orWhere('contacted_log_last', '<', date("Y-m-d H:i:s",strtotime("-3 month")));  //  Lấy HĐ đã chăm sóc cách đây lâu hơn 3 tháng
+                            $query->orWhere('contacted_log_last', null);
+                        })
+                        ->where('expiry_date', '>', date("Y-m-d H:i:s",strtotime("+1 month")))  //  Lấy HĐ không gần với thời gian gia hạn
+                        ->where('status', 1)    //  HĐ đang kich hoạt
+//                        ->whereNotIn('service_id', [3, 4, 6])    //  HĐ đang kich hoạt
+                        ->orderBy('contacted_log_last', 'asc')->orderBy('id', 'asc');   //  Lấy HĐ tương tác lâu nhất & cũ nhất lên trước
+
+        $query = $query->groupBy('customer_id');
 
         return $query;
     }

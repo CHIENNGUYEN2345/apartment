@@ -24,11 +24,11 @@ class TPBillController extends CURDBaseController
     protected $module = [
         'code' => 'tpbill',
         'table_name' => 'bills',
-        'label' => 'CRMEdu_admin.tpbill',
+        'label' => 'Hợp đồng phòng KD',
         'modal' => '\App\CRMEdu\Models\Bill',
         'list' => [
-//            ['name' => 'domain', 'type' => 'text_edit', 'label' => 'CRMEdu_admin.tpbill-bill_domain', 'sort' => true],
-            ['name' => 'customer_id', 'type' => 'relation_edit', 'label' => 'CRMEdu_admin.tpbill_client', 'object' => 'customer', 'display_field' => 'name'],
+            ['name' => 'domain', 'type' => 'text_edit', 'label' => 'CRMEdu_admin.tpbill-bill_domain', 'sort' => true],
+            ['name' => 'customer_id', 'type' => 'relation', 'label' => 'CRMEdu_admin.tpbill_client', 'object' => 'admin', 'display_field' => 'name'],
             ['name' => 'total_price', 'type' => 'price_vi', 'label' => 'CRMEdu_admin.tpbill_total_price', 'sort' => true],
             ['name' => 'total_price_contract', 'type' => 'price_vi', 'label' => 'CRMEdu_admin.tpbill_total_money'],
             ['name' => 'total_received', 'type' => 'price_vi', 'label' => 'CRMEdu_admin.tpbill_money_received'],
@@ -40,11 +40,11 @@ class TPBillController extends CURDBaseController
         ],
         'form' => [
             'general_tab' => [
-                ['name' => 'total_price', 'type' => 'price_vi', 'class' => 'required', 'label' => 'CRMEdu_admin.tpbill_sales', 'group_class' => 'col-md-6'],
-                ['name' => 'domain', 'type' => 'text', 'label' => 'CRMEdu_admin.tpbill_Domain', 'group_class' => 'col-md-6'],
-                ['name' => 'service_id', 'type' => 'select2_model', 'class' => ' required',  'label' => 'CRMEdu_admin.tpbill_Goi_DV', 'model' => Service::class, 'display_field' => 'name_vi', 'group_class' => 'col-md-3'],
-                ['name' => 'registration_date', 'type' => 'date', 'label' => 'CRMEdu_admin.tpbill_sign_day', 'class' => 'required', 'group_class' => 'col-md-3'],
-                ['name' => 'contract_time', 'type' => 'number', 'label' => 'CRMEdu_admin.tpbill_Used_Time', 'class' => 'required', 'group_class' => 'col-md-3'],
+                ['name' => 'total_price', 'type' => 'price_vi', 'class' => 'required', 'label' => 'Doanh số', 'group_class' => 'col-md-6'],
+                ['name' => 'domain', 'type' => 'text', 'label' => 'Tên miền', 'group_class' => 'col-md-6'],
+                ['name' => 'service_id', 'type' => 'select2_model', 'class' => ' required',  'label' => 'Gói DV', 'model' => Service::class, 'display_field' => 'name_vi', 'group_class' => 'col-md-3'],
+                ['name' => 'registration_date', 'type' => 'date', 'label' => 'Ngày ký HĐ', 'class' => 'required', 'group_class' => 'col-md-3'],
+                ['name' => 'contract_time', 'type' => 'number', 'label' => 'Thời gian sử dụng (tháng)', 'class' => 'required', 'group_class' => 'col-md-3'],
                 /*['name' => 'retention_time', 'type' => 'select', 'options' =>
                     [
                         0 => 'Không bảo hành',
@@ -58,17 +58,17 @@ class TPBillController extends CURDBaseController
 
             ],
             'customer_tab' => [
-                ['name' => 'marketer_ids', 'type' => 'select2_ajax_model', 'label' => 'CRMEdu_admin.tpbill_Marketing', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'code', 'multiple' => true, 'group_class' => 'col-md-6'],
-                ['name' => 'saler_id', 'type' => 'select2_ajax_model', 'label' => 'CRMEdu_admin.tpbill_Sale', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'code', 'class' => 'required'],
+                ['name' => 'marketer_ids', 'type' => 'select2_ajax_model', 'label' => 'Marketing', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'code', 'multiple' => true, 'group_class' => 'col-md-6'],
+                ['name' => 'saler_id', 'type' => 'select2_ajax_model', 'label' => 'Sale', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'code', 'class' => 'required'],
                 ['name' => 'customer_id', 'type' => 'custom', 'type_history' => 'relation_multiple', 'field' => 'CRMEdu.form.fields.select_customer',
-                    'label' => 'CRMEdu_admin.tpbill_client', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'tel', 'class' => 'required'],
+                    'label' => 'Khách hàng', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'tel', 'class' => 'required'],
                 ['name' => 'customer_legal_id', 'type' => 'custom', 'type_history' => 'relation_multiple', 'field' => 'CRMEdu.form.fields.select_customer',
-                    'label' => 'CRMEdu_admin.tpbill_Legal_representative', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'tel', 'class' => ''],
+                    'label' => 'Đại diện pháp lý', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'tel', 'class' => ''],
             ],
             'gia_han_tab' => [
-                ['name' => 'expiry_date', 'type' => 'custom', 'field' => 'CRMEdu.form.fields.expiry_date', 'label' => 'CRMEdu_admin.tpbill_Expiration_date', 'class' => 'required', 'group_class' => 'col-md-6'],
-                ['name' => 'exp_price', 'type' => 'price_vi', 'class' => ' required', 'label' => 'CRMEdu_admin.tpbill_renewal_price', 'group_class' => 'col-md-6'],
-                ['name' => 'auto_extend', 'type' => 'checkbox', 'label' => 'CRMEdu_admin.tpbill_activate', 'value' => 1, 'group_class' => 'col-md-6'],
+                ['name' => 'expiry_date', 'type' => 'custom', 'field' => 'CRMEdu.form.fields.expiry_date', 'label' => 'Ngày hết hạn', 'class' => 'required', 'group_class' => 'col-md-6'],
+                ['name' => 'exp_price', 'type' => 'price_vi', 'class' => ' required', 'label' => 'Giá gia hạn', 'group_class' => 'col-md-6'],
+                ['name' => 'auto_extend', 'type' => 'checkbox', 'label' => 'Kích hoạt tự động gia hạn', 'value' => 1, 'group_class' => 'col-md-6'],
             ],
             'domain_tab' => [
 
@@ -83,9 +83,9 @@ class TPBillController extends CURDBaseController
 
             ],
             'service_tab' => [
-                ['name' => 'status', 'type' => 'checkbox', 'label' => 'CRMEdu_admin.tpbill_activated', 'value' => 1, ],
-                ['name' => 'note', 'type' => 'textarea', 'label' => 'CRMEdu_admin.tpbill_Note'],
-                ['name' => 'customer_note', 'type' => 'textarea', 'label' => 'CRMEdu_admin.tpbill_customer_notes'],
+                ['name' => 'status', 'type' => 'checkbox', 'label' => 'Kích hoạt', 'value' => 1, ],
+                ['name' => 'note', 'type' => 'textarea', 'label' => 'Ghi chú'],
+                ['name' => 'customer_note', 'type' => 'textarea', 'label' => 'Ghi chú của khách'],
             ],
             'account_tab' => [
 
@@ -98,7 +98,7 @@ class TPBillController extends CURDBaseController
 
     protected $filter = [
         'customer_id' => [
-            'label' => 'CRMEdu_admin.tpbill_customer_name',
+            'label' => 'Tên khách hàng',
             'type' => 'select2_ajax_model',
             'display_field' => 'name',
             'model' => \App\Models\Admin::class,
@@ -106,7 +106,7 @@ class TPBillController extends CURDBaseController
             'query_type' => '='
         ],
         'marketer_ids' => [
-            'label' => 'CRMEdu_admin.tpbill_source_marketing',
+            'label' => 'Nguồn marketing',
             'type' => 'select2_ajax_model',
             'display_field' => 'name',
             'display_field2' => 'code',
@@ -115,7 +115,7 @@ class TPBillController extends CURDBaseController
             'query_type' => 'custom'
         ],
         'saler_id' => [
-            'label' => 'CRMEdu_admin.tpbill_Sale1',
+            'label' => 'Sale',
             'type' => 'select2_ajax_model',
             'display_field' => 'name',
             'display_field2' => 'code',
@@ -124,7 +124,7 @@ class TPBillController extends CURDBaseController
             'query_type' => '='
         ],
         'service_id' => [
-            'label' => 'CRMEdu_admin.tpbill_Service',
+            'label' => 'Dịch vụ',
             'type' => 'select2_model',
             'display_field' => 'name_vi',
             'model' => Service::class,
@@ -136,7 +136,7 @@ class TPBillController extends CURDBaseController
             'query_type' => 'like'
         ],*/
         'filter_date' => [
-            'label' => 'CRMEdu_admin.tpbill_Loc',
+            'label' => 'Lọc theo',
             'type' => 'filter_date',
             'options' => [
                 '' => '',

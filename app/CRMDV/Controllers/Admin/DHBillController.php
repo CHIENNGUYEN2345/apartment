@@ -246,7 +246,7 @@ class DHBillController extends CURDBaseController
                                     ->pluck('bill_id')->toArray();
             $query = $query->whereNotIn('id', $bill_bo_ids);
         }
-        kh_xong_date
+
         if(@$request->progress == 'Bỏ') {
             //  Không lấy các dự án đã bỏ
             $bill_bo_ids = BillProgress::whereIn('status', ['Bỏ'])

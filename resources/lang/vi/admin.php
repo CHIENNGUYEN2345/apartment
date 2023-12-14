@@ -211,9 +211,4 @@ return [
     'district' => 'Quận huyện',
     'province' => 'Tỉnh thành',
     'other_information' => 'Thông tin khác',
-    'sale'=>"Sale",
-    'facebook'=>'Facebook',
-    'skype'=>'Skype',
-    'zalo'=>'Zalo',
-    'bills_contract'=>'Hợp Đồng',
 ];

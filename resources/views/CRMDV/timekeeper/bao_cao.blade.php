@@ -26,7 +26,7 @@ $rooms = [
                 <i class="kt-font-brand flaticon-calendar-with-a-clock-time-tools"></i>
             </span>
                     <h3 class="kt-portlet__head-title">
-                        Báo cáo chấm công trong tháng {{ date('m', strtotime(date('Y-m')." -1 month")) }}
+                        Báo cáo chấm công trong tháng {{ date('m', strtotime(date('Y-m')." -0 month")) }}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -62,8 +62,8 @@ $rooms = [
                                     	$timekeepers = \App\CRMDV\Models\Timekeeper::leftJoin('admin', 'timekeeper.may_cham_cong_id', '=', 'admin.may_cham_cong_id')
                                     					->select('admin.id as ad_id', 'admin.name as ad_name', 'admin.code as ad_code', 'admin.room_id',
                                                             'admin.may_cham_cong_id', 'admin.image', 'timekeeper.*')
-                                    					->where('timekeeper.time', '>', date('Y-m-01 00:00:00', strtotime(date('Y-m')." -1 month")))
-                                    					->where('timekeeper.time', '<', date('Y-m-t 23:59:00', strtotime(date('Y-m')." -1 month")))
+                                    					->where('timekeeper.time', '>', date('Y-m-01 00:00:00', strtotime(date('Y-m')." -0 month")))
+                                    					->where('timekeeper.time', '<', date('Y-m-t 23:59:00', strtotime(date('Y-m')." -0 month")))
                                                         ->orderBy('timekeeper.time', 'desc')->get();
                                     	
                                     	$admins = [];
@@ -111,8 +111,8 @@ $rooms = [
                                                 <td>{{ $value['di_muon_co_phep'] }}</td>
                                                 <td>
                                                     <?php
-                                                        $chua_duyet = \App\CRMDV\Models\Timekeeper::where('admin_id', $value['admin_id'])->where('status', '!=', 1)->where('time', '>=', date('Y-m-01 00:00:00', strtotime(date('Y-m')." -1 month")))
-                                                                        ->where('time', '<=', date('Y-m-31 23:59:00', strtotime(date('Y-m')." -1 month")))->count();
+                                                        $chua_duyet = \App\CRMDV\Models\Timekeeper::where('admin_id', $value['admin_id'])->where('status', '!=', 1)->where('time', '>=', date('Y-m-01 00:00:00', strtotime(date('Y-m')." -0 month")))
+                                                                        ->where('time', '<=', date('Y-m-31 23:59:00', strtotime(date('Y-m')." -0 month")))->count();
                                                         ?>
                                                     <a href="/admin/timekeeper?search=true&choose_time=thang_truoc&status=Chờ duyệt&admin_id={{ $value['admin_id'] }}">{{ $chua_duyet }}</a>
                                                 </td>

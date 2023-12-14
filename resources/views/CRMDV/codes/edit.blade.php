@@ -75,9 +75,7 @@
                     <!--begin::Form-->
                     <div class="kt-form">
                         <div class="kt-portlet__body">
-                            @if($result->status == 0)
-                            Tên miền trong HĐ: {{ @$result->bill->domain }}
-                            @endif
+
                             <div class="kt-section kt-section--first">
                                 @foreach($module['form']['general_tab'] as $field)
                                     @php

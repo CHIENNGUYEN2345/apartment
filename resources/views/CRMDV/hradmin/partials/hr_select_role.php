@@ -8,10 +8,10 @@ $data = $model->whereRaw('1=1');
 if (\Auth::guard('admin')->user()->super_admin != 1) {
 
     //  nếu ko phải super_admin thì truy vấn ra các quyền của công ty mình hoặc quyền chung
-
+    $not_customer = App\Models\RoleAdmin::whereNotIn('role_id', [3, 4])->pluck('admin_id')->toArray();
     $not_superadmin = App\Models\RoleAdmin::whereNotIn('role_id', [1, 175, 181])->pluck('admin_id')->toArray();
 
-    $data = $data->whereIn('id', $not_superadmin);
+    $data = $data->whereIn('id', $not_customer)->whereIn('id', $not_superadmin);
 
 
 

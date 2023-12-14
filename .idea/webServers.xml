@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="048c1b7b-e2f6-48fb-b239-2abdd60098ff" name="sehouse.khoweb" url="http://103.48.82.186">
+        <fileTransfer rootFolder="/home/sehouse/domains/sehouse.khoweb.top" accessType="SFTP" host="103.48.82.186" port="222" sshConfigId="9a18aa47-ea9e-4ba9-b8de-a2059c663113" sshConfig="root@103.48.82.186:222 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

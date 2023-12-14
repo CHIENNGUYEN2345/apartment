@@ -6,12 +6,7 @@ if (isset($field['where'])) {
 if (isset($field['where_attr']) && isset($result)) {
     $model = $model->where($field['where_attr'], $result->{$field['where_attr']});
 }
-if (isset($field['orderByRaw'])) {
-    $model = $model->orderByRaw($field['orderByRaw']);
-} else {
-    $model = $model->orderBy($field['display_field'], 'asc');
-}
-$data = $model->get();
+$data = $model->orderBy($field['display_field'], 'asc')->get();
 $value = [];
 if (isset($field['multiple']) && isset($result)) {
     if (is_array($result->{$field['name']}) || is_object($result->{$field['name']})) {
@@ -29,7 +24,7 @@ if (isset($field['multiple']) && isset($result)) {
 <select class="form-control {{ $field['class'] or '' }} select2-{{ $field['name'] }}" id="{{ $field['name'] }}"
         {{ strpos(@$field['class'], 'require') !== false ? 'required' : '' }}
         name="{{ $field['name'] }}{{ isset($field['multiple']) ? '[]' : '' }}" {{ isset($field['multiple']) ? 'multiple' : '' }} {!! @$field['inner'] !!}>
-    <option value="">{{trans('admin.choose')}} {{ trans($field['label']) }}</option>
+    <option value="">{{trans('admin.choose')}} {{ $field['label'] }}</option>
     @foreach ($data as $v)
 
         <option value='{{ $v->id }}' {{ in_array($v->id, $value) ? 'selected':'' }}>{{ $v->{$field['display_field']} }}{{ isset($field['display_field2']) ? ' | ' . $v->{$field['display_field2']} : '' }}</option>

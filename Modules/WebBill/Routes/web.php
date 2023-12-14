@@ -175,6 +175,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
 
     });
 
+    //Phòng ban
+    Route::group(['prefix' => 'rooms'], function () {
+        Route::get('', 'Admin\RoomController@getIndex')->name('rooms')->middleware('permission:rooms_view');
+        Route::get('publish', 'Admin\RoomController@getPublish')->name('rooms.publish')->middleware('permission:rooms_edit');
+        Route::match(array('GET', 'POST'), 'add', 'Admin\RoomController@add')->middleware('permission:rooms_add');
+        Route::get('delete/{id}', 'Admin\RoomController@delete')->middleware('permission:rooms_delete');
+        Route::post('multi-delete', 'Admin\RoomController@multiDelete')->middleware('permission:rooms_delete');
+        Route::get('search-for-select2', 'Admin\RoomController@searchForSelect2')->name('room.search_for_select2')->middleware('permission:rooms_view');
+        Route::get('{id}', 'Admin\RoomController@update')->middleware('permission:rooms_view');
+        Route::post('{id}', 'Admin\RoomController@update')->middleware('permission:rooms_edit');
+
+    });
 
     // lead
 
