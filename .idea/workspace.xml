@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1399ad84-1310-4f45-ba8d-38156f508332" name="Changes" comment="" />
+    <list default="true" id="1399ad84-1310-4f45-ba8d-38156f508332" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_15_2023_5_10_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_15_2023_5_10_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Custom/Controllers/Admin/BaoCaoDanKhachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Custom/Controllers/Admin/BaoCaoDanKhachController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dashboard/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dashboard/dashboard.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,7 +29,7 @@
       <option value="$PROJECT_DIR$/Modules/WebDashboard/composer.json" />
     </option>
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -53,12 +58,13 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "true",
     "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
     "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
     "WebServerToolWindowPanel.toolwindow.show.date": "false",
     "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
-    "last_opened_file_path": "C:/laragon/www/sehouse",
+    "last_opened_file_path": "C:/laragon/www/sehouse1",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -91,6 +97,7 @@
       <workItem from="1702621998539" duration="1090000" />
       <workItem from="1702633358280" duration="635000" />
       <workItem from="1702634372402" duration="477000" />
+      <workItem from="1702638141163" duration="1050000" />
     </task>
     <servers />
   </component>
