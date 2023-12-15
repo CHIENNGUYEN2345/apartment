@@ -30,7 +30,7 @@ class CodesController extends CURDBaseController
 //            ['name' => 'multi_cat', 'type' => 'custom', 'td' => 'CRMDV.list.td.multi_cat', 'label' => 'Danh mục'],
             ['name' => 'dien_tich', 'type' => 'text', 'label' => 'Diện tích'],
             ['name' => 'gia_niem_yet', 'type' => 'text', 'label' => 'Giá'],
-//            ['name' => 'mat_tien', 'type' => 'text', 'label' => 'Mặt tiền'],
+            ['name' => 'so_phong_ngu', 'type' => 'number', 'label' => 'Số phòng ngủ'],
             ['name' => 'phi_moi_gioi', 'type' => 'number', 'label' => 'Phí môi giới'],
             ['name' => 'luot_xem', 'type' => 'number', 'label' => 'Lượt xem',],
             ['name' => 'created_at', 'type' => 'datetime_vi', 'label' => 'Ngày tạo'],
@@ -57,13 +57,20 @@ class CodesController extends CURDBaseController
                 ['name' => 'dien_tich', 'type' => 'text', 'class' => '', 'label' => 'Diện tích', 'group_class' => 'col-md-3'],
                 ['name' => 'mat_tien', 'type' => 'text', 'class' => '', 'label' => 'Mặt tiền', 'group_class' => 'col-md-3'],
                 ['name' => 'so_tang', 'type' => 'number', 'class' => '', 'label' => 'Số tầng', 'group_class' => 'col-md-3'],
+                ['name' => 'phi_moi_gioi', 'type' => 'number', 'label' => 'Phí môi giới' , 'group_class' => 'col-md-3'],
+                ['name' => 'toa', 'type' => 'number', 'label' => 'Tòa' , 'group_class' => 'col-md-3'],
+                ['name' => 'tang', 'type' => 'number', 'label' => 'Tầng' , 'group_class' => 'col-md-3'],
+                ['name' => 'khoang_tang', 'type' => 'number', 'label' => 'Khoảng tầng' , 'group_class' => 'col-md-3'],
+                ['name' => 'so_phong_ngu' , 'type'=>'number' ,'label'=> 'Số phòng ngủ' , 'group_class'=>'col-md-3']
+//                ['name' => 'link', 'type' => 'text', 'class' => '', 'label' => 'Đường', 'group_class' => 'col-md-12'],
             ],
+
             'remind_tab' => [
                 ['name' => 'image', 'type' => 'file_image', 'label' => 'Ảnh đại diện'],
                 ['name' => 'image_extra', 'type' => 'multiple_image_dropzone', 'count' => '6', 'label' => 'Thêm nhiều ảnh khác'],
             ],
             'des_tab' => [
-                ['name' => 'gia_niem_yet', 'type' => 'text', 'class' => '', 'label' => 'Giá bán niêm yết', 'group_class' => 'col-md-4'],
+                ['name' => 'gia_niem_yet', 'type' => 'text', 'class' => 'required', 'label' => 'Giá bán niêm yết', 'group_class' => 'col-md-4'],
                 ['name' => 'gia_ha_chao', 'type' => 'text', 'class' => '', 'label' => 'Giá hạ chào', 'group_class' => 'col-md-4'],
                 ['name' => 'content', 'type' => 'textarea_editor', 'class' => '', 'label' => 'Nội dung chi tiết'],
 //                ['name' => 'content', 'type' => 'textarea_editor', 'class' => '', 'label' => 'Mô tả chi tiết tính năng'],
@@ -364,10 +371,15 @@ class CodesController extends CURDBaseController
             ]);
         }
     }
-    public function get_info($id)
+    public function ajaxGetInfo($id)
     {
         $data = $this->model->find($id);
         if (!is_object($data)) abort(404);
+
+        // tăng số lượt xem thêm 1
+        $data->luot_xem += 1;
+        $data->save();
+
 
         return response()->json([
             'status' => true,

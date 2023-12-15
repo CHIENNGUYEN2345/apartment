@@ -105,16 +105,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
 
     //  Dịch vụ
     Route::group(['prefix' => 'service'], function () {
-        Route::get('', '\App\CRMDV\Controllers\Admin\ServiceController@getIndex')->name('service')->middleware('permission:service');
-        Route::match(array('GET', 'POST'), 'add', '\App\CRMDV\Controllers\Admin\ServiceController@add')->middleware('permission:service');
-        Route::get('delete/{id}', '\App\CRMDV\Controllers\Admin\ServiceController@delete')->middleware('permission:service');
-        Route::post('multi-delete', '\App\CRMDV\Controllers\Admin\ServiceController@multiDelete')->middleware('permission:service');
-        Route::get('search-for-select2', '\App\CRMDV\Controllers\Admin\ServiceController@searchForSelect2')->name('service.search_for_select2')->middleware('permission:service');
+        Route::get('', '\App\CRMDV\Controllers\Admin\ServiceController@getIndex')->name('service')->middleware('permission:service_view');
+        Route::match(array('GET', 'POST'), 'add', '\App\CRMDV\Controllers\Admin\ServiceController@add')->middleware('permission:service_add');
+        Route::get('delete/{id}', '\App\CRMDV\Controllers\Admin\ServiceController@delete')->middleware('permission:service_delete');
+        Route::post('multi-delete', '\App\CRMDV\Controllers\Admin\ServiceController@multiDelete')->middleware('permission:service_delete');
+        Route::get('search-for-select2', '\App\CRMDV\Controllers\Admin\ServiceController@searchForSelect2')->name('service.search_for_select2')->middleware('permission:service_view');
 
-        Route::get('get-info', '\App\CRMDV\Controllers\Admin\ServiceController@get_info')->middleware('permission:service');
+        Route::get('get-info', '\App\CRMDV\Controllers\Admin\ServiceController@get_info')->middleware('permission:service_view');
 
-        Route::get('edit/{id}', '\App\CRMDV\Controllers\Admin\ServiceController@update')->middleware('permission:service');
-        Route::post('edit/{id}', '\App\CRMDV\Controllers\Admin\ServiceController@update')->middleware('permission:service');
+        Route::get('edit/{id}', '\App\CRMDV\Controllers\Admin\ServiceController@update')->middleware('permission:service_view');
+        Route::post('edit/{id}', '\App\CRMDV\Controllers\Admin\ServiceController@update')->middleware('permission:service_edit');
     });
 
     //  Thống kê
@@ -186,14 +186,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
         Route::post('edit/{id}', '\App\CRMDV\Controllers\Admin\BillHistoryController@update');
 
     });
+
     //  Website  da lam
     Route::group(['prefix' => 'codes'], function () {
+        Route::get('ajax-get-info/{id}', '\App\CRMDV\Controllers\Admin\CodesController@ajaxGetInfo')->middleware('permission:codes_view');
 
         Route::get('update-bill-to-codes', '\App\CRMDV\Controllers\Admin\CodesController@updateBillToCode');
         Route::get('backup-to-html', '\App\CRMDV\Controllers\Admin\CodesController@backupToHtml');
 
         Route::match(array('GET', 'POST'), 'check-web-server', '\App\CRMDV\Controllers\Admin\CodesController@checkWebServer');
-        Route::get('view/{id}', '\App\CRMDV\Controllers\Admin\CodesController@get_info')->middleware('permission:codes_view');
+
         Route::get('', '\App\CRMDV\Controllers\Admin\CodesController@getIndex')->name('codes')->middleware('permission:codes_view');
         Route::get('publish', '\App\CRMDV\Controllers\Admin\CodesController@getPublish')->name('codes.publish')->middleware('permission:codes_edit');
         Route::match(array('GET', 'POST'), 'add', '\App\CRMDV\Controllers\Admin\CodesController@add')->middleware('permission:codes_add');
@@ -203,26 +205,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
         Route::get('search-for-select2', '\App\CRMDV\Controllers\Admin\CodesController@searchForSelect2')->name('codes.search_for_select2')->middleware('permission:codes_view');
         Route::get('edit/{id}', '\App\CRMDV\Controllers\Admin\CodesController@update')->middleware('permission:codes_view');
         Route::post('edit/{id}', '\App\CRMDV\Controllers\Admin\CodesController@update')->middleware('permission:codes_edit');
-
-    });
-
-    //Phòng ban
-    Route::group(['prefix' => 'rooms'], function () {
-
-//        Route::get('update-bill-to-codes', '\App\CRMDV\Controllers\Admin\RoomController@updateBillToCode');
-//        Route::get('backup-to-html', '\App\CRMDV\Controllers\Admin\RoomController@backupToHtml');
-
-//        Route::match(array('GET', 'POST'), 'check-web-server', '\App\CRMDV\Controllers\Admin\RoomController@checkWebServer');
-
-        Route::get('', '\App\CRMDV\Controllers\Admin\RoomsController@getIndex')->name('codes')->middleware('permission:rooms_view');
-        Route::get('publish', '\App\CRMDV\Controllers\Admin\RoomsController@getPublish')->name('codes.publish')->middleware('permission:rooms_edit');
-        Route::match(array('GET', 'POST'), 'add', '\App\CRMDV\Controllers\Admin\RoomsController@add')->middleware('permission:rooms_add');
-        Route::match(array('GET', 'POST'), 'quick-add', '\App\CRMDV\Controllers\Admin\RoomsController@quickAdd')->middleware('permission:rooms_add');
-        Route::get('delete/{id}', '\App\CRMDV\Controllers\Admin\RoomsController@delete')->middleware('permission:codes_delete');
-        Route::post('multi-delete', '\App\CRMDV\Controllers\Admin\RoomsController@multiDelete')->middleware('permission:rooms_delete');
-        Route::get('search-for-select2', '\App\CRMDV\Controllers\Admin\RoomsController@searchForSelect2')->name('codes.search_for_select2')->middleware('permission:rooms_view');
-        Route::get('edit/{id}', '\App\CRMDV\Controllers\Admin\RoomsController@update')->middleware('permission:rooms_view');
-        Route::post('edit/{id}', '\App\CRMDV\Controllers\Admin\RoomsController@update')->middleware('permission:rooms_edit');
 
     });
 

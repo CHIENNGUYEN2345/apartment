@@ -156,7 +156,7 @@
                         </thead>
                         <tbody class="kt-datatable__body ps ps--active-y" style="max-height: 496px;">
                         @foreach($listItem as $item)
-                            <tr data-row="0" class="kt-datatable__row" style="left: 0px;">
+                            <tr data-row="{{ $item->id }}" class="kt-datatable__row  row_id{{ $item->id }}" style="left: 0px;">
                                 <td style="display: none;"
                                     class="id id-{{ $item->id }}">{{ $item->id }}</td>
                                 <td class="kt-datatable__cell--center kt-datatable__cell kt-datatable__cell--check"
@@ -229,40 +229,144 @@
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>
-                                        Thông tin cơ bản
-                                    </h4>
+                                    <h4>Thông tin cơ bản</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <div>
+                                                    Loại Hình: <span class="loai_hinh"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <div>
+                                                    Loại Nhà Đất: <span class="loai_nha_dat"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <div>Dự án: <span class="du_an"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <div>Địa chỉ: <span class="address"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <div>
+                                                    Diện tích: <span class="dien_tich"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <div>Mặt tiền: <span class="mat_tien"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <div>Số tầng: <span class="so_tang"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <div>
+                                                    Phí môi giới: <span class="phi_moi_gioi"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <div>Toà: <span class="toa"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <div>Tầng: <span class="tang"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <div>
+                                                    Khoảng tầng: <span class="khoang_tang"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <div>
+                                                    Số phòng ngủ: <span class="so_phong_ngu"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <div>Giá bán niêm yết: <span class="price_setup"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <div>Giá hạ chào: <span class="gia_ha_chao"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col"><div class="">Mô tả</div>
+                                        <div class="content"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Thông tin liên hệ</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
                                             <div class="mb-3">
-                                                <div>
-                                                    Loại Hình
-                                                </div>
-                                                <div class="loai_hinh">
-
-                                                </div>
+                                                <div>Họ tên chủ sở hữu</div>
+                                                <div class="intro"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div>Số điện thoại</div>
+                                                <div class="sdt_chu_nha"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div>Số giấy chứng nhận</div>
+                                                <div class="so_giay_chung_nhan"></div>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="mb-3">
-                                                <div>
-                                                    Loại Nhà Đất
-                                                </div>
-                                                <div class="loai_nha_dat">
-
-                                                </div>
+                                                <div>Địa chỉ</div>
+                                                <div class="dia_chi_tren_so"></div>
                                             </div>
-                                        </div>
-                                        <div class="col">
                                             <div class="mb-3">
-                                                <div>
-                                                    Dự án
-                                                </div>
-                                                <div class="loai_nha_dat">
-
-                                                </div>
+                                                <div></div>
+                                                <div class="addressk"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div>Số Seri</div>
+                                                <div class="seri"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -272,12 +376,27 @@
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>
-                                        Ảnh
-                                    </h4>
+                                    <h4>Ảnh</h4>
                                 </div>
                                 <div class="card-body">
-
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <div>Ảnh đại diện</div>
+                                                <div class="">
+                                                    <img src="" alt="" class="image" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <div>Ảnh khác</div>
+                                                <div class="image_extra"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -306,15 +425,53 @@
         $(document).ready(function (){
            $('.btn-view').click(function (){
                var id = $(this).data('id');
-
+               var luot_xem = $('[data-row="' + id + '"][data-field="luot_xem"]');
                 $.ajax({
-                     url: '/admin/codes/view/' + id,
+                     url: '/admin/codes/ajax-get-info/' + id,
                      type: 'GET',
                      success: function (res){
                          var response = res.data;
+                         console.log(response)
                          $('.modal-view-code').modal('show');
                          $('.loai_hinh').html(response.loai_hinh);
-                            $('.loai_nha_dat').html(response.loai_nha_dat);
+                         $('.loai_nha_dat').html(response.loai_nha_dat);
+                         $('.du_an').html(response.name_vi);
+                        if(response.image == null){
+                            $('.image').attr('src', 'https://sehouse.khoweb.top/filemanager/userfiles/_thumbs/se-house-logo-100x.jpg');
+                        }else{
+                            $('.image').attr('src', response.image);
+                        }
+
+                        if(response.image_extra == null){
+                            $('.image_extra').html('<img src="https://sehouse.khoweb.top/filemanager/userfiles/_thumbs/se-house-logo-100x.jpg" alt="" class="image_extra" style="width: 100px;height: 100px;">');
+                        }else{
+                            var image_extra = response.image_extra.split('|');
+                            var html = '';
+                            for(var i = 0; i < image_extra.length; i++){
+                                html += '<img src="https://sehouse.khoweb.top/filemanager/userfiles/'+ image_extra[i] +'" alt="" class="image_extra" style="width: 100px;height: 100px;">';
+                            }
+                            $('.image_extra').html(html);
+                        }
+                        $('.address').html(response.address);
+                        $('.intro').html(response.intro);
+                        $('.sdt_chu_nha').html(response.sdt_chu_nha);
+                        $('.so_giay_chung_nhan').html(response.so_giay_chung_nhan);
+                         $('.row_id'+response.id+' .item-luot_xem').html(response.luot_xem);
+                         $('.gia_ha_chao').html(response.gia_ha_chao);
+                         $('.price_setup').html(response.gia_niem_yet);
+                         $('.dien_tich').html(response.dien_tich);
+                         $('.mat_tien').html(response.mat_tien);
+                         $('.so_tang').html(response.so_tang);
+                         $('.phi_moi_gioi').html(response.phi_moi_gioi);
+                         $('.toa').html(response.toa);
+                         $('.tang').html(response.tang);
+                         $('.khoang_tang').html(response.khoang_tang);
+                         $('.so_phong_ngu').html(response.so_phong_ngu);
+                         $('.content').html(response.content);
+                         $('.dia_chi_tren_so').html(response.dia_chi_tren_so);
+
+
+
                      }
                 });
            });
