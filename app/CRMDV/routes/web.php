@@ -186,7 +186,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
         Route::post('edit/{id}', '\App\CRMDV\Controllers\Admin\BillHistoryController@update');
 
     });
-
     //  Website  da lam
     Route::group(['prefix' => 'codes'], function () {
 
