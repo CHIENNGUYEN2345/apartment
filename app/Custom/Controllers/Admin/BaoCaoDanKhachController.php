@@ -6,6 +6,7 @@ use App\CRMDV\Models\CompanyProfile;
 use App\Http\Helpers\CommonHelper;
 use App\Models\Admin;
 use App\Models\Province;
+use App\Models\RoleAdmin;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -85,6 +86,23 @@ class BaoCaoDanKhachController extends CURDBaseController
 
     public function appendWhere($query, $request)
     {
+
+        //  Nếu không có quyền xem toàn bộ dữ liệu thì chỉ được xem các dữ liệu mình tạo
+        if (!CommonHelper::has_permission(\Auth::guard('admin')->user()->id, 'view_all_data')) {
+            if (CommonHelper::has_permission(\Auth::guard('admin')->user()->id, 'truong_phong')) {
+
+                //  lấy id các thành viên trong phòng mình
+                $admin_ids = Admin::select('id')->where('phong_ban_id', \Auth::guard('admin')->user()->phong_ban_id)->pluck('id')->toArray();
+
+                $query = $query->where(function ($query) use ($admin_ids) {
+                    foreach ($admin_ids as $admin_id) {
+                        $query->orWhere('admin_id', $admin_id); //   xem duoc của thành viên trong phòng mình
+                    }
+                });
+            } else {
+                $query = $query->where('admin_id', \Auth::guard('admin')->user()->id);
+            }
+        }
 
         return $query;
     }

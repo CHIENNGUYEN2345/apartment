@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1399ad84-1310-4f45-ba8d-38156f508332" name="Changes" comment="" />
+    <list default="true" id="508be2fc-5657-4601-b5e4-09d661efe15b" name="Changes" comment="Merge branch 'dev' of gitlab.com:hoanghung.dev/sehouse into dev&#10;&#10;# Conflicts:&#10;#&#9;app/Custom/Controllers/Admin/BaoCaoDanKhachController.php">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/HRAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/HRAdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Custom/Controllers/Admin/BaoCaoDanKhachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Custom/Controllers/Admin/BaoCaoDanKhachController.php" afterDir="false" />
+    </list>
+    <list id="8bdfc4a3-d011-44e5-83ab-9e7000d884ff" name="ko push" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,7 +47,6 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\laragon\bin\php\php-8.2.5-Win32-vs16-x64\php.exe" />
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 4
@@ -49,24 +56,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
-    "WebServerToolWindowPanel.toolwindow.show.date": "false",
-    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
-    "WebServerToolWindowPanel.toolwindow.show.size": "false",
-    "last_opened_file_path": "C:/laragon/www/sehouse",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/laragon/www/sehouse&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -77,21 +84,63 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1399ad84-1310-4f45-ba8d-38156f508332" name="Changes" comment="" />
-      <created>1702565853364</created>
+      <changelist id="508be2fc-5657-4601-b5e4-09d661efe15b" name="Changes" comment="" />
+      <changelist id="8bdfc4a3-d011-44e5-83ab-9e7000d884ff" name="ko push" comment="" />
+      <created>1702024049800</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1702565853364</updated>
-      <workItem from="1702565859218" duration="4139000" />
-      <workItem from="1702612064649" duration="289000" />
-      <workItem from="1702612865336" duration="407000" />
-      <workItem from="1702620889339" duration="566000" />
-      <workItem from="1702621517609" duration="289000" />
-      <workItem from="1702621832185" duration="73000" />
-      <workItem from="1702621998539" duration="1090000" />
-      <workItem from="1702633358280" duration="635000" />
-      <workItem from="1702634372402" duration="477000" />
+      <updated>1702024049800</updated>
+      <workItem from="1702024051130" duration="1835000" />
+      <workItem from="1702258716085" duration="814000" />
+      <workItem from="1702276890447" duration="250000" />
+      <workItem from="1702277143543" duration="6981000" />
+      <workItem from="1702344637773" duration="9511000" />
+      <workItem from="1702361705983" duration="602000" />
+      <workItem from="1702634127160" duration="4231000" />
     </task>
+    <task id="LOCAL-00001" summary="tao bang hang">
+      <created>1702025257869</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1702025257869</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Merge branch 'dev' of gitlab.com:hoanghung.dev/sehouse into dev&#10;&#10;# Conflicts:&#10;#&#9;.idea/deployment.xml&#10;#&#9;.idea/php.xml&#10;#&#9;.idea/sehouse.iml&#10;#&#9;.idea/vcs.xml&#10;#&#9;.idea/webServers.xml">
+      <created>1702277174345</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1702277174345</updated>
+    </task>
+    <task id="LOCAL-00003" summary="update">
+      <created>1702277305064</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1702277305064</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update">
+      <created>1702277540378</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1702277540378</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update">
+      <created>1702346800847</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1702346800847</updated>
+    </task>
+    <task id="LOCAL-00006" summary="update">
+      <created>1702347204582</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1702347204582</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,5 +156,12 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="tao bang hang" />
+    <MESSAGE value="Merge branch 'dev' of gitlab.com:hoanghung.dev/sehouse into dev&#10;&#10;# Conflicts:&#10;#&#9;.idea/deployment.xml&#10;#&#9;.idea/php.xml&#10;#&#9;.idea/sehouse.iml&#10;#&#9;.idea/vcs.xml&#10;#&#9;.idea/webServers.xml" />
+    <MESSAGE value="update" />
+    <MESSAGE value="Merge branch 'dev' of gitlab.com:hoanghung.dev/sehouse into dev&#10;&#10;# Conflicts:&#10;#&#9;app/Custom/Controllers/Admin/BaoCaoDanKhachController.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'dev' of gitlab.com:hoanghung.dev/sehouse into dev&#10;&#10;# Conflicts:&#10;#&#9;app/Custom/Controllers/Admin/BaoCaoDanKhachController.php" />
   </component>
 </project>
