@@ -126,12 +126,7 @@
                                             class="kt-checkbox kt-checkbox--single kt-checkbox--all kt-checkbox--solid"><input
                                                 type="checkbox"
                                                 class="checkbox-master">&nbsp;<span></span></label></span></th>
-                            @if(@$_GET['view'] == 'all')
-                                <th data-field="company_id"
-                                    class="kt-datatable__cell kt-datatable__cell--sort">
-                                    Công ty
-                                </th>
-                            @endif
+
                             @php $count_sort = 0; @endphp
                             @foreach($module['list'] as $field)
                                 <th data-field="{{ $field['name'] }}"
@@ -166,12 +161,7 @@
                                                     type="checkbox" class="ids"
                                                     value="{{ $item->id }}">&nbsp;<span></span></label></span>
                                 </td>
-                                @if(@$_GET['view'] == 'all')
-                                    <td data-field="company_name"
-                                        class="kt-datatable__cell item-company_id">
-                                        {{ @$item->company->name }}
-                                    </td>
-                                @endif
+
                                 @foreach($module['list'] as $field)
                                     <td data-field="{{ @$field['name'] }}"
                                         class="kt-datatable__cell item-{{ @$field['name'] }}">

@@ -1,6 +1,8 @@
 <?php
 $value = $data = [];
-
+if(isset($_GET[$field['name']])) {
+    $field['value'] = $_GET[$field['name']];
+}
 if (isset($field['multiple']) && isset($field['value'])) {
     if (is_array($field['value']) || is_object($field['value'])) {
         foreach ($field['value'] as $item) {

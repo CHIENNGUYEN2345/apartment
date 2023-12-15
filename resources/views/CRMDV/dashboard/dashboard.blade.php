@@ -220,19 +220,12 @@ a {
 }
 </style>
 <ul class="home">
+
+    @include('CRMDV.timekeeper.partials.nut_diem_danh_theo_toa_do')
+
+    @if(in_array('rooms_view', $permissions))
     <li class="home__li">
-        <a href="https://sehouse.khoweb.top/admin/hradmin" class="home__a">
-            <span class="home__svg"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="20"
-                    viewBox="0 0 640 512">
-                    <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                    <path
-                        d="M96 224c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm448 0c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm32 32h-64c-17.6 0-33.5 7.1-45.1 18.6 40.3 22.1 68.9 62 75.1 109.4h66c17.7 0 32-14.3 32-32v-32c0-35.3-28.7-64-64-64zm-256 0c61.9 0 112-50.1 112-112S381.9 32 320 32 208 82.1 208 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C179.6 288 128 339.6 128 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zm-223.7-13.4C161.5 263.1 145.6 256 128 256H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32h65.9c6.3-47.4 34.9-87.3 75.2-109.4z" />
-                </svg></span>
-            <span class="home__text">Thành viên</span>
-        </a>
-    </li>
-    <li class="home__li">
-        <a href="https://sehouse.khoweb.top/admin/rooms" class="home__a">
+        <a href="/admin/rooms" class="home__a">
             <span class="home__svg"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
                     viewBox="0 0 448 512">
                     <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
@@ -242,8 +235,11 @@ a {
             <span class="home__text">Phòng ban</span>
         </a>
     </li>
+    @endif
+
+
     <li class="home__li">
-        <a href="https://sehouse.khoweb.top/admin/timekeeper/bao-cao" class="home__a">
+        <a href="/admin/timekeeper" class="home__a">
             <span class="home__svg"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="20"
                     viewBox="0 0 640 512">
                     <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
@@ -253,8 +249,11 @@ a {
             <span class="home__text">Chấm công</span>
         </a>
     </li>
+
+
+    @if(in_array('codes_view', $permissions))
     <li class="home__li">
-        <a href="https://sehouse.khoweb.top/admin/codes" class="home__a">
+        <a href="/admin/codes" class="home__a">
             <span class="home__svg"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="12"
                     viewBox="0 0 384 512">
                     <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
@@ -264,8 +263,12 @@ a {
             <span class="home__text">Bảng hàng</span>
         </a>
     </li>
+    @endif
+
+
+    @if(in_array('bao_cao_dan_khach_view', $permissions))
     <li class="home__li">
-        <a href="https://sehouse.khoweb.top/admin/bao_cao_dan_khach" class="home__a">
+        <a href="/admin/bao_cao_dan_khach" class="home__a">
             <span class="home__svg"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
                     viewBox="0 0 448 512">
                     <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
@@ -275,8 +278,11 @@ a {
             <span class="home__text">Báo cáo dẫn khách</span>
         </a>
     </li>
+    @endif
+
+    @if(in_array('hradmin_view', $permissions))
     <li class="home__li">
-        <a href="https://sehouse.khoweb.top/admin/admin" class="home__a">
+        <a href="/admin/admin" class="home__a">
             <span class="home__svg"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="15.5"
                     viewBox="0 0 496 512">
                     <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
@@ -286,8 +292,11 @@ a {
             <span class="home__text">Tài khoản</span>
         </a>
     </li>
+    @endif
+
+    @if(in_array('role_view', $permissions))
     <li class="home__li">
-        <a href="https://sehouse.khoweb.top/admin/role" class="home__a">
+        <a href="/admin/role" class="home__a">
             <span class="home__svg"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="20"
                     viewBox="0 0 640 512">
                     <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
@@ -297,8 +306,11 @@ a {
             <span class="home__text">Phân quyền</span>
         </a>
     </li>
+    @endif
+
+    @if(in_array('setting', $permissions))
     <li class="home__li">
-        <a href="https://sehouse.khoweb.top/admin/setting" class="home__a">
+        <a href="/admin/setting" class="home__a">
             <span class="home__svg"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
                     viewBox="0 0 512 512">
                     <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
@@ -308,17 +320,8 @@ a {
             <span class="home__text">Cấu hình chung</span>
         </a>
     </li>
-    <li class="home__li">
-        <a href="#" class="home__a">
-            <span class="home__svg"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
-                    viewBox="0 0 512 512">
-                    <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                    <path
-                        d="M496 384H160v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h80v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h336c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160h-80v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h336v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h80c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160H288V48c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16C7.2 64 0 71.2 0 80v32c0 8.8 7.2 16 16 16h208v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h208c8.8 0 16-7.2 16-16V80c0-8.8-7.2-16-16-16z" />
-                </svg></span>
-            <span class="home__text">Hệ thống</span>
-        </a>
-    </li>
+    @endif
+
 </ul>
 
 @endsection

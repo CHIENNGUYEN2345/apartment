@@ -35,7 +35,7 @@ class CodesController extends CURDBaseController
             ['name' => 'luot_xem', 'type' => 'number', 'label' => 'Lượt xem',],
             ['name' => 'created_at', 'type' => 'datetime_vi', 'label' => 'Ngày tạo'],
             ['name' => 'admin_id', 'type' => 'relation', 'label' => 'Người tạo', 'object' => 'admin', 'display_field' => 'name'],
-            ['name' => 'id' , 'type' => 'view_popup' , 'label' => 'Hành động'],
+            ['name' => 'hanh_dong' , 'type' => 'custom', 'td' => 'CRMDV.codes.list.td.hanh_dong', 'label' => 'Hành động'],
         ],
         'form' => [
             'general_tab' => [
@@ -114,7 +114,19 @@ class CodesController extends CURDBaseController
     {
         //  Nếu không có quyền xem toàn bộ dữ liệu thì chỉ được xem các dữ liệu mình tạo
         if (!CommonHelper::has_permission(\Auth::guard('admin')->user()->id, 'view_all_data')) {
-            // $query = $query->where('admin_id', \Auth::guard('admin')->user()->id);
+            if (CommonHelper::has_permission(\Auth::guard('admin')->user()->id, 'truong_phong')) {
+
+                //  lấy id các thành viên trong phòng mình
+                $admin_ids = Admin::select('id')->where('phong_ban_id', \Auth::guard('admin')->user()->phong_ban_id)->pluck('id')->toArray();
+
+                $query = $query->where(function ($query) use ($admin_ids) {
+                    foreach ($admin_ids as $admin_id) {
+                        $query->orWhere('admin_id', $admin_id); //   xem duoc của thành viên trong phòng mình
+                    }
+                });
+            } else {
+                $query = $query->where('admin_id', \Auth::guard('admin')->user()->id);
+            }
         }
 
         if (!is_null($request->get('multi_cat'))) {

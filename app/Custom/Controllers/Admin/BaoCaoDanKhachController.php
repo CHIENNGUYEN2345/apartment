@@ -87,22 +87,32 @@ class BaoCaoDanKhachController extends CURDBaseController
     public function appendWhere($query, $request)
     {
 
-        //  Nếu không có quyền xem toàn bộ dữ liệu thì chỉ được xem các dữ liệu mình tạo
-        if (!CommonHelper::has_permission(\Auth::guard('admin')->user()->id, 'view_all_data')) {
-            if (CommonHelper::has_permission(\Auth::guard('admin')->user()->id, 'truong_phong')) {
-
-                //  lấy id các thành viên trong phòng mình
-                $admin_ids = Admin::select('id')->where('phong_ban_id', \Auth::guard('admin')->user()->phong_ban_id)->pluck('id')->toArray();
-
-                $query = $query->where(function ($query) use ($admin_ids) {
-                    foreach ($admin_ids as $admin_id) {
-                        $query->orWhere('admin_id', $admin_id); //   xem duoc của thành viên trong phòng mình
-                    }
-                });
-            } else {
-                $query = $query->where('admin_id', \Auth::guard('admin')->user()->id);
-            }
+        if (in_array(CommonHelper::getRoleName(\Auth::guard('admin')->user()->id, 'name'), ['dau_chu'])) {
+            // nếu là quyền đầu chủ thì hiển thị các báo cáo dẫn khách về bảng hàng của mình tạo
+            $code_ids = Codes::where('admin_id', \Auth::guard('admin')->user()->id)->pluck('id')->toArray();
+            $query = $query->whereIn('code_id', $code_ids);
         }
+
+
+        if (in_array(CommonHelper::getRoleName(\Auth::guard('admin')->user()->id, 'name'), ['cvkd_fulltime', 'cvkd_fulltime'])) {
+
+            // nếu là quyền nvkd full / part thì hiển thị các báo cáo dẫn khách do mình tạo
+            $query = $query->where('admin_id', \Auth::guard('admin')->user()->id);
+        }
+
+        if (in_array(CommonHelper::getRoleName(\Auth::guard('admin')->user()->id, 'name'), ['tpkd'])) {
+            // nếu là quyền nvkd full / part thì hiển thị các báo cáo dẫn khách do mình tạo
+            //  lấy id các thành viên trong phòng mình
+            $admin_ids = Admin::select('id')->where('phong_ban_id', \Auth::guard('admin')->user()->phong_ban_id)->pluck('id')->toArray();
+
+            $query = $query->where(function ($query) use ($admin_ids) {
+                foreach ($admin_ids as $admin_id) {
+                    $query->orWhere('admin_id', $admin_id); //   xem duoc của thành viên trong phòng mình
+                }
+            });
+        }
+
+
 
         return $query;
     }
