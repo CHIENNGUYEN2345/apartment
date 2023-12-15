@@ -207,6 +207,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
         Route::post('edit/{id}', '\App\CRMDV\Controllers\Admin\CodesController@update')->middleware('permission:codes_edit');
 
     });
+    Route::group(['prefix' => 'rooms'], function () {
+        Route::match(array('GET', 'POST'), 'check-web-server', '\App\CRMDV\Controllers\Admin\RoomsController@checkWebServer');
+        Route::get('', '\App\CRMDV\Controllers\Admin\RoomsController@getIndex')->name('rooms')->middleware('permission:rooms_view');
+        Route::get('publish', '\App\CRMDV\Controllers\Admin\RoomsController@getPublish')->name('rooms.publish')->middleware('permission:rooms_edit');
+        Route::match(array('GET', 'POST'), 'add', '\App\CRMDV\Controllers\Admin\RoomsController@add')->middleware('permission:rooms_add');
+        Route::match(array('GET', 'POST'), 'quick-add', '\App\CRMDV\Controllers\Admin\RoomsController@quickAdd')->middleware('permission:rooms_add');
+        Route::get('delete/{id}', '\App\CRMDV\Controllers\Admin\RoomsController@delete')->middleware('permission:rooms_delete');
+        Route::post('multi-delete', '\App\CRMDV\Controllers\Admin\RoomsController@multiDelete')->middleware('permission:rooms_delete');
+        Route::get('search-for-select2', '\App\CRMDV\Controllers\Admin\RoomsController@searchForSelect2')->name('rooms.search_for_select2')->middleware('permission:codes_view');
+        Route::get('edit/{id}', '\App\CRMDV\Controllers\Admin\RoomsController@update')->middleware('permission:rooms_view');
+        Route::post('edit/{id}', '\App\CRMDV\Controllers\Admin\RoomsController@update')->middleware('permission:rooms_edit');
+
+    });
 
 
     // lead
