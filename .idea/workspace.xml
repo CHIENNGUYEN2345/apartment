@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1399ad84-1310-4f45-ba8d-38156f508332" name="Changes" comment="Sửa lại route/web">
+      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/codes/list/td/ten_bang_hang.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/HRAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/HRAdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/CodesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/CodesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/codes/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/codes/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/codes/list/td/hanh_dong.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/codes/list/td/hanh_dong.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/themes/metronic1/list/td/partials/row_actions.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/themes/metronic1/list/td/partials/row_actions.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +31,7 @@
       <option value="$PROJECT_DIR$/Modules/WebDashboard/composer.json" />
     </option>
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -57,6 +60,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
@@ -96,6 +100,8 @@
       <workItem from="1702633358280" duration="635000" />
       <workItem from="1702634372402" duration="477000" />
       <workItem from="1702637765566" duration="2448000" />
+      <workItem from="1702693694665" duration="684000" />
+      <workItem from="1702700323260" duration="927000" />
     </task>
     <task id="LOCAL-00001" summary="sua giao dien">
       <option name="closed" value="true" />

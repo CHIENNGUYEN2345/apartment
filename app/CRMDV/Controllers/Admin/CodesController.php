@@ -25,7 +25,7 @@ class CodesController extends CURDBaseController
         'list' => [
 //            ['name' => 'image', 'type' => 'image', 'label' => 'Ảnh'],
             ['name' => 'id', 'type' => 'text', 'label' => 'No'],
-            ['name' => 'address', 'type' => 'text_edit', 'label' => 'Địa chỉ'],
+            ['name' => 'address', 'type' => 'custom', 'td' => 'CRMDV.codes.list.td.ten_bang_hang', 'label' => 'Địa chỉ'],
 //            ['name' => 'link', 'type' => 'relation', 'object' => 'bill', 'display_field' => 'name_vi', 'label' => 'Dự án'],
 //            ['name' => 'multi_cat', 'type' => 'custom', 'td' => 'CRMDV.list.td.multi_cat', 'label' => 'Danh mục'],
             ['name' => 'dien_tich', 'type' => 'text', 'label' => 'Diện tích'],
