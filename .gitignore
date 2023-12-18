@@ -15,7 +15,6 @@ public_html/filemanager/userfiles/bill_receipts/*
 public_html/filemanager/userfiles/dhbill/*
 public_html/filemanager/userfiles/penalty_ticket/*
 public_html/filemanager/userfiles/plugin/*
-.idea/
 
 private_html/
 
@@ -37,6 +36,7 @@ dist/
 
 # JetBrains IDE
 .idea/
+.idea/workspace.xml
 
 # Unit test reports
 TEST*.xml

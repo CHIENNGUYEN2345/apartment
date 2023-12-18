@@ -9,7 +9,7 @@
                 <i class="kt-font-brand flaticon-calendar-with-a-clock-time-tools"></i>
 			</span>
                     <h3 class="kt-portlet__head-title">
-                        {{ $module['label'] }}
+                        {{ trans($module['label']) }}
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -43,7 +43,7 @@
                                                 <span class="kt-nav__link-text">Xuất Excel</span>
                                             </a>
                                         </li>
-                                        @if(in_array($module['code'].'_delete', $permissions))
+                                        @if(in_array('super_admin', $permissions))
                                             <li class="kt-nav__item">
                                                 <a href="#" class="kt-nav__link" onclick="multiDelete();"
                                                    title="Xóa tất cả các dòng đang được tích chọn">
@@ -55,13 +55,11 @@
                                     </ul>
                                 </div>
                             </div>
-                            @if(in_array($module['code'].'_add', $permissions))
                                 <a href="{{ url('/admin/'.$module['code'].'/add/') }}"
                                    class="btn btn-brand btn-elevate btn-icon-sm">
                                     <i class="la la-plus"></i>
                                     Tạo mới
                                 </a>
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -141,7 +139,7 @@
                                     onclick="sort('{{ $field['name'] }}')"
                                         @endif
                                 >
-                                    {{ trans($field['label'])}}
+                                    {{ trans($field['label']) }}
                                     @if(isset($field['sort']))
                                         @if(@$_GET['sorts'][$count_sort] == $field['name'].'|asc')
                                             <i class="flaticon2-arrow-up"></i>
@@ -221,7 +219,6 @@
 @section('custom_head')
     <link type="text/css" rel="stylesheet" charset="UTF-8"
           href="{{ asset(config('core.admin_asset').'/css/list.css') }}">
-
     {{--    <link type="text/css" rel="stylesheet" charset="UTF-8" href="{{ asset('Modules\WebService\Resources\assets\css\custom.css') }}">--}}
     {{--    <script src="{{asset('Modules\WebService\Resources\assets\js\custom.js')}}"></script>--}}
 @endsection

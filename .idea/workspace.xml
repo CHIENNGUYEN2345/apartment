@@ -4,10 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="1399ad84-1310-4f45-ba8d-38156f508332" name="Changes" comment="Sửa lại route/web">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/codes/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/codes/list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dashboard/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dashboard/dashboard.blade.php" afterDir="false" />
+=======
+    <list default="true" id="1399ad84-1310-4f45-ba8d-38156f508332" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/ProjectTypeController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/project_type/add.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/project_type/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/project_type/list.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/project_type/quick_add.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/tag/add.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/tag/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/tag/list.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/tag/quick_add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/CodesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/CodesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/ServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/ServiceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/TagController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/TagController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CRMDV/Models/Codes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Models/Codes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CRMDV/Providers/CRMDVServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Providers/CRMDVServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CRMDV/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Custom/Controllers/Admin/BaoCaoDanKhachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Custom/Controllers/Admin/BaoCaoDanKhachController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/codes/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/codes/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dashboard/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dashboard/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/partials/aside_menu/menu_left.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/partials/aside_menu/menu_left.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Custom/bao_cao_dan_khach/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Custom/bao_cao_dan_khach/list.blade.php" afterDir="false" />
+>>>>>>> f80b3ec79e97b6e705dded8a7dee40202db8ea2a
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,25 +58,13 @@
     <execution />
   </component>
   <component name="Git.Settings">
-    <favorite-branches>
-      <branch-storage>
-        <map>
-          <entry type="LOCAL">
-            <value>
-              <list>
-                <branch-info repo="$PROJECT_DIR$" source="dev" />
-              </list>
-            </value>
-          </entry>
-        </map>
-      </branch-storage>
-    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -62,6 +75,9 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2ZXQGliUpxecuBe9RSvwv69sFBM" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -70,14 +86,14 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/laragon/www/sehouse&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/laragon/www/sehouse/resources/views/CRMDV&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -86,6 +102,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\sehouse\resources\views\CRMDV" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -110,6 +131,7 @@
       <workItem from="1702621998539" duration="1090000" />
       <workItem from="1702633358280" duration="635000" />
       <workItem from="1702634372402" duration="477000" />
+<<<<<<< HEAD
       <workItem from="1702637765566" duration="2448000" />
       <workItem from="1702693694665" duration="684000" />
       <workItem from="1702700323260" duration="927000" />
@@ -119,24 +141,16 @@
       <workItem from="1702863244008" duration="1256000" />
       <workItem from="1702879755740" duration="8752000" />
       <workItem from="1702908644645" duration="7089000" />
+=======
+      <workItem from="1702638141163" duration="1660000" />
+      <workItem from="1702695938683" duration="643000" />
+      <workItem from="1702712412295" duration="1098000" />
+      <workItem from="1702718183944" duration="12274000" />
+      <workItem from="1702804496535" duration="5854000" />
+      <workItem from="1702822286904" duration="2817000" />
+      <workItem from="1702859727935" duration="17656000" />
+>>>>>>> f80b3ec79e97b6e705dded8a7dee40202db8ea2a
     </task>
-    <task id="LOCAL-00001" summary="sua giao dien">
-      <option name="closed" value="true" />
-      <created>1702637057538</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1702637057538</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Sửa lại route/web">
-      <option name="closed" value="true" />
-      <created>1702638064344</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1702638064344</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,9 +167,19 @@
       </map>
     </option>
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="sua giao dien" />
-    <MESSAGE value="Sửa lại route/web" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sửa lại route/web" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>remoteDeploymentFS://&lt;5ae9969c-969b-4506-a450-cd546dff1728&gt;/app/CRMEdu/Controllers/Admin/LeadController.php</url>
+          <line>195</line>
+          <properties>
+            <option name="className" value="\App\CRMEdu\Controllers\Admin\LeadController" />
+            <option name="methodName" value="appendWhere" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

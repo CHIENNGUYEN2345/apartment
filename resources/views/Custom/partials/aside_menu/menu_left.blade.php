@@ -18,6 +18,7 @@
 </svg></span><span class="kt-menu__link-text">Bảng hàng </span></a></li>
 @endif
 
+@if(in_array('bao_cao_dan_khach_view', $permissions))
 <li class="kt-menu__item" aria-haspopup="true"><a href="/admin/bao_cao_dan_khach"
                                                   class="kt-menu__link "><span
                 class="kt-menu__link-icon">
@@ -33,6 +34,7 @@
               fill="#000000"/>
     </g>
 </svg></span><span class="kt-menu__link-text">Báo cáo dẫn khách </span></a></li>
+@endif
 
 @if(in_array('service_view', $permissions))
 <li class="kt-menu__item" aria-haspopup="true"><a href="/admin/service"

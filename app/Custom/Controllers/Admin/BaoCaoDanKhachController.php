@@ -31,11 +31,12 @@ class BaoCaoDanKhachController extends CURDBaseController
         ],
         'form' => [
             'general_tab' => [
-                ['name' => 'code_id', 'type' => 'select2_ajax_model', 'label' => 'Bảng hàng', 'class' => 'required', 'model' => Codes::class, 'object' => 'codes', 'display_field' => 'address'],
+                ['name' => 'code_id', 'type' => 'select2_ajax_model', 'label' => 'Bảng hàng', 'class' => 'required',
+                    'model' => Codes::class, 'object' => 'codes', 'display_field' => 'address'],
                 ['name' => 'khach_name', 'type' => 'text', 'class' => 'required', 'label' => 'Tên khách', 'group_class' => 'col-md-6'],
                 ['name' => 'khach_tel', 'type' => 'text', 'class' => 'required', 'label' => 'SĐT', 'group_class' => 'col-md-4'],
-                ['name' => 'note', 'type' => 'textarea', 'class' => '', 'label' => 'Ghi chú', 'group_class' => 'col-md-12'],
-                ['name' => 'image_extra', 'type' => 'multiple_image_dropzone', 'count' => '6', 'label' => 'Thêm nhiều ảnh khác'],
+                ['name' => 'note', 'type' => 'textarea', 'class' => 'required', 'label' => 'Ghi chú', 'group_class' => 'col-md-12'],
+                ['name' => 'image_extra', 'type' => 'multiple_image_dropzone','class' => 'required', 'count' => '6', 'label' => 'Thêm nhiều ảnh khác'],
             ],
         ]
     ];
@@ -54,6 +55,7 @@ class BaoCaoDanKhachController extends CURDBaseController
             'object' => 'admin',
             'query_type' => '='
         ],
+
         'code_id' => [
             'label' => 'Bảng hàng',
             'type' => 'select2_ajax_model',
@@ -61,6 +63,23 @@ class BaoCaoDanKhachController extends CURDBaseController
             'model' => Codes::class,
             'object' => 'codes',
             'query_type' => '='
+        ],
+        'khach_name' => [
+            'label' => 'Tên khách',
+            'type' => 'select2_model',
+            'model' => \App\Custom\Models\BaoCaoDanKhach::class,
+            'display_field' => 'khach_name',
+//            'where' => 'type="project"',
+            'orderByRaw' => 'order_no desc',
+            'query_type' => 'like',
+        ],
+        'khach_tel' => [
+            'label' => 'Số điện thoại',
+            'type' => 'select2_model',
+            'model' => \App\Custom\Models\BaoCaoDanKhach::class,
+            'display_field' => 'khach_tel',
+            'orderByRaw' => 'order_no desc',
+            'query_type' => 'like',
         ],
 
         'filter_date' => [
