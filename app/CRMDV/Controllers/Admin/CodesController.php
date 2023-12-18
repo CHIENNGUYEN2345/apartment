@@ -25,7 +25,7 @@ class CodesController extends CURDBaseController
         'list' => [
 //            ['name' => 'image', 'type' => 'image', 'label' => 'Ảnh'],
             ['name' => 'id', 'type' => 'text', 'label' => 'No'],
-            ['name' => 'address', 'type' => 'text_edit', 'label' => 'Địa chỉ'],
+            ['name' => 'address', 'type' => 'custom', 'td' => 'CRMDV.codes.list.td.ten_bang_hang', 'label' => 'Địa chỉ'],
 //            ['name' => 'link', 'type' => 'relation', 'object' => 'bill', 'display_field' => 'name_vi', 'label' => 'Dự án'],
 //            ['name' => 'multi_cat', 'type' => 'custom', 'td' => 'CRMDV.list.td.multi_cat', 'label' => 'Danh mục'],
             ['name' => 'dien_tich', 'type' => 'text', 'label' => 'Diện tích'],
@@ -35,7 +35,7 @@ class CodesController extends CURDBaseController
             ['name' => 'luot_xem', 'type' => 'number', 'label' => 'Lượt xem',],
             ['name' => 'created_at', 'type' => 'datetime_vi', 'label' => 'Ngày tạo'],
             ['name' => 'admin_id', 'type' => 'relation', 'label' => 'Người tạo', 'object' => 'admin', 'display_field' => 'name'],
-            ['name' => 'id' , 'type' => 'view_popup' , 'label' => 'Hành động'],
+            ['name' => 'hanh_dong' , 'type' => 'custom', 'td' => 'CRMDV.codes.list.td.hanh_dong', 'label' => 'Hành động'],
         ],
         'form' => [
             'general_tab' => [
@@ -50,7 +50,8 @@ class CodesController extends CURDBaseController
                     'Liền kề - biệt thự' => 'Liền kề - biệt thự',
                     'Chung cư' => 'Chung cư',
                 ], 'label' => 'Loại nhà đất', 'group_class' => 'col-md-6'],
-                ['name' => 'service_id', 'type' => 'select2_model', 'label' => 'Dự án', 'model' => \App\CRMDV\Models\Service::class, 'object' => 'service', 'display_field' => 'name_vi', 'class' => ''],
+                ['name' => 'service_id', 'type' => 'select2_model', 'label' => 'Dự án', 'model' => \App\CRMDV\Models\Service::class, 'object' => 'service', 'display_field' => 'name_vi', 'group_class' => 'col-md-6'],
+                ['name' => 'project_type_id', 'type' => 'select2_model', 'label' => 'Loại dự án', 'model' => \App\CRMDV\Models\Project_type::class,'where' => 'type="project"', 'object' => 'project_type', 'display_field' => 'name', 'group_class' => 'col-md-6'],
                 ['name' => 'province_id', 'type' => 'select_location', 'class' => 'required', 'label' => 'Chọn địa điểm', 'group_class' => 'col-md-9'],
                 ['name' => 'duong', 'type' => 'text', 'class' => '', 'label' => 'Đường', 'group_class' => 'col-md-12'],
                 ['name' => 'address', 'type' => 'text', 'class' => 'required', 'label' => 'Địa chỉ', 'group_class' => 'col-md-12'],
@@ -101,6 +102,16 @@ class CodesController extends CURDBaseController
             'model' => Category::class,
             'query_type' => 'custom',
         ],
+        'project_type_id' => [
+            'label' => 'Loại dự án',
+            'type' => 'select2_model',
+            'model' => \App\CRMDV\Models\Project_type::class,
+            'display_field' => 'name',
+            'where' => 'type="project"',
+            'orderByRaw' => 'order_no desc',
+
+            'query_type' => 'like',
+        ],
     ];
 
     public function getIndex(Request $request)
@@ -114,7 +125,19 @@ class CodesController extends CURDBaseController
     {
         //  Nếu không có quyền xem toàn bộ dữ liệu thì chỉ được xem các dữ liệu mình tạo
         if (!CommonHelper::has_permission(\Auth::guard('admin')->user()->id, 'view_all_data')) {
-            // $query = $query->where('admin_id', \Auth::guard('admin')->user()->id);
+            if (CommonHelper::has_permission(\Auth::guard('admin')->user()->id, 'truong_phong')) {
+
+                //  lấy id các thành viên trong phòng mình
+                $admin_ids = Admin::select('id')->where('phong_ban_id', \Auth::guard('admin')->user()->phong_ban_id)->pluck('id')->toArray();
+
+                $query = $query->where(function ($query) use ($admin_ids) {
+                    foreach ($admin_ids as $admin_id) {
+                        $query->orWhere('admin_id', $admin_id); //   xem duoc của thành viên trong phòng mình
+                    }
+                });
+            } else {
+                $query = $query->where('admin_id', \Auth::guard('admin')->user()->id);
+            }
         }
 
         if (!is_null($request->get('multi_cat'))) {

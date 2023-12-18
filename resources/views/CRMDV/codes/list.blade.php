@@ -126,12 +126,7 @@
                                             class="kt-checkbox kt-checkbox--single kt-checkbox--all kt-checkbox--solid"><input
                                                 type="checkbox"
                                                 class="checkbox-master">&nbsp;<span></span></label></span></th>
-                            @if(@$_GET['view'] == 'all')
-                                <th data-field="company_id"
-                                    class="kt-datatable__cell kt-datatable__cell--sort">
-                                    Công ty
-                                </th>
-                            @endif
+
                             @php $count_sort = 0; @endphp
                             @foreach($module['list'] as $field)
                                 <th data-field="{{ $field['name'] }}"
@@ -166,12 +161,7 @@
                                                     type="checkbox" class="ids"
                                                     value="{{ $item->id }}">&nbsp;<span></span></label></span>
                                 </td>
-                                @if(@$_GET['view'] == 'all')
-                                    <td data-field="company_name"
-                                        class="kt-datatable__cell item-company_id">
-                                        {{ @$item->company->name }}
-                                    </td>
-                                @endif
+
                                 @foreach($module['list'] as $field)
                                     <td data-field="{{ @$field['name'] }}"
                                         class="kt-datatable__cell item-{{ @$field['name'] }}">
@@ -228,6 +218,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="card">
+                                <a id="bao-cao-dan-khach" href="#" style="color: red;">Báo cáo dẫn khách</a>
                                 <div class="card-header">
                                     <h4>Thông tin cơ bản</h4>
                                 </div>
@@ -436,6 +427,7 @@
                          $('.loai_hinh').html(response.loai_hinh);
                          $('.loai_nha_dat').html(response.loai_nha_dat);
                          $('.du_an').html(response.name_vi);
+                         $('#bao-cao-dan-khach').attr('href', '/admin/bao_cao_dan_khach/add?code_id=' + response.id);
                         if(response.image == null){
                             $('.image').attr('src', 'https://sehouse.khoweb.top/filemanager/userfiles/_thumbs/se-house-logo-100x.jpg');
                         }else{

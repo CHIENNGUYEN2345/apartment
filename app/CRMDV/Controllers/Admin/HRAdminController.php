@@ -2,6 +2,7 @@
 
 namespace App\CRMDV\Controllers\Admin;
 
+use App\CRMDV\Models\Phong_ban;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Helpers\CommonHelper;
 use App\Models\{RoleAdmin, Setting, Roles, User};
@@ -32,20 +33,7 @@ class HRAdminController extends CURDBaseController
         'list' => [
             ['name' => 'image', 'type' => 'image', 'label' => 'admin.image'],
             ['name' => 'name', 'type' => 'text_admin_edit', 'label' => 'admin.name', 'sort' => true],
-            ['name' => 'room_id', 'type' => 'select', 'options' => [
-                '' => '',
-                1 => 'Phòng kinh doanh 1',
-                2 => 'Phòng kinh doanh 2',
-                3 => 'Phòng kinh doanh 3',
-                4 => 'Phòng kinh doanh 4',
-                5 => 'Phòng kinh doanh 5',
-                6 => 'Phòng Telesale',
-                10 => 'Kỹ thuật',
-                15 => 'Điều hành',
-                20 => 'Marketing',
-                25 => 'Tuyển dụng',
-                30 => 'CSKH',
-            ], 'label' => 'Phòng', 'sort' => true],
+            ['name' => 'phong_ban_id', 'type' => 'relation_filter','object'=>'room', 'display_field'=>'name','label' => 'Phòng',  'sort' => true],
             ['name' => 'role_id', 'type' => 'role_name', 'label' => 'admin.permission'],
             ['name' => 'tel', 'type' => 'text', 'label' => 'admin.phone', 'sort' => true],
             ['name' => 'code', 'type' => 'text', 'label' => 'Mã NV', 'sort' => true],
@@ -126,23 +114,13 @@ class HRAdminController extends CURDBaseController
                 1 => 'admin.active'
             ]
         ],
-        'room_id' => [
-            'label' => 'Phòng',
-            'type' => 'select',
-            'query_type' => '=',
-            'options' => [
-                '' => '',
-                1 => 'Phòng kinh doanh 1',
-                2 => 'Phòng kinh doanh 2',
-                3 => 'Phòng kinh doanh 3',
-                4 => 'Phòng kinh doanh 4',
-                5 => 'Phòng kinh doanh 5',
-                10 => 'Kỹ thuật',
-                15 => 'Điều hành',
-                20 => 'Marketing',
-                25 => 'Tuyển dụng',
-                30 => 'CSKH',
-            ]
+        'phong_ban_id' => [
+            'label' => 'Phòng ban',
+            'type' => 'select2_model',
+            'display_field' => 'name',
+            'model' => Phong_ban::class,
+            'object' => 'phong_ban',
+            'query_type' => '='
         ],
         'role_id' => [
             'label' => 'Quyền',
@@ -195,7 +173,7 @@ class HRAdminController extends CURDBaseController
 
         if (!CommonHelper::has_permission(\Auth::guard('admin')->user()->id, 'admin_view_all')) {
             //  không được xem toàn bộ thành viên thì chỉ hiển thị ra thành viên trong phòng mình
-            $query = $query->where('room_id', \Auth::guard('admin')->user()->room_id);
+            $query = $query->where('phong_ban_id', \Auth::guard('admin')->user()->phong_ban_id);
         }
 
 

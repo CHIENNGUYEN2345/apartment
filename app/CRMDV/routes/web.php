@@ -487,6 +487,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
         Route::get('delete/{id}', '\App\CRMDV\Controllers\Admin\DomainErrorLogController@delete')->middleware('permission:check_error_link_logs');
         Route::post('multi-delete', '\App\CRMDV\Controllers\Admin\DomainErrorLogController@multiDelete')->middleware('permission:check_error_link_logs');
     });
+
+    //  Tag
+    Route::group(['prefix' => 'project_type'], function () {
+
+        Route::get('', '\App\CRMDV\Controllers\Admin\ProjectTypeController@getIndex')->name('project_type')->middleware('permission:super_admin');
+        Route::get('publish', '\App\CRMDV\Controllers\Admin\ProjectTypeController@getPublish')->name('project_type.publish')->middleware('permission:super_admin');
+        Route::match(array('GET', 'POST'), 'add', '\App\CRMDV\Controllers\Admin\ProjectTypeController@add')->middleware('permission:super_admin');
+        Route::get('delete/{id}', '\App\CRMDV\Controllers\Admin\ProjectTypeController@delete')->middleware('permission:super_admin');
+        Route::post('multi-delete', '\App\CRMDV\Controllers\Admin\ProjectTypeController@multiDelete')->middleware('permission:super_admin');
+        Route::get('search-for-select2', '\App\CRMDV\Controllers\Admin\ProjectTypeController@searchForSelect2')->name('project_type.search_for_select2')->middleware('permission:super_admin');
+        Route::get('edit/{id}', '\App\CRMDV\Controllers\Admin\ProjectTypeController@update')->middleware('permission:super_admin');
+        Route::post('edit/{id}', '\App\CRMDV\Controllers\Admin\ProjectTypeController@update')->middleware('permission:super_admin');
+
+    });
 });
 
 
