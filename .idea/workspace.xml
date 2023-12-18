@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1399ad84-1310-4f45-ba8d-38156f508332" name="Changes" comment="Sửa lại route/web">
-      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/codes/list/td/ten_bang_hang.blade.php" afterDir="false" />
+    <list default="true" id="1399ad84-1310-4f45-ba8d-38156f508332" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/CodesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/CodesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/codes/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/codes/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Custom/Controllers/Admin/BaoCaoDanKhachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Custom/Controllers/Admin/BaoCaoDanKhachController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/codes/list/td/hanh_dong.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/codes/list/td/hanh_dong.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/themes/metronic1/list/td/partials/row_actions.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/themes/metronic1/list/td/partials/row_actions.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Custom/partials/aside_menu/menu_left.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Custom/partials/aside_menu/menu_left.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +99,9 @@
       <workItem from="1702634372402" duration="477000" />
       <workItem from="1702637765566" duration="2448000" />
       <workItem from="1702693694665" duration="684000" />
-      <workItem from="1702700323260" duration="927000" />
+      <workItem from="1702700323260" duration="3925000" />
+      <workItem from="1702720217774" duration="604000" />
+      <workItem from="1702803174534" duration="598000" />
     </task>
     <task id="LOCAL-00001" summary="sua giao dien">
       <option name="closed" value="true" />
@@ -119,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702638064344</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="sua nut bao cao dan khach">
+      <created>1702701266638</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1702701266638</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,6 +146,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="sua giao dien" />
     <MESSAGE value="Sửa lại route/web" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sửa lại route/web" />
+    <MESSAGE value="sua nut bao cao dan khach" />
+    <option name="LAST_COMMIT_MESSAGE" value="sua nut bao cao dan khach" />
   </component>
 </project>
