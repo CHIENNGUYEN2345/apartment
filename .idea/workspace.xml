@@ -5,89 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1399ad84-1310-4f45-ba8d-38156f508332" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/project_type/add.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/project_type/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/project_type/list.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/project_type/quick_add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/.htaccess" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/BillProgressHistoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/BillProgressHistoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/BillReceiptsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/BillReceiptsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/CategoryCourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/CategoryCourseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/CodesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/CodesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/CourseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/DHBillController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/DHBillController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/DomainErrorLogController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/DomainErrorLogController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/GHBillController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/GHBillController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/HRAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/HRAdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/LeadController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/LeadController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/MKTController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/MKTController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/MKTLeadController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/MKTLeadController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/PenaltyTicketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/PenaltyTicketController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/PlanController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/PlanController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/ServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/ServiceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/TPBillController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/TPBillController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/TPLeadController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/TPLeadController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/TagController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/TagController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/TimekeeperController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/TimekeeperController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Models/Codes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Models/Codes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/admin/form/code.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/admin/form/code.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/admin/hieu_suat_cong_viec.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/admin/hieu_suat_cong_viec.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/bill/list/td/chua_thu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/bill/list/td/chua_thu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/bill_receipts/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/bill_receipts/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/bill_receipts/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/bill_receipts/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/bill_receipts/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/bill_receipts/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/check_error_link_logs/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/check_error_link_logs/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/codes/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/codes/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dashboard/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dashboard/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dashboard/partials/thong_bao/hd_moi_thuong_sx.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dashboard/partials/thong_bao/hd_moi_thuong_sx.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/list/td/chua_thu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/list/td/chua_thu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/list/td/kh_xong_date.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/list/td/kh_xong_date.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/list/td/kh_xong_image.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/list/td/kh_xong_image.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/list/td/reminder_customer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/list/td/reminder_customer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/list/td/service.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/list/td/service.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/list/td/thanh_toan.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/list/td/thanh_toan.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/partials/du_an_quy_diem.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/partials/du_an_quy_diem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/partials/lich_su_trang_thai.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/partials/lich_su_trang_thai.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/partials/lich_su_trang_thai_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dhbill/partials/lich_su_trang_thai_view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/form/fields/multi_cat.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/form/fields/multi_cat.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/form/fields/phu_luc_hd.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/form/fields/phu_luc_hd.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/form/fields/select_sale.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/form/fields/select_sale.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/form/fields/thong_tin_thanh_toan.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/form/fields/thong_tin_thanh_toan.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/form/fields/thong_tin_trien_khai.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/form/fields/thong_tin_trien_khai.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/form/partials/select_dieu_hanh.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/form/partials/select_dieu_hanh.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/form/partials/select_ky_thuat.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/form/partials/select_ky_thuat.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/frontend/pages/code/list_trans.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/frontend/pages/code/list_trans.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/frontend/pages/code/view_landingpage.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/frontend/pages/code/view_landingpage.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/gh_bill/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/gh_bill/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/gh_bill/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/gh_bill/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/hradmin/partials/hr_select_role.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/hradmin/partials/hr_select_role.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/hradmin/partials/hr_select_role.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/hradmin/partials/hr_select_role.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/lead/form/doi_tac_cua_toi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/lead/form/doi_tac_cua_toi.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/lead/form/lich_su_hop_dong.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/lead/form/lich_su_hop_dong.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/lead/form/lich_su_tu_van.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/lead/form/lich_su_tu_van.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/lead/form/lich_su_tu_van.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/lead/form/lich_su_tu_van.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/lead/form/lish_su_hop_dong.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/lead/form/lish_su_hop_dong.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/lead/form/partials/nut_submit_ls_tu_van.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/lead/form/partials/nut_submit_ls_tu_van.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/lead/list/partials/nhac_nho_telesale.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/lead/list/partials/nhac_nho_telesale.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/list/td/domain.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/list/td/domain.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/list/td/relation_filter.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/list/td/relation_filter.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/mktlead/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/mktlead/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/partials/aside_menu/menu_left.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/partials/aside_menu/menu_left.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/receipt_payment/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/receipt_payment/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/receipt_payment/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/receipt_payment/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/receipt_payment/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/receipt_payment/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/timekeeper/funtions.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/timekeeper/funtions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/timekeeper/list/td/thoi_gian_muon.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/timekeeper/list/td/thoi_gian_muon.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/timekeeper/partials/nut_diem_danh_theo_toa_do.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/timekeeper/partials/nut_diem_danh_theo_toa_do.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/timekeeping/form/fields/select_admin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/timekeeping/form/fields/select_admin.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/tplead/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/tplead/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/user/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/user/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/user/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/user/edit.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +37,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -136,25 +55,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/laragon/www/sehouse/resources/views/CRMDV&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TODO_SCOPE": "All Places",
+    "WebServerToolWindowFactoryState": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "last_opened_file_path": "C:/laragon/www/sehouse/resources/views/CRMDV",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\laragon\www\sehouse\resources\views\CRMDV" />
@@ -190,7 +110,7 @@
       <workItem from="1702718183944" duration="12274000" />
       <workItem from="1702804496535" duration="5854000" />
       <workItem from="1702822286904" duration="2817000" />
-      <workItem from="1702859727935" duration="310000" />
+      <workItem from="1702859727935" duration="2142000" />
     </task>
     <servers />
   </component>
