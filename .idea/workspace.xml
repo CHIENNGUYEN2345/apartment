@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1399ad84-1310-4f45-ba8d-38156f508332" name="Changes" comment="Sửa lại route/web">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/codes/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/codes/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dashboard/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dashboard/dashboard.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +115,10 @@
       <workItem from="1702700323260" duration="927000" />
       <workItem from="1702730832322" duration="1389000" />
       <workItem from="1702733209424" duration="944000" />
-      <workItem from="1702789379301" duration="1973000" />
+      <workItem from="1702789379301" duration="5259000" />
+      <workItem from="1702863244008" duration="1256000" />
+      <workItem from="1702879755740" duration="8752000" />
+      <workItem from="1702908644645" duration="7089000" />
     </task>
     <task id="LOCAL-00001" summary="sua giao dien">
       <option name="closed" value="true" />
