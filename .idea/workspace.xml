@@ -4,29 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1399ad84-1310-4f45-ba8d-38156f508332" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/ProjectTypeController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/project_type/add.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/project_type/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/project_type/list.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/project_type/quick_add.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/tag/add.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/tag/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/tag/list.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/CRMDV/tag/quick_add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/CodesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/CodesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/ServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/ServiceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/TagController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Controllers/Admin/TagController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Models/Codes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Models/Codes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/Providers/CRMDVServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/Providers/CRMDVServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CRMDV/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CRMDV/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Custom/Controllers/Admin/BaoCaoDanKhachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Custom/Controllers/Admin/BaoCaoDanKhachController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/codes/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/codes/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dashboard/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dashboard/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/partials/aside_menu/menu_left.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/partials/aside_menu/menu_left.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Custom/bao_cao_dan_khach/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Custom/bao_cao_dan_khach/list.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="1399ad84-1310-4f45-ba8d-38156f508332" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -75,26 +53,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/laragon/www/sehouse/resources/views/CRMDV&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TODO_SCOPE": "All Places",
+    "WebServerToolWindowFactoryState": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "git-widget-placeholder": "chien__git__lab",
+    "last_opened_file_path": "C:/laragon/www/sehouse/resources/views/CRMDV",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\laragon\www\sehouse\resources\views\CRMDV" />
