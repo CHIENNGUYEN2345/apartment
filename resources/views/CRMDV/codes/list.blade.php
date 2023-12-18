@@ -321,7 +321,7 @@
                                                     <!-- trường id trong bảng Codes -->
                                                     <span class="id">123</span>
                                                 </a>
-                                                <a href="" class="info__baocao d-flex align-items-center justify-content-center text-white p-2">
+                                                <a id="bao-cao-dan-khach" href="#" class="info__baocao d-flex align-items-center justify-content-center text-white p-2">
                                                     <i class="fas fa-address-book"></i>
                                                     Báo cáo dẫn khách
                                                 </a>
