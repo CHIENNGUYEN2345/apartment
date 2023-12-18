@@ -321,7 +321,7 @@
                                                     <!-- trường id trong bảng Codes -->
                                                     <span class="id">123</span>
                                                 </a>
-                                                <a href="" class="info__baocao d-flex align-items-center justify-content-center text-white p-2">
+                                                <a id="bao-cao-dan-khach" href="#" class="info__baocao d-flex align-items-center justify-content-center text-white p-2">
                                                     <i class="fas fa-address-book"></i>
                                                     Báo cáo dẫn khách
                                                 </a>
@@ -645,7 +645,6 @@
                 var id = $(this).data('id');
                 var luot_xem = $('[data-row="' + id + '"][data-field="luot_xem"]');
                 $.ajax({
-<<<<<<< HEAD
                     url: '/admin/codes/ajax-get-info/' + id,
                     type: 'GET',
                     success: function (res){
@@ -656,18 +655,6 @@
                         $('.loai_nha_dat').html(response.loai_nha_dat);
                         $('.du_an').html(res.service);
                         $('#bao-cao-dan-khach').attr('href', '/admin/bao_cao_dan_khach/add?code_id=' + response.id);
-=======
-                     url: '/admin/codes/ajax-get-info/' + id,
-                     type: 'GET',
-                     success: function (res){
-                         var response = res.data;
-                         console.log(response)
-                         $('.modal-view-code').modal('show');
-                         $('.loai_hinh').html(response.loai_hinh);
-                         $('.loai_nha_dat').html(response.loai_nha_dat);
-                         $('.du_an').html(res.service);
-                         $('#bao-cao-dan-khach').attr('href', '/admin/bao_cao_dan_khach/add?code_id=' + response.id);
->>>>>>> f80b3ec79e97b6e705dded8a7dee40202db8ea2a
                         if(response.image == null){
                             $('.image').attr('src', 'https://sehouse.khoweb.top/filemanager/userfiles/_thumbs/se-house-logo-100x.jpg');
                         }else{
