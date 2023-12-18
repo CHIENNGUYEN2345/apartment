@@ -426,7 +426,7 @@
                          $('.modal-view-code').modal('show');
                          $('.loai_hinh').html(response.loai_hinh);
                          $('.loai_nha_dat').html(response.loai_nha_dat);
-                         $('.du_an').html(response.name_vi);
+                         $('.du_an').html(res.service);
                          $('#bao-cao-dan-khach').attr('href', '/admin/bao_cao_dan_khach/add?code_id=' + response.id);
                         if(response.image == null){
                             $('.image').attr('src', 'https://sehouse.khoweb.top/filemanager/userfiles/_thumbs/se-house-logo-100x.jpg');

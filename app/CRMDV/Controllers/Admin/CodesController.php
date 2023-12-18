@@ -50,17 +50,24 @@ class CodesController extends CURDBaseController
                     'Liền kề - biệt thự' => 'Liền kề - biệt thự',
                     'Chung cư' => 'Chung cư',
                 ], 'label' => 'Loại nhà đất', 'group_class' => 'col-md-6'],
-                ['name' => 'service_id', 'type' => 'select2_model', 'label' => 'Dự án', 'model' => \App\CRMDV\Models\Service::class, 'object' => 'service', 'display_field' => 'name_vi', 'class' => ''],
-                ['name' => 'province_id', 'type' => 'select_location', 'class' => 'required', 'label' => 'Chọn địa điểm', 'group_class' => 'col-md-9'],
-                ['name' => 'duong', 'type' => 'text', 'class' => '', 'label' => 'Đường', 'group_class' => 'col-md-12'],
+                ['name' => 'service_id', 'type' => 'select2_model', 'label' => 'Dự án', 'model' => \App\CRMDV\Models\Service::class, 'object' => 'service', 'display_field' => 'name_vi', 'group_class' => 'col-md-6'],
+                ['name' => 'project_type_id', 'type' => 'select2_model', 'label' => 'Loại dự án', 'model' => \App\CRMDV\Models\Project_type::class,'where' => 'type="project"', 'object' => 'project_type', 'display_field' => 'name', 'group_class' => 'col-md-6'],
+                ['name' => 'province_id', 'seleted' => '2', 'type' => 'select_location', 'class' => 'required', 'label' => 'Chọn địa điểm', 'group_class' => 'col-md-9'],
+                ['name' => 'duong', 'type' => 'text', 'class' => '', 'label' => 'Đường', 'class' => 'required', 'group_class' => 'col-md-12'],
                 ['name' => 'address', 'type' => 'text', 'class' => 'required', 'label' => 'Địa chỉ', 'group_class' => 'col-md-12'],
-                ['name' => 'dien_tich', 'type' => 'text', 'class' => '', 'label' => 'Diện tích', 'group_class' => 'col-md-3'],
+                ['name' => 'dien_tich', 'type' => 'text', 'class' => '', 'label' => 'Diện tích sổ', 'group_class' => 'col-md-3'],
                 ['name' => 'mat_tien', 'type' => 'text', 'class' => '', 'label' => 'Mặt tiền', 'group_class' => 'col-md-3'],
                 ['name' => 'so_tang', 'type' => 'number', 'class' => '', 'label' => 'Số tầng', 'group_class' => 'col-md-3'],
-                ['name' => 'phi_moi_gioi', 'type' => 'number', 'label' => 'Phí môi giới' , 'group_class' => 'col-md-3'],
-                ['name' => 'toa', 'type' => 'number', 'label' => 'Tòa' , 'group_class' => 'col-md-3'],
-                ['name' => 'tang', 'type' => 'number', 'label' => 'Tầng' , 'group_class' => 'col-md-3'],
-                ['name' => 'khoang_tang', 'type' => 'number', 'label' => 'Khoảng tầng' , 'group_class' => 'col-md-3'],
+//                ['name' => 'phi_moi_gioi', 'type' => 'number', 'label' => 'Phí môi giới' , 'group_class' => 'col-md-3'],
+//                ['name' => 'toa', 'type' => 'number', 'label' => 'Tòa' , 'group_class' => 'col-md-3'],
+//                ['name' => 'tang', 'type' => 'number', 'label' => 'Tầng' , 'group_class' => 'col-md-3'],
+//                ['name' => 'khoang_tang', 'type' => 'number', 'label' => 'Khoảng tầng' , 'group_class' => 'col-md-3'],
+                ['name' => 'khoang_tang','class' => '', 'type' => 'select', 'options' => [
+                    '' => '',
+                    'Tầng thấp' => 'Tầng thấp',
+                    'Tầng trung' => 'Tầng trung',
+                    'Tầng cao' => 'Tầng cao',
+                ], 'label' => 'Loại hình', 'group_class' => 'col-md-3'],
                 ['name' => 'so_phong_ngu' , 'type'=>'number' ,'label'=> 'Số phòng ngủ' , 'group_class'=>'col-md-3']
 //                ['name' => 'link', 'type' => 'text', 'class' => '', 'label' => 'Đường', 'group_class' => 'col-md-12'],
             ],
@@ -70,19 +77,25 @@ class CodesController extends CURDBaseController
                 ['name' => 'image_extra', 'type' => 'multiple_image_dropzone', 'count' => '6', 'label' => 'Thêm nhiều ảnh khác'],
             ],
             'des_tab' => [
-                ['name' => 'gia_niem_yet', 'type' => 'text', 'class' => 'required', 'label' => 'Giá bán niêm yết', 'group_class' => 'col-md-4'],
-                ['name' => 'gia_ha_chao', 'type' => 'text', 'class' => '', 'label' => 'Giá hạ chào', 'group_class' => 'col-md-4'],
+                ['name' => 'gia_niem_yet', 'type' => 'text', 'class' => 'required', 'label' => 'Giá bán', 'group_class' => 'col-md-4'],
+                ['name' => 'phi_moi_gioi', 'type' => 'text', 'class' => '', 'label' => 'Phí môi giới', 'group_class' => 'col-md-4'],
                 ['name' => 'content', 'type' => 'textarea_editor', 'class' => '', 'label' => 'Nội dung chi tiết'],
 //                ['name' => 'content', 'type' => 'textarea_editor', 'class' => '', 'label' => 'Mô tả chi tiết tính năng'],
-                ['name' => 'intro', 'type' => 'text', 'label' => 'Họ tên chủ nhà', 'group_class' => 'col-md-6'],
-                ['name' => 'sdt_chu_nha', 'type' => 'text', 'label' => 'Số điện thoại chủ nhà', 'group_class' => 'col-md-6'],
-                ['name' => 'so_giay_chung_nhan', 'type' => 'text', 'label' => 'Số giấy chứng nhận vào sổ', 'group_class' => 'col-md-6'],
-                ['name' => 'seri', 'type' => 'text', 'label' => 'Số seri', 'group_class' => 'col-md-6'],
+                ['name' => 'intro', 'type' => 'text', 'label' => 'Họ tên chủ nhà','class' => 'required', 'group_class' => 'col-md-6'],
+                ['name' => 'sdt_chu_nha', 'type' => 'text', 'label' => 'Số điện thoại chủ nhà', 'class' => 'required','group_class' => 'col-md-6'],
+                ['name' => 'so_giay_chung_nhan', 'type' => 'text', 'label' => 'Số seri sổ (tuỳ chọn)', 'group_class' => 'col-md-6'],
+                ['name' => 'seri', 'type' => 'text', 'label' => 'Số hợp đồng mua bán (tùy chọn)', 'group_class' => 'col-md-6'],
                 ['name' => 'dia_chi_tren_so', 'type' => 'text', 'label' => 'Địa chỉ trên số', 'group_class' => 'col-md-12'],
-                ['name' => 'so_do_va_hop_dong_chu_nha', 'type' => 'multiple_image_dropzone', 'count' => '1', 'label' => 'Sơ đồ và hợp đồng chủ nhà'],
+                ['name' => 'so_do_va_hop_dong_chu_nha', 'type' => 'multiple_image_dropzone', 'count' => '1', 'label' => 'Sổ đỏ và hợp đồng ký gửi với chủ nhà'],
                 ['name' => 'xac_thuc', 'type' => 'checkbox', 'label' => 'Trạng thái tin xác thực', 'value' => 1, 'group_class' => 'col-md-4'],
 //                ['name' => 'trang_thai_2', 'type' => 'checkbox', 'label' => 'Trạng thái tin xác thực', 'value' => 1, 'group_class' => 'col-md-4'],
-                ['name' => 'da_ban', 'type' => 'checkbox', 'label' => 'Đã bán', 'value' => 1, 'group_class' => 'col-md-4'],
+//                ['name' => 'da_ban', 'type' => 'checkbox', 'label' => 'Đã bán', 'value' => 1, 'group_class' => 'col-md-4'],
+                ['name' => 'status','class' => '', 'type' => 'select', 'options' => [
+                    '' => '',
+                    'Đã bán' => 'Đã bán',
+                    'Chưa bán' => 'Chưa bán',
+                    'Tạm dừng' => 'Tạm dừng',
+                ], 'label' => 'Trạng thái', 'group_class' => 'col-md-4'],
             ],
         ]
     ];
@@ -100,6 +113,49 @@ class CodesController extends CURDBaseController
             'object' => 'category',
             'model' => Category::class,
             'query_type' => 'custom',
+        ],
+        'project_type_id' => [
+            'label' => 'Loại dự án',
+            'type' => 'select2_model',
+            'model' => \App\CRMDV\Models\Project_type::class,
+            'display_field' => 'name',
+            'where' => 'type="project"',
+            'orderByRaw' => 'order_no desc',
+            'query_type' => 'like',
+        ],
+        'service_id' => [
+            'label' => 'Dự án',
+            'type' => 'select2_model',
+            'model' => \App\CRMDV\Models\Service::class,
+            'display_field' => 'name_vi',
+            'orderByRaw' => 'order_no desc',
+            'query_type' => 'like',
+        ],
+        'dien_tich' => [
+            'label' => 'Diện tích',
+            'type' => 'select2_model',
+            'model' => \App\CRMDV\Models\Codes::class,
+            'display_field' => 'dien_tich',
+//            'where' => 'type="project"',
+            'orderByRaw' => 'order_no desc',
+
+            'query_type' => 'like',
+        ],
+        'dien_tich' => [
+            'label' => 'Diện tích',
+            'type' => 'select',
+            'query_type' => '=',
+            'options' => [
+                '' => '',
+                1 => 'Dưới 30m2',
+                2 => '30m2 - 50m2',
+                3 => '50m2 - 80m2',
+                4 => '80m2 - 100m2',
+                5 => '100m2 - 150m2',
+                6 => '150m2 - 200m2',
+                7 => '200m2 - 250m2',
+                8 => 'trên 250m2',
+            ],
         ],
     ];
 
@@ -387,7 +443,7 @@ class CodesController extends CURDBaseController
     {
         $data = $this->model->find($id);
         if (!is_object($data)) abort(404);
-
+        $service = $data->service->name_vi;
         // tăng số lượt xem thêm 1
         $data->luot_xem += 1;
         $data->save();
@@ -396,6 +452,7 @@ class CodesController extends CURDBaseController
         return response()->json([
             'status' => true,
             'data' => $data,
+            'service' => $service
         ]);
     }
 

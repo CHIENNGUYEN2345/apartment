@@ -82,6 +82,7 @@ class CRMDVServiceProvider
                 'penalty_ticket',
                 'check_error_link_logs',
                 'receipts_publish',
+                'loai_du_an_view', 'loai_du_an_add', 'loai_du_an_edit', 'loai_du_an_delete',
                 ]);
             return $per_check;
         }, 1, 1);

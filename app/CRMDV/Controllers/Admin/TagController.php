@@ -1,10 +1,17 @@
 <?php
 
-namespace App\CRMDV\Controllers\Admin;
+namespace App\CRMEdu\Controllers\Admin;
 
 use App\Http\Helpers\CommonHelper;
+use App\Models\Admin;
 use Illuminate\Http\Request;
+use App\CRMEdu\Models\Category;
+use App\CRMEdu\Models\Codes;
+use App\CRMEdu\Models\Theme;
+use App\CRMEdu\Models\Tag;
 use Validator;
+use App\CRMEdu\Models\PostTag;
+use App\CRMEdu\Models\BillProgress;
 
 class TagController extends CURDBaseController
 {
@@ -12,20 +19,32 @@ class TagController extends CURDBaseController
     protected $module = [
         'code' => 'tag',
         'table_name' => 'tags',
-        'label' => 'Thẻ',
-        'modal' => '\App\CRMDV\Models\Tag',
+        'label' => 'CRMEdu_admin.tag',
+        'modal' => '\App\CRMEdu\Models\Tag',
         'list' => [
-            ['name' => 'name', 'type' => 'text_edit', 'label' => 'Tên'],
-            ['name' => 'type', 'type' => 'text', 'label' => 'Loại',],
-            ['name' => 'status', 'type' => 'status', 'label' => 'Trang thái'],
-            ['name' => 'color', 'type' => 'color', 'label' => 'Màu hiển thị'],
+            ['name' => 'name', 'type' => 'text_edit', 'label' => 'CRMEdu_admin.tag_Name'],
+            ['name' => 'type', 'type' => 'select', 'options' => [
+                'bill_receipts' => 'Tài khoản tiền',
+                'lead_rate' => 'Đánh giá đầu mối',
+                'lead_source' => 'Nguồn khách',
+                'user_tick' => 'Đánh dấu khách hàng',
+            ], 'label' => 'Loại',],
+            ['name' => 'status', 'type' => 'status', 'label' => 'CRMEdu_admin.tag_Trang_thai'],
+            ['name' => 'color', 'type' => 'color', 'label' => 'CRMEdu_admin.tag_Mau_hien_thi'],
         ],
         'form' => [
             'general_tab' => [
-                ['name' => 'name', 'type' => 'text', 'class' => '', 'label' => 'Tên', 'group_class' => 'col-md-6'],
-                ['name' => 'type', 'type' => 'text', 'class' => '', 'label' => 'Loại', 'group_class' => 'col-md-6'],
-                ['name' => 'status', 'type' => 'checkbox', 'label' => 'Kich hoạt', 'value' => 1, 'group_class' => 'col-md-4'],
-                ['name' => 'color', 'type' => 'color', 'class' => '', 'label' => 'Màu nhận diện', 'group_class' => 'col-md-6'],
+                ['name' => 'name', 'type' => 'text', 'class' => '', 'label' => 'CRMEdu_admin.tag_Ten', 'group_class' => 'col-md-6'],
+                ['name' => 'type', 'type' => 'select_type_available', 'model' => \App\Models\Tag::class,
+                    'options' => [
+                        'bill_receipts' => 'Tài khoản tiền',
+                        'lead_rate' => 'Đánh giá đầu mối',
+                        'lead_source' => 'Nguồn khách',
+                        'user_tick' => 'Đánh dấu khách hàng',
+                    ],'field' => 'type', 'class' => '', 'label' => 'CRMEdu_admin.tag_Loai', 'group_class' => 'col-md-6'],
+                ['name' => 'status', 'type' => 'checkbox', 'label' => 'CRMEdu_admin.tag_Kich_hoat', 'value' => 1, 'group_class' => 'col-md-3'],
+                ['name' => 'order_no', 'type' => 'number', 'label' => 'Thứ tự', 'des' => 'CRMEdu_admin.tag_so_to_truoc', 'value' => 1, 'group_class' => 'col-md-3'],
+                ['name' => 'color', 'type' => 'color', 'class' => '', 'label' => 'CRMEdu_admin.tag_Mau', 'group_class' => 'col-md-3'],
             ],
         ]
     ];
@@ -46,6 +65,18 @@ class TagController extends CURDBaseController
             ],
             'query_type' => '='
         ],
+        'type' => [
+            'label' => 'Phân loại',
+            'type' => 'select',
+            'options' => [
+                '' => '',
+                'bill_receipts' => 'Tài khoản tiền',
+                'lead_rate' => 'Đánh giá đầu mối',
+                'lead_source' => 'Nguồn khách',
+            ],
+            'query_type' => '='
+        ],
+
     ];
 
     public function getIndex(Request $request)
@@ -53,7 +84,7 @@ class TagController extends CURDBaseController
         
         $data = $this->getDataList($request);
 
-        return view('CRMDV.tag.list')->with($data);
+        return view('CRMEdu.tag.list')->with($data);
     }
 
     public function appendWhere($query, $request)
@@ -69,7 +100,7 @@ class TagController extends CURDBaseController
 
             if (!$_POST) {
                 $data = $this->getDataAdd($request);
-                return view('CRMDV.tag.add')->with($data);
+                return view('CRMEdu.tag.add')->with($data);
             } else if ($_POST) {
                 \DB::beginTransaction();
 
@@ -134,7 +165,7 @@ class TagController extends CURDBaseController
             if (!is_object($item)) abort(404);
             if (!$_POST) {
                 $data = $this->getDataUpdate($request, $item);
-                return view('CRMDV.tag.edit')->with($data);
+                return view('CRMEdu.tag.edit')->with($data);
             } else if ($_POST) {
                 \DB::beginTransaction();
 

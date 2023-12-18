@@ -3,71 +3,84 @@
 namespace App\CRMDV\Controllers\Admin;
 
 use App\Http\Helpers\CommonHelper;
+use App\Models\Admin;
 use Illuminate\Http\Request;
-use Modules\EworkingCompany\Models\Company;
-use App\CRMDV\Models\Service;
-use App\CRMDV\Models\ServiceHistory;
+use App\CRMDV\Models\Category;
+use App\CRMDV\Models\Codes;
+use App\CRMDV\Models\Theme;
+use App\CRMDV\Models\Tag;
 use Validator;
+use App\CRMDV\Models\PostTag;
+use App\CRMDV\Models\BillProgress;
 
-class ServiceController extends CURDBaseController
+class ProjectTypeController extends CURDBaseController
 {
 
     protected $module = [
-        'code' => 'service',
-        'table_name' => 'services',
-        'label' => 'Dự án',
-        'modal' => '\App\CRMDV\Models\Service',
+        'code' => 'project_type',
+        'table_name' => 'project_type',
+        'label' => 'CRMDV_admin.project_type',
+        'modal' => '\App\CRMDV\Models\Project_type',
         'list' => [
-            ['name' => 'name_vi', 'type' => 'text_edit', 'label' => 'Tên', 'sort' => true],
-//            ['name' => 'expiry_date', 'type' => 'date_vi', 'label' => 'Hết hạn'],
-            ['name' => 'intro', 'type' => 'text', 'label' => 'Mô tả', 'sort' => true],
+            ['name' => 'name', 'type' => 'text_edit', 'label' => 'Tên'],
             ['name' => 'type', 'type' => 'select', 'options' => [
                 'bill_receipts' => 'Tài khoản tiền',
                 'lead_rate' => 'Đánh giá đầu mối',
                 'lead_source' => 'Nguồn khách',
-                'user_tick' => 'Đánh dấu khách hàng',
-            ], 'label' => 'Loại dự án',],
+                'project' => 'Đánh dấu dự án'
+            ], 'label' => 'Loại',],
+            ['name' => 'status', 'type' => 'status', 'label' => 'Trạg thái'],
+            ['name' => 'color', 'type' => 'color', 'label' => 'Màu hiển thị'],
         ],
         'form' => [
             'general_tab' => [
-                ['name' => 'name_vi', 'type' => 'text', 'class' => 'required', 'label' => 'Tên'],
-//                ['name' => 'code', 'type' => 'text', 'class' => 'required', 'label' => 'Mã'],
-//                ['name' => 'expiry_date', 'type' => 'number', 'label' => 'Hết hạn'],
-                ['name' => 'intro', 'type' => 'textarea', 'label' => 'Mô tả'],
-//                ['name' => 'checkbox', 'type' => 'checkbox_multiple', 'label' => 'Chọn thứ', 'options' => [
-//                    'Tuesday' => 3,
-//                    'Friday' => 6
-//                ]],
-                ['name' => 'type', 'type' => 'select', 'model' => \App\Models\Service::class,
-                    'options' => [
-                        'bill_receipts' => 'Tài khoản tiền',
-                        'lead_rate' => 'Đánh giá đầu mối',
-                        'lead_source' => 'Nguồn khách',
-                        'user_tick' => 'Đánh dấu khách hàng',
-                    ],'field' => 'type', 'class' => '', 'label' => 'loại dự án'],
+                ['name' => 'name', 'type' => 'text', 'class' => '', 'label' => 'Tên', 'group_class' => 'col-md-6'],
+                ['name' => 'type','class' => 'required', 'type' => 'select', 'options' => [
+                    '' => '',
+                    'bill_receipts' => 'Tài khoản tiền',
+                    'lead_rate' => 'Đánh giá đầu mối',
+                    'lead_source' => 'Nguồn khách',
+                    'project' => 'Đánh dấu dự án'
+                ], 'label' => 'Loại dịch vụ', 'group_class' => 'col-md-6'],
+
+                ['name' => 'status', 'type' => 'checkbox', 'label' => 'Kích hoạt', 'value' => 1, 'group_class' => 'col-md-3'],
+                ['name' => 'order_no', 'type' => 'number', 'label' => 'Thứ tự', 'des' => "Số thứ tự", 'value' => 1, 'group_class' => 'col-md-3'],
+                ['name' => 'color', 'type' => 'color', 'class' => '', 'label' => 'Màu sắc hiển thị', 'group_class' => 'col-md-3'],
             ],
         ]
     ];
 
+    protected $quick_search = [
+        'label' => 'ID',
+        'fields' => 'id, type'
+    ];
+
     protected $filter = [
-        /*'name_vi' => [
-            'label' => 'Tên',
-            'type' => 'text',
-            'query_type' => 'like'
-        ],
-        'price_vi' => [
-            'label' => 'Giá',
-            'type' => 'number',
+        'status' => [
+            'label' => 'Trạng thái',
+            'type' => 'select',
+            'options' => [
+                '' => 'Tất cả',
+                0 => 'Không kich hoạt',
+                1 => 'Kich hoạt',
+            ],
             'query_type' => '='
-        ],*/
+        ],
+
+
     ];
 
     public function getIndex(Request $request)
     {
-
         $data = $this->getDataList($request);
 
-        return view('CRMDV.service.list')->with($data);
+        return view('CRMDV.project_type.list')->with($data);
+    }
+
+    public function appendWhere($query, $request)
+    {
+
+        return $query;
     }
 
     public function add(Request $request)
@@ -77,31 +90,34 @@ class ServiceController extends CURDBaseController
 
             if (!$_POST) {
                 $data = $this->getDataAdd($request);
-                return view('CRMDV.service.add')->with($data);
+                return view('CRMDV.project_type.add')->with($data);
             } else if ($_POST) {
+                \DB::beginTransaction();
+
                 $validator = Validator::make($request->all(), [
-                    'name_vi' => 'required',
+                    'name' => 'required',
                 ], [
-                    'name_vi.required' => 'Bắt buộc phải nhập tên',
+                    'name.required' => 'Bắt buộc phải nhập tên',
                 ]);
                 if ($validator->fails()) {
                     return back()->withErrors($validator)->withInput();
                 } else {
                     $data = $this->processingValueInFields($request, $this->getAllFormFiled());
                     //  Tùy chỉnh dữ liệu insert
-                    if ($request->has('price_day')) {
-                        $data['price'] = json_encode($this->getPriceInfo($request));
-                    }
+
+                    $data['admin_id'] = \Auth::guard('admin')->user()->id;
+                    $data['slug'] = $request->name;
 
                     foreach ($data as $k => $v) {
                         $this->model->$k = $v;
                     }
 
                     if ($this->model->save()) {
-                        $this->afterAddLog($request, $this->model);
+                        \DB::commit();
 
                         CommonHelper::one_time_message('success', 'Tạo mới thành công!');
                     } else {
+                        \DB::rollback();
                         CommonHelper::one_time_message('error', 'Lỗi tao mới. Vui lòng load lại trang và thử lại!');
                     }
 
@@ -123,25 +139,10 @@ class ServiceController extends CURDBaseController
                 }
             }
         } catch (\Exception $ex) {
+            \DB::rollback();
             CommonHelper::one_time_message('error', $ex->getMessage());
             return redirect()->back()->withInput();
         }
-    }
-
-    public function getTimePrice($request)
-    {
-        $time_price = [];
-        if ($request->has('time_price_use_date_max')) {
-            foreach ($request->time_price_use_date_max as $k => $key) {
-                if ($key != null) {
-                    $time_price[] = [
-                        'use_date_max' => $key,
-                        'price' => $request->time_price_price[$k],
-                    ];
-                }
-            }
-        }
-        return $time_price;
     }
 
     public function update(Request $request)
@@ -154,30 +155,32 @@ class ServiceController extends CURDBaseController
             if (!is_object($item)) abort(404);
             if (!$_POST) {
                 $data = $this->getDataUpdate($request, $item);
-                return view('CRMDV.service.edit')->with($data);
+                return view('CRMDV.project_type.edit')->with($data);
             } else if ($_POST) {
-
+                \DB::beginTransaction();
 
                 $validator = Validator::make($request->all(), [
-                    'name_vi' => 'required',
+//                    'name' => 'required',
+//                    'link' => 'required',
                 ], [
-                    'name_vi.required' => 'Bắt buộc phải nhập tên gói',
+//                    'name.required' => 'Bắt buộc phải nhập tên gói',
+//                    'link.unique' => 'Web này đã đăng!',
                 ]);
 
                 if ($validator->fails()) {
                     return back()->withErrors($validator)->withInput();
                 } else {
                     $data = $this->processingValueInFields($request, $this->getAllFormFiled());
-                    //  Tùy chỉnh dữ liệu insert
-                    if ($request->has('price_day')) {
-                        $data['price'] = json_encode($this->getPriceInfo($request));
-                    }
+
+
                     foreach ($data as $k => $v) {
                         $item->$k = $v;
                     }
                     if ($item->save()) {
+                        \DB::commit();
                         CommonHelper::one_time_message('success', 'Cập nhật thành công!');
                     } else {
+                        \DB::rollback();
                         CommonHelper::one_time_message('error', 'Lỗi cập nhật. Vui lòng load lại trang và thử lại!');
                     }
                     if ($request->ajax()) {
@@ -198,8 +201,9 @@ class ServiceController extends CURDBaseController
                 }
             }
         } catch (\Exception $ex) {
-            CommonHelper::one_time_message('error', 'Lỗi hệ thống! Vui lòng liên hệ kỹ thuật viên.');
-//            CommonHelper::one_time_message('error', $ex->getMessage());
+            \DB::rollback();
+//            CommonHelper::one_time_message('error', 'Lỗi hệ thống! Vui lòng liên hệ kỹ thuật viên.');
+            CommonHelper::one_time_message('error', $ex->getMessage());
             return redirect()->back()->withInput();
         }
     }
@@ -273,45 +277,4 @@ class ServiceController extends CURDBaseController
         }
     }
 
-    public function getPriceInfo($request)
-    {
-        $price = [];
-        if ($request->has('price_day')) {
-            foreach ($request->price_day as $k => $key) {
-                if ($key != null) {
-                    $price[] = [
-                        'day' => $key,
-                        'price' => str_replace(',', '', str_replace('.', '', $request->price_price[$k])),
-                    ];
-                }
-            }
-        }
-        return $price;
-    }
-
-    public function show()
-    {
-        $data['page_title'] = 'Các gói dịch vụ';
-        $data['page_type'] = 'list';
-        return view('CRMDV.service.show')->with($data);
-    }
-
-    public function get_info(Request $r) {
-        $service = Service::find($r->service_id);
-        $configPrice = json_decode($service->price);
-        foreach ($configPrice as $v) {
-            if ($v->day == 'start') {
-                $priceStart = $v->price;
-            }
-            if ($v->day == '365') {
-                $priceExpiry = $v->price;
-            }
-        }
-        return response()->json([
-            'total_price' => $priceStart,
-            'total_price_format' => number_format($priceStart),
-            'exp_price' => $priceExpiry,
-            'exp_price_format' => number_format($priceExpiry)
-        ]);
-    }
 }
