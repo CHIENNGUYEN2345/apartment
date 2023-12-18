@@ -206,6 +206,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
         Route::get('edit/{id}', '\App\CRMDV\Controllers\Admin\CodesController@update')->middleware('permission:codes_view');
         Route::post('edit/{id}', '\App\CRMDV\Controllers\Admin\CodesController@update')->middleware('permission:codes_edit');
 
+        Route::get('/tha-noi', '\App\CRMEdu\Controllers\Admin\LeadController@getIndex')->name('lead')->middleware('permission:lead_float_view');
+        Route::get('/chua-chia', '\App\CRMEdu\Controllers\Admin\LeadController@chuaChia')->name('lead')->middleware('permission:lead_float_view');
+
     });
     Route::group(['prefix' => 'rooms'], function () {
         Route::match(array('GET', 'POST'), 'check-web-server', '\App\CRMDV\Controllers\Admin\RoomsController@checkWebServer');
@@ -488,17 +491,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
         Route::post('multi-delete', '\App\CRMDV\Controllers\Admin\DomainErrorLogController@multiDelete')->middleware('permission:check_error_link_logs');
     });
 
-    //  Tag
+    //  Loại dự án
     Route::group(['prefix' => 'project_type'], function () {
 
-        Route::get('', '\App\CRMDV\Controllers\Admin\ProjectTypeController@getIndex')->name('project_type')->middleware('permission:super_admin');
-        Route::get('publish', '\App\CRMDV\Controllers\Admin\ProjectTypeController@getPublish')->name('project_type.publish')->middleware('permission:super_admin');
-        Route::match(array('GET', 'POST'), 'add', '\App\CRMDV\Controllers\Admin\ProjectTypeController@add')->middleware('permission:super_admin');
-        Route::get('delete/{id}', '\App\CRMDV\Controllers\Admin\ProjectTypeController@delete')->middleware('permission:super_admin');
-        Route::post('multi-delete', '\App\CRMDV\Controllers\Admin\ProjectTypeController@multiDelete')->middleware('permission:super_admin');
+        Route::get('', '\App\CRMDV\Controllers\Admin\ProjectTypeController@getIndex')->name('project_type')->middleware('permission:loai_du_an_view');
+        Route::get('publish', '\App\CRMDV\Controllers\Admin\ProjectTypeController@getPublish')->name('project_type.publish')->middleware('permission:supperadmin');
+        Route::match(array('GET', 'POST'), 'add', '\App\CRMDV\Controllers\Admin\ProjectTypeController@add')->middleware('permission:loai_du_an_add');
+        Route::get('delete/{id}', '\App\CRMDV\Controllers\Admin\ProjectTypeController@delete')->middleware('permission:loai_du_an_delete');
+        Route::post('multi-delete', '\App\CRMDV\Controllers\Admin\ProjectTypeController@multiDelete')->middleware('permission:loai_du_an_delete');
         Route::get('search-for-select2', '\App\CRMDV\Controllers\Admin\ProjectTypeController@searchForSelect2')->name('project_type.search_for_select2')->middleware('permission:super_admin');
-        Route::get('edit/{id}', '\App\CRMDV\Controllers\Admin\ProjectTypeController@update')->middleware('permission:super_admin');
-        Route::post('edit/{id}', '\App\CRMDV\Controllers\Admin\ProjectTypeController@update')->middleware('permission:super_admin');
+        Route::get('edit/{id}', '\App\CRMDV\Controllers\Admin\ProjectTypeController@update')->middleware('permission:loai_du_an_edit');
+        Route::post('edit/{id}', '\App\CRMDV\Controllers\Admin\ProjectTypeController@update')->middleware('permission:loai_du_an_edit');
 
     });
 });

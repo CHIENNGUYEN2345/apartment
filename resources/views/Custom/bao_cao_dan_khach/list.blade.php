@@ -221,6 +221,7 @@
 @section('custom_head')
     <link type="text/css" rel="stylesheet" charset="UTF-8"
           href="{{ asset(config('core.admin_asset').'/css/list.css') }}">
+
     {{--    <link type="text/css" rel="stylesheet" charset="UTF-8" href="{{ asset('Modules\WebService\Resources\assets\css\custom.css') }}">--}}
     {{--    <script src="{{asset('Modules\WebService\Resources\assets\js\custom.js')}}"></script>--}}
 @endsection
