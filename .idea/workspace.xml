@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1399ad84-1310-4f45-ba8d-38156f508332" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/CRMDV/dashboard/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/CRMDV/dashboard/dashboard.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +66,7 @@
     "WebServerToolWindowPanel.toolwindow.show.date": "false",
     "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
-    "git-widget-placeholder": "Merging dev",
+    "git-widget-placeholder": "dev",
     "last_opened_file_path": "C:/laragon/www/sehouse/resources/views/CRMDV",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
