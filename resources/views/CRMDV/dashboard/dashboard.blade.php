@@ -111,8 +111,9 @@
     <div class="container">
         <div class="row py-3">
             {{--            nut cham cong --}}
+            {{-- diem danh theo toa do: thong bao khoang cach cua nhan vien toi van phong lam viec --}}
             <a
-                    href=""
+                    href="/diem-danh"
                     class="col-md-4 box"
                     style="background-color: #ffeed6"
             >
@@ -123,7 +124,7 @@
                                 style="color: #196e64"
                         ></i>
                         <div class="text-danger box-content-text">
-                            <p style="color: #196e64">
+                            <p style="color: #196e64;">
                                 @include('CRMDV.timekeeper.partials.nut_diem_danh_theo_toa_do')
                             </p>
                         </div>

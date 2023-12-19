@@ -2,6 +2,12 @@
 $diem_danh = \App\CRMDV\Models\Timekeeper::where('may_cham_cong_id', \Auth::guard('admin')->user()->may_cham_cong_id)->where('time', '>', date('Y-m-d 00:01:00'))->count();
 ?>
 
+<style>
+    #vi_tri_nv_so_voi_vp {
+        font-size: 18px;
+    }
+</style>
+
 <div class="diem-danh-button">
     <button class="btn btn-primary" id="nut-diem-danh" disabled href="/diem-danh?admin_id={{ \Auth::guard('admin')->user()->id }}">Điểm danh hôm nay</button>
 </div>
