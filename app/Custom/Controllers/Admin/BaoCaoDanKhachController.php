@@ -7,6 +7,7 @@ use App\Http\Helpers\CommonHelper;
 use App\Models\Admin;
 use App\Models\Province;
 use App\Models\RoleAdmin;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -21,7 +22,7 @@ class BaoCaoDanKhachController extends CURDBaseController
         'label' => 'Báo cáo dẫn khách',
         'modal' => '\App\Custom\Models\BaoCaoDanKhach',
         'list' => [
-            ['name' => 'code_id', 'type' => 'relation_edit', 'label' => 'Sản phẩm', 'object' => 'code', 'display_field' => 'address'],
+            ['name' => 'code_id', 'type' => 'custom','td'=>'Custom.bao_cao_dan_khach.list.td.ten_bang_hang' ,'label' => 'Sản phẩm', 'object' => 'code', 'display_field' => 'address'],
             ['name' => 'khach_name', 'type' => 'text', 'label' => 'Tên khách'],
             ['name' => 'khach_tel', 'type' => 'text', 'label' => 'SĐT'],
             ['name' => 'note', 'type' => 'text', 'label' => 'Ghi chú'],
@@ -390,4 +391,21 @@ class BaoCaoDanKhachController extends CURDBaseController
             });
         })->download('xlsx');
     }
+
+    public function ajaxGetInfo($id){
+        $data = $this->model->find($id);
+        $code = Codes::query()->where('id', $data->code_id)->first();
+        if (!is_object($data)) abort(404);
+        $imagePath = asset('/filemanager/userfiles/'.$code->image);
+        $imagePaths = explode('|', $code->image_extra);
+        $fullPaths = array_map(function ($path) {
+            return asset('/filemanager/userfiles/' . $path);
+        }, $imagePaths);
+        return response()->json([
+            'data' => $code,
+            'imagePath' => $imagePath,
+            'imagePaths' => $fullPaths
+        ]);
+    }
+
 }

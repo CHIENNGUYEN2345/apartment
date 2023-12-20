@@ -95,6 +95,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
         Route::get('delete/{id}', '\App\Custom\Controllers\Admin\BaoCaoDanKhachController@delete')->middleware('permission:super_admin');
         Route::post('multi-delete', '\App\Custom\Controllers\Admin\BaoCaoDanKhachController@multiDelete')->middleware('permission:super_admin');
         Route::get('publish', '\App\Custom\Controllers\Admin\BaoCaoDanKhachController@getPublish')->name('bao_cao_dan_khach.publish')->middleware('permission:bao_cao_dan_khach_view');
+        Route::get('ajax-get-info/{id}', '\App\Custom\Controllers\Admin\BaoCaoDanKhachController@ajaxGetInfo')->middleware('permission:bao_cao_dan_khach_view');
+
+
     });
 
     //  ngành nghề
