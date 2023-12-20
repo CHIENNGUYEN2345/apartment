@@ -5,6 +5,14 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <!-- CSS Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+{{--    Link font awesome 6.5.1 --}}
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    />
 
     <?php
     if (\Auth::guard('admin')->user()->super_admin != 1) {
@@ -62,17 +70,15 @@
 {{--        </div>--}}
 {{--    </div>--}}
 <style>
-    .home__li {
-        width: 300px;
-        height: 200px;
-        margin-bottom: 50px;
-        background-color: rgb(158, 158, 34);
-        list-style-type: none;
+    .box a {
+        pointer-events: none;
+        text-decoration: none;
     }
 
-    svg {
-        width: 40px;
-        height: 40px;
+    .box-content {
+        position: relative;
+        width: 100%;
+        height: 200px;
     }
 
     .content {
@@ -87,330 +93,153 @@
         font-weight: 500;
     }
 
-<<<<<<< HEAD
-        .home__li0 {
-            background-color: #e1f0ff;
-        }
-
-        .home__li0 svg {
-            fill: #6cb3fa;
-        }
-
-        .home__li0 .home__text {
-            color: #6cb3fa;
-        }
-
-        .home__li1 {
-            background-color: #fff4de;
-        }
-
-        .home__li1 svg {
-            fill: #c09134;
-        }
-
-        .home__li1 .home__text {
-            color: #c09134;
-        }
-
-        .home__li2 {
-            background-color: #e1f0ff;
-        }
-
-        .home__li2 svg {
-            fill: #6cb3fa;
-        }
-
-        .home__li2 .home__text {
-            color: #6cb3fa;
-        }
-
-        .home__li3 {
-            background-color: #ffe2e5;
-        }
-
-        .home__li3 .home__text {
-            color: #ff7d8a;
-        }
-
-        .home__li3 svg {
-            fill: #ff7d8a;
-        }
-
-        .home__li4 {
-            background-color: #c9f7f5;
-        }
-
-        .home__li4 svg {
-            fill: #33cfc8;
-        }
-
-        .home__li4 .home__text {
-            color: #33cfc8;
-        }
-
-        .home__li5 {
-            background-color: #ffeed6;
-        }
-
-        .home__li5 svg {
-            fill: #ec961d;
-        }
-
-        .home__li5 .home__text {
-            color: #ec961d;
-        }
-
-        .home__li6 {
-            background-color: #b7eed6;
-        }
-
-        .home__li6 svg {
-            fill: #108351;
-        }
-
-        .home__li6 .home__text {
-            color: #108351;
-        }
-
-        .home__li7 {
-            background-color: #b7dad6;
-        }
-
-        .home__li7 svg {
-            fill: #0cb6a2;
-        }
-
-        .home__li7 .home__text {
-            color: #0cb6a2;
-        }
-        .home__a {
-            padding: 30px;
-        }
-
-        .home__svg, .home__text {
-            display: block;
-        }
-
-        a {
-            text-decoration: none !important;
-        }
-
-        .home__a {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .home__svg svg {
-            transition: transform 1s ease; /* Thời gian và kiểu chuyển đổi */
-        }
-
-        .home__svg__setting svg {
-            transition: transform 1s ease; /* Thời gian và kiểu chuyển đổi */
-        }
-
-        .home__svg:hover svg {
-            transform: rotateY(180deg);
-        }
-
-        .home__svg__setting:hover svg{
-            transform: rotate(360deg);
-        }
-    </style>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <ul class="list-group">
-                    <!-- 3 thẻ li cột đầu -->
-                    <li class="list-group-item home__li0">
-                        @include('CRMDV.timekeeper.partials.nut_diem_danh_theo_toa_do')
-                    </li>
-
-                    <li class="list-group-item home__li1">
-                        <a href="/admin/timekeeper" class="home__a">
-                            <span class="home__svg"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="20"
-                                                         viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                                    <path
-                                            d="M496 224c-79.6 0-144 64.4-144 144s64.4 144 144 144 144-64.4 144-144-64.4-144-144-144zm64 150.3c0 5.3-4.4 9.7-9.7 9.7h-60.6c-5.3 0-9.7-4.4-9.7-9.7v-76.6c0-5.3 4.4-9.7 9.7-9.7h12.6c5.3 0 9.7 4.4 9.7 9.7V352h38.3c5.3 0 9.7 4.4 9.7 9.7v12.6zM320 368c0-27.8 6.7-54.1 18.2-77.5-8-1.5-16.2-2.5-24.6-2.5h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h347.1c-45.3-31.9-75.1-84.5-75.1-144zm-96-112c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128z" />
-                                </svg></span>
-                            <span class="home__text">Chấm công</span>
-                        </a>
-                    </li>
-
-                    @if(in_array('rooms_view', $permissions))
-                        <li class="list-group-item home__li2">
-                            <a href="/admin/rooms" class="home__a">
-                            <span class="home__svg"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
-                                                         viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                                    <path
-                                            d="M436 480h-20V24c0-13.3-10.7-24-24-24H56C42.7 0 32 10.7 32 24v456H12c-6.6 0-12 5.4-12 12v20h448v-20c0-6.6-5.4-12-12-12zM128 76c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12V76zm0 96c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm52 148h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm76 160h-64v-84c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v84zm64-172c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm0-96c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm0-96c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40z" />
-                                </svg></span>
-                                <span class="home__text">Phòng ban</span>
-                            </a>
-                        </li>
-                    @endif
-
-                </ul>
-=======
     .box-content-icon {
         font-size: 2.45rem;
         color: #ffffff;
         margin: 0 0 16px 12px;
     }
+
+    .fa-solid, .fa-gear {
+        transition: transform 0.5s ease;
+    }
+
+    .fa-solid:hover {
+        transform: rotateY(180deg);
+    }
+
+    .fa-gear:hover {
+        transform: rotate(360deg);
+    }
 </style>
-<div class="container">
-    <div class="row py-3">
-        <a href="https://sehouse.khoweb.top/admin/hradmin" class="col-md-4 box">
-            <div
-                    class="box-content rounded position-relative"
-                    style="background-color: #fff4de"
-            >
-                <div class="content position-absolute">
-                    <i
-                            class="fa-solid fa-users box-content-icon"
-                            style="color: #c09134"
-                    ></i>
-                    <div class="text-danger box-content-text">
-                        <p style="color: #c09134">Thành viên</p>
+
+{{--    trang chu --}}
+    <div class="container">
+        <div class="row py-3">
+            <!-- <a href="ahsah.html" class="col-md-4 box">
+          <div
+            class="box-content rounded position-relative"
+            style="background-color: #fff4de"
+          >
+            <div class="content position-absolute">
+              <i
+                class="fa-solid fa-users box-content-icon"
+                style="color: #c09134"
+              ></i>
+              <div class="text-danger box-content-text">
+                <p style="color: #c09134">Thành viên</p>
+              </div>
+            </div>
+          </div>
+        </a> -->
+
+            <!-- Nut cham cong: diem danh theo toa do, thong bao khoang cach cua nhan vien toi van phong -->
+            <a href="/diem-danh" class="col-md-4 box">
+                <div class="box-content rounded position-relative" style="background-color: #ff7d8a">
+                    <div class="content position-absolute">
+                        <i class="fa-solid fa-user-clock box-content-icon" style="color: #ffffff"></i>
+                        <div class="text-danger box-content-text">
+                            <p style="color: #ffffff">
+                                @include('CRMDV.timekeeper.partials.nut_diem_danh_theo_toa_do')
+                            </p>
+                        </div>
                     </div>
                 </div>
->>>>>>> f80b3ec79e97b6e705dded8a7dee40202db8ea2a
-            </div>
-        </a>
-        <a href="https://sehouse.khoweb.top/admin/rooms" class="col-md-4 box">
-            <div
-                    class="box-content rounded position-relative"
-                    style="background-color: #e1f0ff"
-            >
-                <div class="content position-absolute">
-                    <i
-                            class="fa-solid fa-building box-content-icon"
-                            style="color: #f067fa"
-                    ></i>
-                    <div class="text-danger box-content-text">
-                        <p style="color: #f067fa">Phòng ban</p>
+            </a>
+            <!-- Nut phong ban -->
+            @if(in_array('rooms_view', $permissions))
+                <a href="/admin/rooms" class="col-md-4 box">
+                    <div class="box-content rounded position-relative" style="background-color: #e1f0ff">
+                        <div class="content position-absolute">
+                            <i class="fa-solid fa-building box-content-icon" style="color: #f067fa"></i>
+                            <div class="text-danger box-content-text">
+                                <p style="color: #f067fa">Phòng ban</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @endif
+            <!-- nut tai khoan -->
+            @if(in_array('hradmin_view', $permissions))
+                <a href="/admin/admin" class="col-md-4 box">
+                    <div class="box-content rounded position-relative" style="background-color: #b7eed6">
+                        <div class="content position-absolute">
+                            <i class="fa-solid fa-user box-content-icon" style="color: #108351"></i>
+                            <div class="text-danger box-content-text">
+                                <p style="color: #108351">Tài khoản</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @endif
+        </div>
+        <div class="row py-3">
+            <!-- nut bang hang -->
+            @if(in_array('codes_view', $permissions))
+                <a href="/admin/codes" class="col-md-4 box">
+                    <div class="box-content rounded position-relative" style="background-color: #c9f7f5">
+                        <div class="content position-absolute">
+                            <i class="fa-solid fa-clipboard-list box-content-icon" style="color: #33cfc8"></i>
+                            <div class="text-danger box-content-text">
+                                <p style="color: #33cfc8">Bảng hàng</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @endif
+            <!-- nut bao cao dan khach -->
+            @if(in_array('bao_cao_dan_khach_view', $permissions))
+                <a href="/admin/bao_cao_dan_khach" class="col-md-4 box">
+                    <div class="box-content rounded position-relative" style="background-color: #ffeed6">
+                        <div class="content position-absolute">
+                            <i class="fa-solid fa-address-book box-content-icon" style="color: #ec961d"></i>
+                            <div class="text-danger box-content-text">
+                                <p style="color: #ec961d">Báo cáo dẫn khách</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @endif
+            <!-- nut phan quyen -->
+            @if(in_array('role_view', $permissions))
+                <a href="/admin/role" class="col-md-4 box">
+                    <div class="box-content rounded position-relative" style="background-color: #b7dad6">
+                        <div class="content position-absolute">
+                            <i class="fa-solid fa-users-gear box-content-icon" style="color: #196e64"></i>
+                            <div class="text-danger box-content-text">
+                                <p style="color: #196e64">Phân quyền</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @endif
+        </div>
+        <div class="row py-3">
+            @if(in_array('setting', $permissions))
+                <a href="/admin/setting" class="col-md-4 box">
+                    <div class="box-content rounded position-relative" style="background-color: #6b9608">
+                        <div class="content position-absolute">
+                            <i class="fa-solid fa-gear box-content-icon" style="color: #e6ffac"></i>
+                            <div class="text-danger box-content-text">
+                                <p style="color: #e6ffac">Cấu hình chung</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @endif
+            <!-- Nut he thong -->
+            <!-- <a href="" class="col-md-4 box">
+                <div class="box-content rounded position-relative" style="background-color: #fbbfff">
+                    <div class="content position-absolute">
+                        <i class="fa-solid fa-sliders box-content-icon" style="color: #ee00ff"></i>
+                        <div class="text-danger box-content-text">
+                            <p style="color: #ee00ff">Hệ thống</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </a>
-        <a href="https://sehouse.khoweb.top/admin/timekeeper/bao-cao" class="col-md-4 box">
-            <div
-                    class="box-content rounded position-relative"
-                    style="background-color: #ff7d8a"
-            >
-                <div class="content position-absolute">
-                    <i
-                            class="fa-solid fa-user-clock box-content-icon"
-                            style="color: #ffffff"
-                    ></i>
-                    <div class="text-danger box-content-text">
-                        <p style="color: #ffffff">Chấm công</p>
-                    </div>
-                </div>
-            </div>
-        </a>
+            </a> -->
+        </div>
     </div>
-    <div class="row py-3">
-        <a href="https://sehouse.khoweb.top/admin/codes" class="col-md-4 box">
-            <div
-                    class="box-content rounded position-relative"
-                    style="background-color: #c9f7f5"
-            >
-                <div class="content position-absolute">
-                    <i
-                            class="fa-solid fa-clipboard-list box-content-icon"
-                            style="color: #33cfc8"
-                    ></i>
-                    <div class="text-danger box-content-text">
-                        <p style="color: #33cfc8">Bảng hàng</p>
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a href="https://sehouse.khoweb.top/admin/bao_cao_dan_khach" class="col-md-4 box">
-            <div
-                    class="box-content rounded position-relative"
-                    style="background-color: #ffeed6"
-            >
-                <div class="content position-absolute">
-                    <i
-                            class="fa-solid fa-address-book box-content-icon"
-                            style="color: #ec961d"
-                    ></i>
-                    <div class="text-danger box-content-text">
-                        <p style="color: #ec961d">Báo cáo dẫn khách</p>
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a href="https://sehouse.khoweb.top/admin/admin" class="col-md-4 box">
-            <div
-                    class="box-content rounded position-relative"
-                    style="background-color: #b7eed6"
-            >
-                <div class="content position-absolute">
-                    <i
-                            class="fa-solid fa-user box-content-icon"
-                            style="color: #108351"
-                    ></i>
-                    <div class="text-danger box-content-text">
-                        <p style="color: #108351">Tài khoản</p>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="row py-3">
-        <a href="https://sehouse.khoweb.top/admin/role" class="col-md-4 box">
-            <div
-                    class="box-content rounded position-relative"
-                    style="background-color: #b7dad6"
-            >
-                <div class="content position-absolute">
-                    <i
-                            class="fa-solid fa-users-gear box-content-icon"
-                            style="color: #196e64"
-                    ></i>
-                    <div class="text-danger box-content-text">
-                        <p style="color: #196e64">Phân quyền</p>
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a href="https://sehouse.khoweb.top/admin/setting" class="col-md-4 box">
-            <div
-                    class="box-content rounded position-relative"
-                    style="background-color: #6b9608"
-            >
-                <div class="content position-absolute">
-                    <i
-                            class="fa-solid fa-gear box-content-icon"
-                            style="color: #e6ffac"
-                    ></i>
-                    <div class="text-danger box-content-text">
-                        <p style="color: #e6ffac">Cấu hình chung</p>
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a href="" class="col-md-4 box">
-            <div
-                    class="box-content rounded position-relative"
-                    style="background-color: #fbbfff"
-            >
-                <div class="content position-absolute">
-                    <i
-                            class="fa-solid fa-sliders box-content-icon"
-                            style="color: #ee00ff"
-                    ></i>
-                    <div class="text-danger box-content-text">
-                        <p style="color: #ee00ff">Hệ thống</p>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
+
 
 @endsection
 @section('custom_head')
@@ -560,6 +389,8 @@
 
 @endsection
 @push('scripts')
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 @endpush

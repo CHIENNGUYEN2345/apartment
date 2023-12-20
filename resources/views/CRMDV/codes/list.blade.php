@@ -15,19 +15,7 @@
                 </div>
                 <div class="kt-portlet__head-toolbar">
                     <div class="kt-portlet__head-wrapper">
-                        @if(in_array('codes_view', $permissions))
-                            <div>
-                                <a href="/admin/codes"
-                                   class="btn {{ explode('?', $_SERVER['REQUEST_URI'])[0] == '/admin/codes' ? 'btn-primary' : 'btn-default' }}">Tất cả</a>
-                                <a href="/admin/codes/chua-ban"
-                                   class="btn {{ strpos($_SERVER['REQUEST_URI'], '/chua-ban') != false ? 'btn-primary' : 'btn-default' }}">Chưa bán</a>
-                                <a href="/admin/codes/da-ban"
-                                   class="btn {{ strpos($_SERVER['REQUEST_URI'], '/da-ban') != false ? 'btn-primary' : 'btn-default' }}">Đã bán</a>
-                                <a href="/admin/codes/tam-dung"
-                                   class="btn {{ strpos($_SERVER['REQUEST_URI'], '/tam-dung') != false ? 'btn-primary' : 'btn-default' }}">Tạm dừng</a>
 
-                            </div>
-                        @endif
                         <div class="">
                             <input type="text" name="quick_search" value="{{ @$_GET['quick_search'] }}"
                                    class="form-control" title="Chỉ cần enter để thực hiện tìm kiếm"
@@ -76,6 +64,7 @@
                             </a>
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -124,9 +113,25 @@
                 </form>
                 <!--end: Search Form -->
             </div>
-            <div class="kt-separator kt-separator--md kt-separator--dashed" style="margin: 0;"></div>
+            @if(in_array('codes_view', $permissions))
+                <div>
+                    <a href="/admin/codes"
+                       class="btn {{ explode('?', $_SERVER['REQUEST_URI'])[0] == '/admin/codes' ? 'btn-primary' : 'btn-default' }}">Chưa bán</a>
+                    <a href="/admin/codes/da-ban"
+                       class="btn {{ strpos($_SERVER['REQUEST_URI'], '/da-ban') != false ? 'btn-primary' : 'btn-default' }}">Đã bán</a>
+                    <a href="/admin/codes/tam-dung"
+                       class="btn {{ strpos($_SERVER['REQUEST_URI'], '/tam-dung') != false ? 'btn-primary' : 'btn-default' }}">Tạm dừng</a>
+  <a href="/admin/codes/tat-ca"
+                       class="btn {{ strpos($_SERVER['REQUEST_URI'], '/tat-ca') != false ? 'btn-primary' : 'btn-default' }}">Tất cả</a>
+
+                </div>
+            @endif
+            <div class="kt-separator kt-separator--md kt-separator--dashed" style="margin: 0;">
+            </div>
+
             <div class="kt-portlet__body kt-portlet__body--fit">
                 <!--begin: Datatable -->
+
                 <div class="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--scroll kt-datatable--loaded"
                      id="scrolling_vertical" style="">
                     <table class="table table-striped">
@@ -219,12 +224,12 @@
         </div>
     </div>
 
-    {{--    include file pop_up.css--}}
+{{--    include file pop_up.css--}}
     <link rel="stylesheet" href="{{ asset('/backend/css/pop_up.css') }}">
-    {{--    include font awesome 5.15.4 --}}
+{{--    include font awesome 5.15.4 --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
           integrity="..." crossorigin="anonymous">
-    {{--    include Jquery --}}
+{{--    include Jquery --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <div class="modal fade modal-view-code" tabindex="-1" role="dialog"  aria-hidden="true">
@@ -242,32 +247,10 @@
                                 <div class="slider">
                                     <div class="slider__main">
                                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                            <div class="carousel-inner">
-                                                <div class="carousel-item active">
-                                                    <img
-                                                            src="https://noithatviet24h.vn/wp-content/uploads/2020/08/hinh-anh-can-ho-chung-cu-dep-3.jpg"
-                                                            class="d-block w-100" alt="Main Slide">
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img
-                                                            src="https://noithatviet24h.vn/wp-content/uploads/2020/08/hinh-anh-can-ho-chung-cu-dep-1.jpg"
-                                                            class="d-block w-100" alt="Slide 1">
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img
-                                                            src="https://noithatviet24h.vn/wp-content/uploads/2020/08/hinh-anh-can-ho-chung-cu-dep-4.jpg"
-                                                            class="d-block w-100" alt="Slide 2">
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img
-                                                            src="https://noithatviet24h.vn/wp-content/uploads/2020/08/hinh-anh-can-ho-chung-cu-dep-11.jpg"
-                                                            class="d-block w-100" alt="Slide 3">
-                                                </div>
-                                                <!-- Add more sub slides if needed -->
-                                                <!-- <div class="carousel-item">
-                                                  <img src="sub-slide-image.jpg" class="d-block w-100" alt="Sub Slide">
-                                                </div> -->
+                                            <div id="myCarousel" class="carousel-inner" style="height: 600px">
+                                                <!-- Slides will be dynamically added here -->
                                             </div>
+
                                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
                                                data-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -280,29 +263,7 @@
                                             </a>
                                         </div>
 
-                                        <div class="row mt-4">
-                                            <div class="col-md-4">
-                                                <img
-                                                        src="https://noithatviet24h.vn/wp-content/uploads/2020/08/hinh-anh-can-ho-chung-cu-dep-1.jpg"
-                                                        class="d-block w-100 sub-slide" alt="Slide 1" data-target="#carouselExampleIndicators"
-                                                        data-slide-to="1">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <img
-                                                        src="https://noithatviet24h.vn/wp-content/uploads/2020/08/hinh-anh-can-ho-chung-cu-dep-4.jpg"
-                                                        class="d-block w-100 sub-slide" alt="Slide 2" data-target="#carouselExampleIndicators"
-                                                        data-slide-to="2">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <img
-                                                        src="https://noithatviet24h.vn/wp-content/uploads/2020/08/hinh-anh-can-ho-chung-cu-dep-11.jpg"
-                                                        class="d-block w-100 sub-slide" alt="Slide 3" data-target="#carouselExampleIndicators"
-                                                        data-slide-to="3">
-                                            </div>
-                                            <!-- Add more sub slides if needed -->
-                                            <!-- <div class="col-md-4">
-                                              <img src="sub-slide-image.jpg" class="d-block w-100 sub-slide" alt="Sub Slide" data-target="#carouselExampleIndicators" data-slide-to="4">
-                                            </div> -->
+                                        <div class="row mt-4 slide-image">
                                         </div>
 
 
@@ -310,7 +271,7 @@
 
                                     <p class="slider__name">
                                         <!-- Trường address trong bảng Codes -->
-                                        <span class="address">Chung cư abc def</span>
+                                        <span class="address"></span>
                                     </p>
                                 </div>
                                 <div class="info">
@@ -319,7 +280,7 @@
                                             <div class="info__left__top d-flex justify-content-between align-items-center">
                                                 <a href="" class="info__no">
                                                     <!-- trường id trong bảng Codes -->
-                                                    <span class="id">123</span>
+                                                    <span class="id"></span>
                                                 </a>
                                                 <a id="bao-cao-dan-khach" href="#" class="info__baocao d-flex align-items-center justify-content-center text-white p-2">
                                                     <i class="fas fa-address-book"></i>
@@ -340,7 +301,7 @@
 
                                                         <span class="info__number">
                               <!-- trường diện tích -->
-                              <span class="dien_tich">125m2</span>
+                              <span class="dien_tich"></span>
                             </span>
                                                     </div>
                                                     <div
@@ -350,7 +311,7 @@
                             </span>
                                                         <span class="info__number">
                               <!-- trường so_phong_ngu -->
-                              <span class="so_phong_ngu">3</span> PN
+                              <span class="so_phong_ngu"></span> PN
                             </span>
                                                     </div>
                                                     <div
@@ -360,7 +321,7 @@
                             </span>
                                                         <span class="info__number">
                               <!-- trường số nhà vệ sinh -->
-                              <span class="so_nha_ve_sinh">2</span> WC
+                              <span class="so_nha_ve_sinh"></span> WC
                             </span>
                                                     </div>
                                                 </div>
@@ -369,7 +330,7 @@
                                                     <i class="far fa-clock"></i>
                                                     <span class="info__time">
                             <!-- Ngày tạo -->
-                            <span class="created_at">2023/11/11 11:11:11</span>
+                            <span class="created_at"></span>
                           </span>
                                                 </div>
                                             </div>
@@ -379,7 +340,7 @@
                                                 <span>Giá bán:</span><br />
                                                 <span class="info__price__number">
                           <!-- Giá bán -->
-                          <span class="price_setup">6.5 tỷ</span>
+                          <span class="price_setup"></span>
                         </span>
                                             </div>
                                             <a href=""
@@ -428,7 +389,7 @@
                                                 <span>Loại nhà đất</span>
                                             </div>
                                             <!-- loại nhà đất -->
-                                            <div class="info__chitiet__dataInfo"><span class="loai_nha_dat">yyy</span></div>
+                                            <div class="info__chitiet__dataInfo"><span class="loai_nha_dat"></span></div>
                                             <!--  -->
                                         </div>
                                         <div class="info__chitiet__data d-flex justify-content-between align-items-center">
@@ -439,7 +400,7 @@
                                                 <span>Dự án</span>
                                             </div>
                                             <!-- dự án -->
-                                            <div class="info__chitiet__dataInfo"><span class="du_an">vvv</span></div>
+                                            <div class="info__chitiet__dataInfo"><span class="du_an"></span></div>
                                             <!--  -->
                                         </div>
                                         <div class="info__chitiet__data d-flex justify-content-between align-items-center">
@@ -450,7 +411,7 @@
                                                 <span>Địa chỉ</span>
                                             </div>
                                             <!-- address -->
-                                            <div class="info__chitiet__dataInfo"><span class="address">zx</span></div>
+                                            <div class="info__chitiet__dataInfo"><span class="address"></span></div>
                                             <!--  -->
                                         </div>
                                         <div class="info__chitiet__data d-flex justify-content-between align-items-center">
@@ -461,7 +422,7 @@
                                                 <span>Diện tích</span>
                                             </div>
                                             <!-- dien tich -->
-                                            <div class="info__chitiet__dataInfo"><span class="dien_tich">bc</span></div>
+                                            <div class="info__chitiet__dataInfo"><span class="dien_tich"></span></div>
                                             <!--  -->
                                         </div>
                                         <div class="info__chitiet__data d-flex justify-content-between align-items-center">
@@ -472,7 +433,7 @@
                                                 <span>Mặt tiền</span>
                                             </div>
                                             <!-- Mặt tiền -->
-                                            <div class="info__chitiet__dataInfo"><span class="mat_tien">cac</span></div>
+                                            <div class="info__chitiet__dataInfo"><span class="mat_tien"></span></div>
                                             <!--  -->
                                         </div>
                                         <div class="info__chitiet__data d-flex justify-content-between align-items-center">
@@ -483,7 +444,7 @@
                                                 <span>Số tầng</span>
                                             </div>
                                             <!-- Số tầng -->
-                                            <div class="info__chitiet__dataInfo"><span class="so_tang">abc</span></div>
+                                            <div class="info__chitiet__dataInfo"><span class="so_tang"></span></div>
                                             <!--  -->
                                         </div>
                                         <div class="info__chitiet__data d-flex justify-content-between align-items-center">
@@ -494,7 +455,7 @@
                                                 <span>Phí môi giới</span>
                                             </div>
                                             <!-- Phí môi giới -->
-                                            <div class="info__chitiet__dataInfo"><span class="phi_moi_gioi">abc</span></div>
+                                            <div class="info__chitiet__dataInfo"><span class="phi_moi_gioi"></span></div>
                                             <!--  -->
                                         </div>
                                         <div class="info__chitiet__data d-flex justify-content-between align-items-center">
@@ -505,7 +466,7 @@
                                                 <span>Toà</span>
                                             </div>
                                             <!-- Toà -->
-                                            <div class="info__chitiet__dataInfo"><span class="toa">abc</span></div>
+                                            <div class="info__chitiet__dataInfo"><span class="toa"></span></div>
                                             <!--  -->
                                         </div>
                                         <div class="info__chitiet__data d-flex justify-content-between align-items-center">
@@ -516,7 +477,7 @@
                                                 <span>Tầng</span>
                                             </div>
                                             <!-- Tầng -->
-                                            <div class="info__chitiet__dataInfo"><span class="tang">3</span></div>
+                                            <div class="info__chitiet__dataInfo"><span class="tang"></span></div>
                                             <!--  -->
                                         </div>
                                         <div class="info__chitiet__data d-flex justify-content-between align-items-center">
@@ -527,7 +488,7 @@
                                                 <span>Khoảng tầng</span>
                                             </div>
                                             <!-- Khoảng tầng -->
-                                            <div class="info__chitiet__dataInfo"><span class="khoang_tang">2</span></div>
+                                            <div class="info__chitiet__dataInfo"><span class="khoang_tang"></span></div>
                                             <!--  -->
                                         </div>
                                         <div class="info__chitiet__data d-flex justify-content-between align-items-center">
@@ -538,7 +499,7 @@
                                                 <span>Số phòng ngủ</span>
                                             </div>
                                             <!-- Số phòng ngủ -->
-                                            <div class="info__chitiet__dataInfo"><span class="so_phong_ngu">zzz</span></div>
+                                            <div class="info__chitiet__dataInfo"><span class="so_phong_ngu"></span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -551,19 +512,19 @@
                                             <img src="https://cdn-icons-png.flaticon.com/512/219/219983.png" width="100" height="100" alt=""
                                                  srcset="">
                                             <!-- Họ tên chủ nhà, trường intro -->
-                                            <span class="name__text intro">Hoàng Quốc Hiệu</span>
+                                            <span class="name__text intro"></span>
                                         </div>
                                         <div class="name__info d-flex flex-column">
                       <span>
                         <i class="fas fa-map-marker-alt"></i>
                           <!-- Địa chỉ trên sổ, trường dia_chi_tren_so -->
-                        <span class="dia_chi_tren_so">Phố nguỵ như kon tum phường nhân chính thanh xuân</span>
+                        <span class="dia_chi_tren_so"></span>
                       </span>
                                             <!-- sđt -->
                                             <span>
                         <i class="fas fa-mobile-alt"></i>
                                                 <!-- trường sdt_chu_nha -->
-                        <span class="sdt_chu_nha">0925743</span>
+                        <span class="sdt_chu_nha"></span>
                       </span>
                                             <!-- trường số giấy chứng nhận (đang hiện trên frontend: số seri sổ) -->
                                             <span>
@@ -571,7 +532,7 @@
                       </span>
                                             <!-- trường seri (đang hiện trên frontend: số hợp đồng mua bán)  -->
                                             <span>
-                        Số giấy chứng nhận: <span class="seri">1111</span>
+                        Số giấy chứng nhận: <span class="seri"></span>
                       </span>
                                         </div>
                                     </div>
@@ -582,7 +543,7 @@
 
                     </div>
                     <div class="price d-flex align-items-center justify-content-around">
-                        <div class="price__left">
+                        <div class="price__left d-flex align-items-center">
                             <p>Giá bán:</p>
                             <p class="price__number">
                                 <span class="price_setup"></span>
@@ -625,7 +586,7 @@
     @include(config('core.admin_theme').'.partials.js_common')
 @endsection
 @push('scripts')
-    {{--    slide --}}
+{{--    slide --}}
     <script>
         // Get all sub-slides
         const subSlides = document.querySelectorAll('.sub-slide');
@@ -637,7 +598,8 @@
             });
         });
     </script>
-    {{--end slide--}}
+    </script>
+{{--end slide--}}
     @include(config('core.admin_theme').'.partials.js_common_list')
     <script>
         $(document).ready(function (){
@@ -676,8 +638,8 @@
                         $('.sdt_chu_nha').html(response.sdt_chu_nha);
                         $('.so_giay_chung_nhan').html(response.so_giay_chung_nhan);
                         $('.row_id'+response.id+' .item-luot_xem').html(response.luot_xem);
-                        $('.gia_ha_chao').html(response.gia_ha_chao);
-                        $('.price_setup').html(response.gia_niem_yet);
+                        $('.gia_ha_chao').html(formatValue(response.gia_ha_chao));
+                        $('.price_setup').html(formatValue(response.gia_niem_yet));
                         $('.dien_tich').html(response.dien_tich);
                         $('.mat_tien').html(response.mat_tien);
                         $('.so_tang').html(response.so_tang);
@@ -688,12 +650,41 @@
                         $('.so_phong_ngu').html(response.so_phong_ngu);
                         $('.content').html(response.content);
                         $('.dia_chi_tren_so').html(response.dia_chi_tren_so);
+                        $('.img-main').attr('src', res.imagePath);
+                        console.log(res.imagePaths);
+                        $('#myCarousel').empty().append(
+                            '<div class="carousel-item active">' +
+                            '<img class="d-block w-100" src="' + res.imagePath + '" alt="Main Slide">' +
+                            '</div>'
+                        );
 
-
+                        // Add additional slides
+                        $.each(res.imagePaths, function (index, path) {
+                            $('#myCarousel').append(
+                                '<div class="carousel-item">' +
+                                '<img class="d-block w-100" src="' + path + '" alt="Slide ' + (index + 1) + '">' +
+                                '</div>'
+                            );
+                        });
 
                     }
                 });
             });
+            function formatPrice(price) {
+                // Định dạng số tiền theo kiểu tiền tệ, ví dụ: 1,000,000 đ
+                return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+            }
+            function formatValue(inputValue) {
+                    if (inputValue >= 1000000000) {
+                        return (inputValue / 1000000000) + ' tỷ';
+                    } else if (inputValue >= 1000000) {
+                        return (inputValue / 1000000) + ' triệu';
+                    } else {
+                        return inputValue + ' đ';
+                    }
+
+            }
         });
+
     </script>
 @endpush

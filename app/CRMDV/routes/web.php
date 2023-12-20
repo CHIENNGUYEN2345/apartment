@@ -206,8 +206,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
         Route::get('edit/{id}', '\App\CRMDV\Controllers\Admin\CodesController@update')->middleware('permission:codes_view');
         Route::post('edit/{id}', '\App\CRMDV\Controllers\Admin\CodesController@update')->middleware('permission:codes_edit');
 
-        Route::get('/tha-noi', '\App\CRMEdu\Controllers\Admin\LeadController@getIndex')->name('lead')->middleware('permission:lead_float_view');
-        Route::get('/chua-chia', '\App\CRMEdu\Controllers\Admin\LeadController@chuaChia')->name('lead')->middleware('permission:lead_float_view');
+        Route::get('/da-ban', '\App\CRMDV\Controllers\Admin\CodesController@getIndex')->name('codes')->middleware('permission:codes_view');
+        Route::get('/tat-ca', '\App\CRMDV\Controllers\Admin\CodesController@getIndex')->name('codes')->middleware('permission:codes_view');
+        Route::get('/tam-dung', '\App\CRMDV\Controllers\Admin\CodesController@getIndex')->name('codes')->middleware('permission:codes_view');
 
     });
     Route::group(['prefix' => 'rooms'], function () {
