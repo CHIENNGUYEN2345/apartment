@@ -321,7 +321,7 @@
                             </span>
                                                         <span class="info__number">
                               <!-- trường số nhà vệ sinh -->
-                              <span class="so_nha_ve_sinh"></span> WC
+                              <span class="so_nha_ve_sinh">2</span> WC
                             </span>
                                                     </div>
                                                 </div>

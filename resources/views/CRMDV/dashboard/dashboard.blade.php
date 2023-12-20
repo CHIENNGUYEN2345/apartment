@@ -5,7 +5,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <!-- CSS Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-{{--    Link font awesome 6.5.1 --}}
+    {{--    Link font awesome 6.5.1 --}}
     <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -59,98 +59,114 @@
     $phieu_chi = \App\CRMDV\Models\BillReceipts::where('price', '<', 0)->whereRaw($whereDate)->sum('price');
 
     ?>
-{{--    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">--}}
-{{--        <div class="row">--}}
-{{--            @if(in_array(CommonHelper::getRoleName(\Auth::guard('admin')->user()->id, 'name'), ['super_admin', ]))--}}
-{{--                @include('CRMDV.dashboard.partials.bo_loc.bo_loc_chung')--}}
-{{--            @endif--}}
-{{--        </div>--}}
-{{--        <div class="row">--}}
-{{--            @include('CRMDV.timekeeper.partials.nut_diem_danh_theo_toa_do')--}}
-{{--        </div>--}}
-{{--    </div>--}}
-<style>
-    .box a {
-        pointer-events: none;
-        text-decoration: none;
-    }
+    {{--    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">--}}
+    {{--        <div class="row">--}}
+    {{--            @if(in_array(CommonHelper::getRoleName(\Auth::guard('admin')->user()->id, 'name'), ['super_admin', ]))--}}
+    {{--                @include('CRMDV.dashboard.partials.bo_loc.bo_loc_chung')--}}
+    {{--            @endif--}}
+    {{--        </div>--}}
+    {{--        <div class="row">--}}
+    {{--            @include('CRMDV.timekeeper.partials.nut_diem_danh_theo_toa_do')--}}
+    {{--        </div>--}}
+    {{--    </div>--}}
+    <style>
+        .box {
+            width: 90%;
+            height: 180px;
+            border-radius: 15px;
+            padding: 16px;
+        }
+        .content {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+        }
 
-    .box-content {
-        position: relative;
-        width: 100%;
-        height: 200px;
-    }
+        .box-content-text {
+            font-size: 28px;
+            font-family: Poppins, Helvetica, "sans-serif";
+            font-weight: 500;
+        }
 
-    .content {
-        position: absolute;
-        top: 40px;
-        left: 40px;
-    }
+        .box-content-icon {
+            font-size: 2.45rem;
+            color: #ffffff;
+            margin: 0 0 16px 12px;
+        }
 
-    .box-content-text {
-        font-size: 28px;
-        font-family: Poppins, Helvetica, "sans-serif";
-        font-weight: 500;
-    }
+        .fa-solid, .fa-gear {
+            transition: transform 0.5s ease;
+        }
 
-    .box-content-icon {
-        font-size: 2.45rem;
-        color: #ffffff;
-        margin: 0 0 16px 12px;
-    }
+        .fa-solid:hover {
+            transform: rotateY(180deg);
+        }
 
-    .fa-solid, .fa-gear {
-        transition: transform 0.5s ease;
-    }
+        .fa-gear:hover {
+            transform: rotate(360deg);
+        }
+    </style>
 
-    .fa-solid:hover {
-        transform: rotateY(180deg);
-    }
-
-    .fa-gear:hover {
-        transform: rotate(360deg);
-    }
-</style>
-
-{{--    trang chu --}}
+    {{--    trang chu --}}
     <div class="container">
         <div class="row py-3">
-            <!-- <a href="ahsah.html" class="col-md-4 box">
-          <div
-            class="box-content rounded position-relative"
-            style="background-color: #fff4de"
-          >
-            <div class="content position-absolute">
-              <i
-                class="fa-solid fa-users box-content-icon"
-                style="color: #c09134"
-              ></i>
-              <div class="text-danger box-content-text">
-                <p style="color: #c09134">Thành viên</p>
-              </div>
-            </div>
-          </div>
-        </a> -->
-
-            <!-- Nut cham cong: diem danh theo toa do, thong bao khoang cach cua nhan vien toi van phong -->
-            <a href="/diem-danh" class="col-md-4 box">
-                <div class="box-content rounded position-relative" style="background-color: #ff7d8a">
+            {{--            nut cham cong --}}
+            {{-- diem danh theo toa do: thong bao khoang cach cua nhan vien toi van phong lam viec --}}
+            <a
+                    href="/diem-danh"
+                    class="col-md-4 box"
+                    style="background-color: #ffeed6"
+            >
+                <div class="box-content rounded position-relative">
                     <div class="content position-absolute">
-                        <i class="fa-solid fa-user-clock box-content-icon" style="color: #ffffff"></i>
+                        <i
+                                class="fa-solid fa-users box-content-icon"
+                                style="color: #196e64"
+                        ></i>
                         <div class="text-danger box-content-text">
-                            <p style="color: #ffffff">
+                            <p style="color: #196e64;">
                                 @include('CRMDV.timekeeper.partials.nut_diem_danh_theo_toa_do')
                             </p>
                         </div>
                     </div>
                 </div>
             </a>
-            <!-- Nut phong ban -->
+            {{--            end nut cham cong --}}
+
+            {{--            nut thanh vien --}}
+            {{--            @if(in_array('hradmin_view', $permissions))--}}
+            {{--            <a--}}
+            {{--                    href="/admin/hradmin"--}}
+            {{--                    class="col-md-4 box"--}}
+            {{--                    style="background-color: #b7dad6"--}}
+            {{--            >--}}
+            {{--                <div class="box-content rounded position-relative">--}}
+            {{--                    <div class="content position-absolute">--}}
+            {{--                        <i--}}
+            {{--                                class="fa-solid fa-users box-content-icon"--}}
+            {{--                                style="color: #c09134"--}}
+            {{--                        ></i>--}}
+            {{--                        <div class="text-danger box-content-text">--}}
+            {{--                            <p style="color: #c09134">Thành viên</p>--}}
+            {{--                        </div>--}}
+            {{--                    </div>--}}
+            {{--                </div>--}}
+            {{--            </a>--}}
+            {{--            @endif--}}
+
+            {{--            nut phong ban --}}
             @if(in_array('rooms_view', $permissions))
-                <a href="/admin/rooms" class="col-md-4 box">
-                    <div class="box-content rounded position-relative" style="background-color: #e1f0ff">
+                <a
+                        href="/admin/rooms"
+                        class="col-md-4 box"
+                        style="background-color: #e1f0ff"
+                >
+                    <div class="box-content rounded position-relative">
                         <div class="content position-absolute">
-                            <i class="fa-solid fa-building box-content-icon" style="color: #f067fa"></i>
+                            <i
+                                    class="fa-solid fa-building box-content-icon"
+                                    style="color: #f067fa"
+                            ></i>
                             <div class="text-danger box-content-text">
                                 <p style="color: #f067fa">Phòng ban</p>
                             </div>
@@ -158,12 +174,82 @@
                     </div>
                 </a>
             @endif
-            <!-- nut tai khoan -->
-            @if(in_array('hradmin_view', $permissions))
-                <a href="/admin/admin" class="col-md-4 box">
-                    <div class="box-content rounded position-relative" style="background-color: #b7eed6">
+
+            {{--            nut cham cong --}}
+            <a
+                    href="/admin/rooms"
+                    class="col-md-4 box"
+                    style="background-color: #ff7d8a"
+            >
+                <div class="box-content rounded position-relative">
+                    <div class="content position-absolute">
+                        <i
+                                class="fa-solid fa-building box-content-icon"
+                                style="color: #ffffff"
+                        ></i>
+                        <div class="text-danger box-content-text">
+                            <p style="color: #ffffff">Chấm công</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="row py-3">
+            {{--            nut bang hang --}}
+            @if(in_array('codes_view', $permissions))
+                <a
+                        href="/admin/codes"
+                        class="col-md-4 box"
+                        style="background-color: #c9f7f5"
+                >
+                    <div class="box-content rounded position-relative">
                         <div class="content position-absolute">
-                            <i class="fa-solid fa-user box-content-icon" style="color: #108351"></i>
+                            <i
+                                    class="fa-solid fa-clipboard-list box-content-icon"
+                                    style="color: #33cfc8"
+                            ></i>
+                            <div class="text-danger box-content-text">
+                                <p style="color: #33cfc8">Bảng hàng</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @endif
+
+            {{--            nut bao cao dan khach --}}
+            @if(in_array('bao_cao_dan_khach_view', $permissions))
+                <a
+                        href="/admin/bao_cao_dan_khach"
+                        class="col-md-4 box"
+                        style="background-color: #ffeed6"
+                >
+                    <div class="box-content rounded position-relative">
+                        <div class="content position-absolute">
+                            <i
+                                    class="fa-solid fa-address-book box-content-icon"
+                                    style="color: #ec961d"
+                            ></i>
+                            <div class="text-danger box-content-text">
+                                <p style="color: #ec961d">Báo cáo dẫn khách</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @endif
+
+            {{--            nut tai khoan --}}
+            @if(in_array('hradmin_view', $permissions))
+                <a
+                        href="/admin/admin"
+                        class="col-md-4 box"
+                        style="background-color: #b7eed6"
+                >
+                    <div class="box-content rounded position-relative">
+                        <div class="content position-absolute">
+                            <i
+                                    class="fa-solid fa-user box-content-icon"
+                                    style="color: #108351"
+                            ></i>
                             <div class="text-danger box-content-text">
                                 <p style="color: #108351">Tài khoản</p>
                             </div>
@@ -173,38 +259,19 @@
             @endif
         </div>
         <div class="row py-3">
-            <!-- nut bang hang -->
-            @if(in_array('codes_view', $permissions))
-                <a href="/admin/codes" class="col-md-4 box">
-                    <div class="box-content rounded position-relative" style="background-color: #c9f7f5">
-                        <div class="content position-absolute">
-                            <i class="fa-solid fa-clipboard-list box-content-icon" style="color: #33cfc8"></i>
-                            <div class="text-danger box-content-text">
-                                <p style="color: #33cfc8">Bảng hàng</p>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            @endif
-            <!-- nut bao cao dan khach -->
-            @if(in_array('bao_cao_dan_khach_view', $permissions))
-                <a href="/admin/bao_cao_dan_khach" class="col-md-4 box">
-                    <div class="box-content rounded position-relative" style="background-color: #ffeed6">
-                        <div class="content position-absolute">
-                            <i class="fa-solid fa-address-book box-content-icon" style="color: #ec961d"></i>
-                            <div class="text-danger box-content-text">
-                                <p style="color: #ec961d">Báo cáo dẫn khách</p>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            @endif
-            <!-- nut phan quyen -->
+            {{--            nut phan quyen --}}
             @if(in_array('role_view', $permissions))
-                <a href="/admin/role" class="col-md-4 box">
-                    <div class="box-content rounded position-relative" style="background-color: #b7dad6">
+                <a
+                        href="/admin/role"
+                        class="col-md-4 box"
+                        style="background-color: #b7dad6"
+                >
+                    <div class="box-content rounded position-relative">
                         <div class="content position-absolute">
-                            <i class="fa-solid fa-users-gear box-content-icon" style="color: #196e64"></i>
+                            <i
+                                    class="fa-solid fa-users-gear box-content-icon"
+                                    style="color: #196e64"
+                            ></i>
                             <div class="text-danger box-content-text">
                                 <p style="color: #196e64">Phân quyền</p>
                             </div>
@@ -212,13 +279,20 @@
                     </div>
                 </a>
             @endif
-        </div>
-        <div class="row py-3">
+
+            {{--            nut setting --}}
             @if(in_array('setting', $permissions))
-                <a href="/admin/setting" class="col-md-4 box">
-                    <div class="box-content rounded position-relative" style="background-color: #6b9608">
+                <a
+                        href="/admin/setting"
+                        class="col-md-4 box"
+                        style="background-color: #6b9608"
+                >
+                    <div class="box-content rounded position-relative">
                         <div class="content position-absolute">
-                            <i class="fa-solid fa-gear box-content-icon" style="color: #e6ffac"></i>
+                            <i
+                                    class="fa-solid fa-gear box-content-icon"
+                                    style="color: #e6ffac"
+                            ></i>
                             <div class="text-danger box-content-text">
                                 <p style="color: #e6ffac">Cấu hình chung</p>
                             </div>
@@ -226,20 +300,25 @@
                     </div>
                 </a>
             @endif
-            <!-- Nut he thong -->
-            <!-- <a href="" class="col-md-4 box">
-                <div class="box-content rounded position-relative" style="background-color: #fbbfff">
-                    <div class="content position-absolute">
-                        <i class="fa-solid fa-sliders box-content-icon" style="color: #ee00ff"></i>
-                        <div class="text-danger box-content-text">
-                            <p style="color: #ee00ff">Hệ thống</p>
-                        </div>
-                    </div>
-                </div>
-            </a> -->
+
+            {{--            nut he thong --}}
+            {{--            @if(in_array('setting', $permissions))--}}
+            {{--            <a href="" class="col-md-4 box" style="background-color: #fbbfff">--}}
+            {{--                <div class="box-content rounded position-relative">--}}
+            {{--                    <div class="content position-absolute">--}}
+            {{--                        <i--}}
+            {{--                                class="fa-solid fa-sliders box-content-icon"--}}
+            {{--                                style="color: #ee00ff"--}}
+            {{--                        ></i>--}}
+            {{--                        <div class="text-danger box-content-text">--}}
+            {{--                            <p style="color: #ee00ff">Hệ thống</p>--}}
+            {{--                        </div>--}}
+            {{--                    </div>--}}
+            {{--                </div>--}}
+            {{--            </a>--}}
+            {{--            @endif--}}
         </div>
     </div>
-
 
 @endsection
 @section('custom_head')
@@ -389,8 +468,6 @@
 
 @endsection
 @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 @endpush
