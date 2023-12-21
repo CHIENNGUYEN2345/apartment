@@ -29,7 +29,7 @@ class CodesController extends CURDBaseController
 //            ['name' => 'link', 'type' => 'relation', 'object' => 'bill', 'display_field' => 'name_vi', 'label' => 'Dự án'],
 //            ['name' => 'multi_cat', 'type' => 'custom', 'td' => 'CRMDV.list.td.multi_cat', 'label' => 'Danh mục'],
             ['name' => 'dien_tich', 'type' => 'text', 'label' => 'Diện tích'],
-            ['name' => 'gia_niem_yet', 'type' => 'text', 'label' => 'Giá'],
+            ['name' => 'gia_niem_yet', 'type' => 'price_vi', 'label' => 'Giá'],
             ['name' => 'so_phong_ngu', 'type' => 'number', 'label' => 'Số phòng ngủ'],
             ['name' => 'phi_moi_gioi', 'type' => 'number', 'label' => 'Phí môi giới'],
             ['name' => 'luot_xem', 'type' => 'number', 'label' => 'Lượt xem',],
@@ -187,6 +187,33 @@ class CodesController extends CURDBaseController
 
         if (!is_null($request->get('multi_cat'))) {
             $query = $query->where('multi_cat', 'like', '%|'.$request->multi_cat.'|%');
+        }
+
+   if (strpos($request->url(), '/da-ban') !== false) {
+//  nếu vào trang đã bán thì truy vấn trạng thái đã bán
+            $query = $query->where(function ($query) {
+                $query->orWhereIn('status', ['Đã bán']);
+//                $query->orWhereRaw('status is NULL');
+            });
+
+        } elseif (strpos($request->url(), '/tam-dung') !== false) {
+
+            //  Vào quan tâm mới
+            $query = $query->where(function ($query) {
+                $query->orWhereIn('status', ['Tạm dừng']);
+//                $query->orWhereRaw('status is NULL');
+            });
+        }elseif (strpos($request->url(), '/tat-ca') !== false) {
+
+        }elseif (strpos($request->url(), '/') !== false) {
+
+            //  Vào quan tâm mới
+            $query = $query->where(function ($query) {
+                $query->orWhereIn('status', ['Chưa bán']);
+            });
+        } else {
+
+
         }
 
         return $query;
@@ -447,14 +474,20 @@ class CodesController extends CURDBaseController
         // tăng số lượt xem thêm 1
         $data->luot_xem += 1;
         $data->save();
-
+        $imagePath = asset('/filemanager/userfiles/'.$data->image);
+        $imagePaths = explode('|', $data->image_extra);
+        $fullPaths = array_map(function ($path) {
+            return asset('/filemanager/userfiles/' . $path);
+        }, $imagePaths);
 
         return response()->json([
             'status' => true,
             'data' => $data,
-            'service' => $service
+            'service' => $service,
+            'imagePath' => $imagePath,
+            'imagePaths' => $fullPaths
         ]);
-    }
 
+    }
 
 }

@@ -5,6 +5,7 @@ $diem_danh = \App\CRMDV\Models\Timekeeper::where('may_cham_cong_id', \Auth::guar
 <style>
     #vi_tri_nv_so_voi_vp {
         font-size: 18px;
+        color: #ffffff;
     }
 </style>
 
