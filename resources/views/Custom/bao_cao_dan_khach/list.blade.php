@@ -1,4 +1,4 @@
-@extends(config('core.admin_theme').'.template')
+@extends('Custom.bao_cao_dan_khach.new_header.new_template')
 @section('main')
 
     <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
@@ -16,7 +16,7 @@
                     <div class="kt-portlet__head-wrapper">
                         <div class="">
                             <input type="text" name="quick_search" value="{{ @$_GET['quick_search'] }}"
-                                   class="form-control" title="Chỉ cần enter để thực hiện tìm kiếm"
+                                   class="form-control w-100" title="Chỉ cần enter để thực hiện tìm kiếm"
                                    placeholder="Tìm kiếm nhanh">
                         </div>
                         <div class="kt-portlet__head-actions">
@@ -79,11 +79,24 @@
                                                                                   placeholder="Tìm kiếm nhanh">
                     <div class="row">
 
+                        {{--                        @foreach($filter as $filter_name => $field)--}}
+                        {{--                            <div class="col-sm-6 col-lg-3 kt-margin-b-10-tablet-and-mobile list-filter-item">--}}
+                        {{--                                <label>{{ @trans($field['label']) }}:</label>--}}
+                        {{--                                @include(config('core.admin_theme').'.list.filter.' . $field['type'], ['name' => $filter_name, 'field'  => $field])--}}
+                        {{--                            </div>--}}
+                        {{--                        @endforeach--}}
                         @foreach($filter as $filter_name => $field)
-                            <div class="col-sm-6 col-lg-3 kt-margin-b-10-tablet-and-mobile list-filter-item">
-                                <label>{{ @trans($field['label']) }}:</label>
-                                @include(config('core.admin_theme').'.list.filter.' . $field['type'], ['name' => $filter_name, 'field'  => $field])
-                            </div>
+                            @if($field['type'] == 'custom')
+                                <div class="col-sm-6 col-lg-3 kt-margin-b-10-tablet-and-mobile list-filter-item">
+                                    <label>{{ @$field['label'] }}:</label>
+                                    @include($field['field'], ['name' => $filter_name, 'field'  => $field])
+                                </div>
+                            @else
+                                <div class="col-sm-6 col-lg-3 kt-margin-b-10-tablet-and-mobile list-filter-item">
+                                    <label>{{ @$field['label'] }}:</label>
+                                    @include(config('core.admin_theme').'.list.filter.' . $field['type'], ['name' => $filter_name, 'field'  => $field])
+                                </div>
+                            @endif
                         @endforeach
                     </div>
                     <div class="row">
@@ -117,7 +130,7 @@
                 <!--begin: Datatable -->
                 <div class="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--scroll kt-datatable--loaded"
                      id="scrolling_vertical" style="">
-                    <table class="table table-striped">
+                    <table class="table table-striped text-center">
                         <thead class="kt-datatable__head">
                         <tr class="kt-datatable__row" style="left: 0px;">
                             <th style="display: none;"></th>
@@ -135,22 +148,27 @@
                             @endif
                             @php $count_sort = 0; @endphp
                             @foreach($module['list'] as $field)
-                                <th data-field="{{ $field['name'] }}"
-                                    class="kt-datatable__cell kt-datatable__cell--sort {{ @$_GET['sorts'][$count_sort] != '' ? 'kt-datatable__cell--sorted' : '' }}"
-                                    @if(isset($field['sort']))
-                                    onclick="sort('{{ $field['name'] }}')"
+                                @if (in_array(CommonHelper::getRoleName(\Auth::guard('admin')->user()->id, 'name'), ['cvkd_parttime']) && $field['label'] == 'Sản phẩm')
+                                    <th></th>
+                                @else
+                                    <th data-field="{{ $field['name'] }}"
+                                        class="kt-datatable__cell kt-datatable__cell--sort {{ @$_GET['sorts'][$count_sort] != '' ? 'kt-datatable__cell--sorted' : '' }}"
+                                        @if(isset($field['sort']))
+                                            onclick="sort('{{ $field['name'] }}')"
+                                            @endif
+                                    >
+                                        {{ trans($field['label'])}}
+                                        @if(isset($field['sort']))
+                                            @if(@$_GET['sorts'][$count_sort] == $field['name'].'|asc')
+                                                <i class="flaticon2-arrow-up"></i>
+                                            @else
+                                                <i class="flaticon2-arrow-down"></i>
+                                            @endif
                                         @endif
-                                >
-                                    {{ trans($field['label'])}}
-                                    @if(isset($field['sort']))
-                                        @if(@$_GET['sorts'][$count_sort] == $field['name'].'|asc')
-                                            <i class="flaticon2-arrow-up"></i>
-                                        @else
-                                            <i class="flaticon2-arrow-down"></i>
-                                        @endif
-                                    @endif
 
-                                </th>
+                                    </th>
+                                @endif
+
                                 @php $count_sort++; @endphp
                             @endforeach
                         </tr>
@@ -215,47 +233,49 @@
                 <!--end: Datatable -->
 
 
-
+                {{--    include file pop_up.css--}}
                 {{--    include file pop_up.css--}}
                 <link rel="stylesheet" href="{{ asset('/backend/css/pop_up.css') }}">
                 {{--    include font awesome 5.15.4 --}}
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
                       integrity="..." crossorigin="anonymous">
                 {{--    include Jquery --}}
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+                <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-                <div class="modal fade modal-view-code" tabindex="-1" role="dialog"  aria-hidden="true">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <div class="modal fade modal-view-code" tabindex="-1" role="dialog" aria-hidden="true" id="myModal">
                     <div class="modal-dialog modal-lg">
-                        <div class="modal-content" style="width: 1200px; margin-left: -200px">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Xem bảng hàng</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                            </div>
+                        <div class="modal-content">
+                            {{--                            <div class="modal-header">--}}
+                            {{--                                <h4 class="modal-title">Xem bảng hàng</h4>--}}
+                            {{--                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>--}}
+                            {{--                            </div>--}}
                             <div class="modal-body">
                                 <!-- Carousel -->
                                 <div class="container main">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 col-12">
                                             <div class="slider">
                                                 <div class="slider__main">
-                                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                                        <div id="myCarousel" class="carousel-inner" style="height: 600px">
-                                                            <!-- Slides will be dynamically added here -->
+                                                    <div
+                                                            style="
+                          --swiper-navigation-color: #fff;
+                          --swiper-pagination-color: #fff;
+                        "
+                                                            class="swiper mySwiper2"
+                                                    >
+                                                        <div class="swiper-wrapper"
+                                                             style="height: 540px;padding-bottom: 16px">
+
                                                         </div>
-
-                                                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                                                           data-slide="prev">
-                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                            <span class="sr-only">Previous</span>
-                                                        </a>
-                                                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                                                           data-slide="next">
-                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                            <span class="sr-only">Next</span>
-                                                        </a>
+                                                        <div class="swiper-button-next"></div>
+                                                        <div class="swiper-button-prev"></div>
                                                     </div>
+                                                    <div thumbsSlider="" class="swiper mySwiper">
+                                                        <div class="swiper-wrapper">
 
-                                                    <div class="row mt-4 slide-image">
+                                                        </div>
                                                     </div>
 
 
@@ -263,26 +283,40 @@
 
                                                 <p class="slider__name">
                                                     <!-- Trường address trong bảng Codes -->
-                                                    <span class="address"></span>
+
+                                                    <i class="fas fa-map-marker-alt fs-2"></i>
+                                                    @if (!in_array(CommonHelper::getRoleName(\Auth::guard('admin')->user()->id, 'name'), ['cvkd_parttime']))
+                                                        <span class="address"
+                                                              style="color: #2d1c32;font-weight: bold;"></span> -
+                                                    @endif
+                                                    <span class="du_an"
+                                                          style="color: #2d1c32;font-weight: bold;"></span> -
+                                                    <span class="duong"
+                                                          style="color: #2d1c32;font-weight: bold;"></span>
                                                 </p>
                                             </div>
                                             <div class="info">
+                                                <div class="box-price d-flex">
+                                                    <div class="info__price mr-2" style="background-color: #0abb87">
+                                                        <span class="price_title">HH:</span>
+                                                        <span class="info__price__number">
+                                          <!-- Hoa hồng -->
+                                          <span class="phi_moi_gioi"></span>
+                                        </span>
+                                                    </div>
+                                                    <div class="info__price">
+                                                        <span class="price_title">Giá bán:</span>
+                                                        <span class="info__price__number">
+                                          <!-- Giá bán -->
+                                          <span class="price_setup"></span>
+                                        </span>
+                                                    </div>
+                                                </div>
+
+
                                                 <div class="info__main d-flex justify-content-between align-items-center">
                                                     <div class="info__left">
-                                                        <div class="info__left__top d-flex justify-content-between align-items-center">
-                                                            <a href="" class="info__no">
-                                                                <!-- trường id trong bảng Codes -->
-                                                                <span class="id"></span>
-                                                            </a>
-                                                            <a id="bao-cao-dan-khach" href="#" class="info__baocao d-flex align-items-center justify-content-center text-white p-2">
-                                                                <i class="fas fa-address-book"></i>
-                                                                Báo cáo dẫn khách
-                                                            </a>
-                                                            <a href="" class="info__copy d-flex align-items-center justify-content-center text-white p-2">
-                                                                <i class="far fa-copy"></i>
-                                                                Copy link
-                                                            </a>
-                                                        </div>
+
                                                         <div class="info__left__bottom d-flex justify-content-between align-items-center pt-4">
                                                             <div class="info__room d-flex align-items-center justify-content-center gap-3">
                                                                 <div
@@ -293,7 +327,7 @@
 
                                                                     <span class="info__number">
                               <!-- trường diện tích -->
-                              <span class="dien_tich"></span>
+                              <span class="dien_tich"></span>m<sup>2</sup>
                             </span>
                                                                 </div>
                                                                 <div
@@ -313,12 +347,12 @@
                             </span>
                                                                     <span class="info__number">
                               <!-- trường số nhà vệ sinh -->
-                              <span class="so_nha_ve_sinh"></span> WC
+                              <span class="so_nha_ve_sinh">2</span> WC
                             </span>
                                                                 </div>
                                                             </div>
                                                             <div class="info__day">
-                                                                <span><b>Ngày tạo:</b></span><br />
+                                                                <span><b>Ngày tạo:</b></span><br/>
                                                                 <i class="far fa-clock"></i>
                                                                 <span class="info__time">
                             <!-- Ngày tạo -->
@@ -328,18 +362,21 @@
                                                         </div>
                                                     </div>
                                                     <div class="info__right d-flex flex-column gap-4 pt-4 ps-4">
-                                                        <div class="info__price">
-                                                            <span>Giá bán:</span><br />
-                                                            <span class="info__price__number">
-                          <!-- Giá bán -->
-                          <span class="price_setup"></span>
-                        </span>
+                                                        <div class="info__left__top d-flex align-items-end">
+                                                            <div
+                                                                    class="btn bg-success d-flex align-items-center justify-content-center text-white p-3 fs-3 text-uppercase bao-cao"
+                                                                    style="font-size: 20px; font-weight: bold">
+                                                                <i class="fas fa-solid fa-file-code"
+                                                                   style="padding-right: 15px"></i> <span
+                                                                        class="ma_tin"></span>
+                                                            </div>
+                                                            <a href="{{url('/admin/bao_cao_dan_khach/add')}}"
+                                                               class="btn info__baocao d-flex align-items-center justify-content-center text-white p-3 fs-3 text-uppercase bao-cao"
+                                                               style="font-size: 20px; font-weight: bold">
+                                                                <i class="fas fa-address-book"></i>
+                                                                Báo cáo dẫn khách
+                                                            </a>
                                                         </div>
-                                                        <a href=""
-                                                           class="info__home bg-primary text-white d-flex align-items-center justify-content-center p-2">
-                                                            <i class="fas fa-house-user"></i>
-                                                            <b>Xem nhà</b>
-                                                        </a>
                                                     </div>
                                                 </div>
 
@@ -349,12 +386,9 @@
                                                 <div class="border__1"></div>
                                                 <div class="border__2"></div>
                                                 <div class="info__mota__list">
-                                                    <!-- Giá bán -->
-                                                    <b>Giá:</b> <p class="price_setup"></p>
-                                                    <!-- phí môi giới  -->
-                                                    <b>Phí môi giới:</b> <p class="phi_moi_gioi"></p>
                                                     <!-- Nội dung chi tiết: trường content -->
-                                                    <b>Nội dung chi tiết:</b> <p class="content"></p>
+                                                    <b class="h5">Nội dung chi tiết:</b>
+                                                    <p class="content"></p>
                                                 </div>
                                             </div>
                                             <div class="info__chitiet">
@@ -370,7 +404,9 @@
                                                             <span>Loại hình</span>
                                                         </div>
                                                         <!-- loại hình -->
-                                                        <div class="info__chitiet__dataInfo"><span class="loai_hinh">ggg</span></div>
+                                                        <div class="info__chitiet__dataInfo"><span
+                                                                    class="loai_hinh  text-primary"></span>
+                                                        </div>
                                                         <!--  -->
                                                     </div>
                                                     <div class="info__chitiet__data d-flex justify-content-between align-items-center">
@@ -381,29 +417,9 @@
                                                             <span>Loại nhà đất</span>
                                                         </div>
                                                         <!-- loại nhà đất -->
-                                                        <div class="info__chitiet__dataInfo"><span class="loai_nha_dat"></span></div>
-                                                        <!--  -->
-                                                    </div>
-                                                    <div class="info__chitiet__data d-flex justify-content-between align-items-center">
-                                                        <div class="info__chitiet__dataName d-flex justify-content-between align-items-center">
-                                                            <div class="info__chitiet__image">
-                                                                <i class="fas fa-building"></i>
-                                                            </div>
-                                                            <span>Dự án</span>
+                                                        <div class="info__chitiet__dataInfo"><span
+                                                                    class="loai_nha_dat text-primary"></span>
                                                         </div>
-                                                        <!-- dự án -->
-                                                        <div class="info__chitiet__dataInfo"><span class="du_an"></span></div>
-                                                        <!--  -->
-                                                    </div>
-                                                    <div class="info__chitiet__data d-flex justify-content-between align-items-center">
-                                                        <div class="info__chitiet__dataName d-flex justify-content-between align-items-center">
-                                                            <div class="info__chitiet__image">
-                                                                <i class="fas fa-map-marker-alt"></i>
-                                                            </div>
-                                                            <span>Địa chỉ</span>
-                                                        </div>
-                                                        <!-- address -->
-                                                        <div class="info__chitiet__dataInfo"><span class="address"></span></div>
                                                         <!--  -->
                                                     </div>
                                                     <div class="info__chitiet__data d-flex justify-content-between align-items-center">
@@ -414,31 +430,11 @@
                                                             <span>Diện tích</span>
                                                         </div>
                                                         <!-- dien tich -->
-                                                        <div class="info__chitiet__dataInfo"><span class="dien_tich"></span></div>
+                                                        <div class="info__chitiet__dataInfo"><span
+                                                                    class="dien_tich text-primary"></span>m<sup>2</sup></div>
                                                         <!--  -->
                                                     </div>
-                                                    <div class="info__chitiet__data d-flex justify-content-between align-items-center">
-                                                        <div class="info__chitiet__dataName d-flex justify-content-between align-items-center">
-                                                            <div class="info__chitiet__image">
-                                                                <i class="far fa-square"></i>
-                                                            </div>
-                                                            <span>Mặt tiền</span>
-                                                        </div>
-                                                        <!-- Mặt tiền -->
-                                                        <div class="info__chitiet__dataInfo"><span class="mat_tien"></span></div>
-                                                        <!--  -->
-                                                    </div>
-                                                    <div class="info__chitiet__data d-flex justify-content-between align-items-center">
-                                                        <div class="info__chitiet__dataName d-flex justify-content-between align-items-center">
-                                                            <div class="info__chitiet__image">
-                                                                <i class="far fa-building"></i>
-                                                            </div>
-                                                            <span>Số tầng</span>
-                                                        </div>
-                                                        <!-- Số tầng -->
-                                                        <div class="info__chitiet__dataInfo"><span class="so_tang"></span></div>
-                                                        <!--  -->
-                                                    </div>
+
                                                     <div class="info__chitiet__data d-flex justify-content-between align-items-center">
                                                         <div class="info__chitiet__dataName d-flex justify-content-between align-items-center">
                                                             <div class="info__chitiet__image">
@@ -447,29 +443,9 @@
                                                             <span>Phí môi giới</span>
                                                         </div>
                                                         <!-- Phí môi giới -->
-                                                        <div class="info__chitiet__dataInfo"><span class="phi_moi_gioi"></span></div>
-                                                        <!--  -->
-                                                    </div>
-                                                    <div class="info__chitiet__data d-flex justify-content-between align-items-center">
-                                                        <div class="info__chitiet__dataName d-flex justify-content-between align-items-center">
-                                                            <div class="info__chitiet__image">
-                                                                <i class="fas fa-building"></i>
-                                                            </div>
-                                                            <span>Toà</span>
+                                                        <div class="info__chitiet__dataInfo"><span
+                                                                    class="phi_moi_gioi text-primary"></span>
                                                         </div>
-                                                        <!-- Toà -->
-                                                        <div class="info__chitiet__dataInfo"><span class="toa"></span></div>
-                                                        <!--  -->
-                                                    </div>
-                                                    <div class="info__chitiet__data d-flex justify-content-between align-items-center">
-                                                        <div class="info__chitiet__dataName d-flex justify-content-between align-items-center">
-                                                            <div class="info__chitiet__image">
-                                                                <i class="fas fa-building"></i>
-                                                            </div>
-                                                            <span>Tầng</span>
-                                                        </div>
-                                                        <!-- Tầng -->
-                                                        <div class="info__chitiet__dataInfo"><span class="tang"></span></div>
                                                         <!--  -->
                                                     </div>
                                                     <div class="info__chitiet__data d-flex justify-content-between align-items-center">
@@ -480,7 +456,8 @@
                                                             <span>Khoảng tầng</span>
                                                         </div>
                                                         <!-- Khoảng tầng -->
-                                                        <div class="info__chitiet__dataInfo"><span class="khoang_tang"></span></div>
+                                                        <div class="info__chitiet__dataInfo"><span
+                                                                    class="khoang_tang text-primary"></span></div>
                                                         <!--  -->
                                                     </div>
                                                     <div class="info__chitiet__data d-flex justify-content-between align-items-center">
@@ -491,185 +468,669 @@
                                                             <span>Số phòng ngủ</span>
                                                         </div>
                                                         <!-- Số phòng ngủ -->
-                                                        <div class="info__chitiet__dataInfo"><span class="so_phong_ngu"></span></div>
+                                                        <div class="info__chitiet__dataInfo"><span
+                                                                    class="so_phong_ngu text-primary"></span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            {{--                                DIV THÔNG TIN LIÊN HỆ ĐẦU CHỦ--}}
                                             <div class="name">
-                                                <p class="info__text">Thông tin liên hệ</p>
+                                                <p class="info__text">Thông tin liên hệ đầu chủ</p>
                                                 <div class="border__1"></div>
                                                 <div class="border__2"></div>
-                                                <div class="name__div d-flex justify-content-around">
-                                                    <div class="name__image d-flex align-items-center">
-                                                        <img src="https://cdn-icons-png.flaticon.com/512/219/219983.png" width="100" height="100" alt=""
+                                                <div class="name__div d-flex justify-content-around row  my-5">
+                                                    <div class="name__image d-flex align-items-center col-md-7">
+                                                        <img src=""
+                                                             width="100"
+                                                             height="100" alt=""
+                                                             srcset="" class="anhDauChu">
+                                                        <!-- Họ tên đầu chủ, trường intro -->
+                                                        <span class="name__text intro_owner h2"></span>
+                                                    </div>
+
+
+                                                    <div class="name__info d-flex flex-column col-md-5">
+                                      <span class="contact">
+                                          <i class="fas fa-envelope h5 icon-contact"></i>
+                                          <!-- Địa chỉ -->
+                                        <span class="email_owner h5 ml-2 text-primary"></span>
+                                      </span>
+                                                        <!-- sđt -->
+                                                        <span class="contact">
+                                            <i class="fas fa-mobile-alt h5 icon-contact"></i>
+                                            <span class="phone_owner h5 ml-2 text-primary"></span>
+                                          </span>
+
+
+                                                        <span class="contact">
+                                        <i class="fas fa-house-user h5 icon-contact"></i>
+                                                            <!-- trường sdt_chu_nha -->
+                                            <span class="room_owner h5 ml-2 text-primary"></span>
+                                          </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="price d-flex align-items-center justify-content-around">
+                                                <div class="price__left d-flex align-items-center">
+                                                    <p>Giá bán:</p>
+                                                    <p class="price__number">
+                                                        <span class="price_setup"></span>
+                                                    </p>
+                                                </div>
+                                                <div class="price__button d-flex align-items-center">
+                                                    <div class="price__image">
+                                                        <div class="price__logo d-flex align-items-center justify-content-center">
+                                                            <div class="price__logo2 d-flex align-items-center justify-content-center"
+                                                                 data-dismiss="modal" aria-label="Close"
+                                                                 style="cursor: pointer">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" height="16"
+                                                                     width="16"
+                                                                     viewBox="0 0 448 512">
+                                                                    <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                                                    <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a id="bao-cao" href="{{url('/admin/bao_cao_dan_khach/add')}}"
+                                                       class="price__right bao-cao">
+                                                        Báo cáo dẫn khách
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            {{--                                END DIV THÔNG TIN LIÊN HỆ ĐẦU CHỦ --}}
+
+                                            {{--                                DIV THÔNG TIN LIÊN HỆ CHỦ NHÀ --}}
+
+                                            <div class="name" id="contactInfo">
+
+                                                <p class="info__text">Thông tin liên hệ chủ nhà</p>
+                                                <div class="border__1"></div>
+                                                <div class="border__2"></div>
+                                                <div class="name__div d-flex justify-content-around row">
+                                                    <div class="name__image d-flex align-items-center col-md-7">
+                                                        <img src="https://cdn-icons-png.flaticon.com/512/219/219983.png"
+                                                             width="100"
+                                                             height="100" alt=""
                                                              srcset="">
                                                         <!-- Họ tên chủ nhà, trường intro -->
-                                                        <span class="name__text intro"></span>
+                                                        <span class="name__text intro h2"></span>
                                                     </div>
-                                                    <div class="name__info d-flex flex-column">
-                      <span>
-                        <i class="fas fa-map-marker-alt"></i>
+                                                    <div class="name__info d-flex flex-column col-md-5">
+                      <span class="contact">
+                        <i class="fas fa-map-marker-alt h5 icon-contact"></i>
                           <!-- Địa chỉ trên sổ, trường dia_chi_tren_so -->
-                        <span class="dia_chi_tren_so"></span>
+                        <span class="dia_chi_tren_so h5 ml-2 text-primary"></span>
                       </span>
                                                         <!-- sđt -->
-                                                        <span>
-                        <i class="fas fa-mobile-alt"></i>
+                                                        <span class="contact">
+                        <i class="fas fa-mobile-alt h5 icon-contact"></i>
                                                             <!-- trường sdt_chu_nha -->
-                        <span class="sdt_chu_nha"></span>
+                        <span class="sdt_chu_nha h5 ml-2 text-primary"></span>
                       </span>
                                                         <!-- trường số giấy chứng nhận (đang hiện trên frontend: số seri sổ) -->
-                                                        <span>
-                        Số seri: <span class="so_giay_chung_nhan"></span>
+                                                        <span class="h5">
+                        Số seri: <span class="so_giay_chung_nhan h5  text-primary"></span>
                       </span>
                                                         <!-- trường seri (đang hiện trên frontend: số hợp đồng mua bán)  -->
-                                                        <span>
-                        Số giấy chứng nhận: <span class="seri"></span>
+                                                        <span class="h5">
+                        Số giấy chứng nhận: <span class="seri  text-primary"></span>
                       </span>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                                <div class="row imageRedBooks my-5">
+                                                    <p class="imglist">
 
-                                    </div>
-
-                                </div>
-                                <div class="price d-flex align-items-center justify-content-around">
-                                    <div class="price__left d-flex align-items-center">
-                                        <p>Giá bán:</p>
-                                        <p class="price__number">
-                                            <span class="price_setup"></span>
-                                        </p>
-                                    </div>
-                                    <div class="price__button d-flex align-items-center">
-                                        <div class="price__image">
-                                            <div class="price__logo d-flex align-items-center justify-content-center">
-                                                <div class="price__logo2 d-flex align-items-center justify-content-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
-                                                         viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                                                        <path
-                                                                d="M96 0C60.7 0 32 28.7 32 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H96zM208 288h64c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16H144c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM512 80c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V80zM496 192c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm16 144c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V336z" />
-                                                    </svg>
+                                                    </p>
                                                 </div>
                                             </div>
+                                            {{--                                END DIV THÔNG TIN LIÊN HỆ CHỦ NHÀ--}}
+
                                         </div>
-                                        <a href="" class="price__right">
-                                            Báo cáo dẫn khách
-                                        </a>
+
                                     </div>
+
                                 </div>
+
                                 <!-- End Carousel -->
                             </div>
                         </div>
                     </div>
                 </div>
-@endsection
 
-@section('custom_head')
-    <link type="text/css" rel="stylesheet" charset="UTF-8"
-          href="{{ asset(config('core.admin_asset').'/css/list.css') }}">
+                @endsection
 
-    {{--    <link type="text/css" rel="stylesheet" charset="UTF-8" href="{{ asset('Modules\WebService\Resources\assets\css\custom.css') }}">--}}
-    {{--    <script src="{{asset('Modules\WebService\Resources\assets\js\custom.js')}}"></script>--}}
-@endsection
-@section('custom_footer')
-    <script src="{{ asset(config('core.admin_asset').'/js/pages/crud/metronic-datatable/advanced/vertical.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ asset(config('core.admin_asset').'/js/list.js') }}"></script>
-    @include(config('core.admin_theme').'.partials.js_common')
-@endsection
-@push('scripts')
-    @include(config('core.admin_theme').'.partials.js_common_list')
+                @section('custom_head')
+                    <link
+                            rel="stylesheet"
+                            href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"
+                    />
+                    <link type="text/css" rel="stylesheet" charset="UTF-8"
+                          href="{{ asset(config('core.admin_asset').'/css/list.css') }}">
+
+                    <style>
+                        .modal-content {
+                            width: 900px;
+                            margin: auto;
+                        }
+
+                        .item-id button {
+                            width: 150px;
+                        }
+
+                        .btn-view {
+                            text-align: start;
+                        }
+
+                        .modal-content {
+                            width: 900px;
+                            margin: auto;
+                        }
+
+                        .item-address {
+                            width: 270px;
+                            text-align: start !important;
+                        }
+
+                        .info__day {
+                            padding-left: 24px;
+                        }
+                        .baocao {
+                            text-align: start;
+                            width: 220px;
+                        }
+
+                        @media (max-width: 991.98px) {
+                            .modal-dialog {
+                                margin: 0;
+                            }
+
+                            .modal-content {
+                                max-width: 150% !important;
+                                margin: 50px 33px;
+                            }
+                        }
+
+                        @media (max-width: 435px) {
+                            .file_image_thumb {
+                                height: 100px !important;
+                            }
+
+                            .box-price {
+                                justify-content: space-between;
+                                align-items: center;
+                            }
+
+                            .box-active {
+                                text-align: center;
+                            }
+
+                            .item-address {
+                                text-align: start !important;
+                            }
+
+                            .item-address button {
+                                width: 150px;
+                            }
+
+                            .btn-view {
+                                text-align: start;
+                            }
+
+                            .item-hanh_dong {
+                                width: 150px;
+                                display: flex;
+                                flex-direction: column;
+                            }
+
+
+                            .modal-content {
+                                width: 100%;
+                                margin: auto;
+                            }
+
+                            .swiper-slide.image-small {
+                                height: 83px !important;
+                            }
+
+                            .swiper-wrapper.swiper.mySwiper2 {
+                                padding-bottom: 13px;
+                            }
+
+                            .swiper.mySwiper.swiper-initialized,
+                            .swiper-slide.image-small img {
+                                height: 83px !important;
+                            }
+
+                            .swiper-wrapper {
+                                height: 540px !important;
+                                padding-bottom: 16px;
+                            }
+
+                            .swiper.mySwiper2.swiper-initialized.swiper-horizontal.swiper-ios.swiper-backface-hidden {
+                                height: 300px !important;
+                                margin-bottom: 10px;
+                            }
+
+                            .slider__main {
+                                width: 100% !important;
+                                height: 100% !important;
+
+                            }
+
+
+                            .modal.modal-view-code {
+                                padding-bottom: 50px !important;
+                            }
+
+                            .modal-body {
+                                padding: 0;
+                            }
+                            .info__price {
+                                width: 48% !important;
+                            }
+
+                            .info__price__number span {
+                                font-size: 22px !important;
+                            }
+
+
+                            .price_title {
+                                font-size: 17px !important;
+                            }
+
+                            .info__main {
+                                display: flex;
+                                flex-direction: column;
+                                align-items: normal;
+                            }
+
+
+                            .info__right {
+                                width: 100% !important;
+                            }
+
+                            .info__left {
+                                width: 100%;
+
+                            }
+
+                            .fa-file-code {
+                                padding-right: 0
+                            }
+
+                            .info__left__top {
+                                display: flex;
+                                justify-content: space-between;
+                                gap: 0 !important;
+                            }
+
+                            .info__price__number {
+                                font-size: 25px !important;
+                            }
+
+                            .info__day span b {
+
+                                font-size: 17px !important;
+                            }
+
+                            /*.info__time {*/
+                            /*    font-size: 15px !important;*/
+                            /*}*/
+                            .info__main {
+                                gap: 0px !important;
+                            }
+
+                            .info__number {
+                                width: 40px !important;
+                            }
+
+                            .info__chitiet__list {
+                                grid-gap: 18px !important;
+                            }
+
+                            .swiper-slide.swiper-slide-active img {
+                                width: 100%;
+                                height: 500px;
+                            }
+
+                            .price__number {
+                                font-size: 28px !important;
+                                margin-left: 20px !important;
+                            }
+
+                            .name__image.d-flex.align-items-center.col-md-7 {
+                                justify-content: flex-start !important;
+                                padding: 0 10px
+                            }
+
+                            .name__info.col-md-5 {
+                                padding-left: 30px;
+                                padding-top: 16px;
+                            }
+
+                            .contact {
+                                padding: 5px 0;
+                            }
+
+                            .icon-contact {
+                                width: 20px;
+                                text-align: center;
+                            }
+
+                            .info__room {
+                                gap: 9px !important;
+                                text-align: center;
+                            }
+
+                            .price {
+
+                                position: fixed;
+                                bottom: 0;
+                                right: 0;
+                                left: 0;
+                                z-index: 999;
+
+                            }
+                            .image-redbook {
+                                width: 100px !important;
+
+                                height: 70px !important;
+                            }
+                            .box-imageRed.col-3{
+                                max-width: 100%;
+                                flex: none;
+                            }
+                            .baocao {
+                                text-align: start;
+                                width: 120px;
+                            }
+                        }
+
+                    </style>
+                    {{--    <link type="text/css" rel="stylesheet" charset="UTF-8" href="{{ asset('Modules\WebService\Resources\assets\css\custom.css') }}">--}}
+                    {{--    <script src="{{asset('Modules\WebService\Resources\assets\js\custom.js')}}"></script>--}}
+                @endsection
+                @section('custom_footer')
+                    <script src="{{ asset(config('core.admin_asset').'/js/pages/crud/metronic-datatable/advanced/vertical.js') }}"
+                            type="text/javascript"></script>
+                    <script src="{{ asset(config('core.admin_asset').'/js/list.js') }}"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+                    @include(config('core.admin_theme').'.partials.js_common')
+                @endsection
+                @push('scripts')
                     <script>
-                        $(document).ready(function (){
-                            $('.btn-view').click(function (){
-                                var id = $(this).data('id');
+                        var swiper = new Swiper(".mySwiper", {
+                            spaceBetween: 10,
+                            slidesPerView: 4,
+                            freeMode: true,
+                            watchSlidesProgress: true,
+                        });
+                        var swiper2 = new Swiper(".mySwiper2", {
+                            spaceBetween: 10,
+                            navigation: {
+                                nextEl: ".swiper-button-next",
+                                prevEl: ".swiper-button-prev",
+                            },
+                            thumbs: {
+                                swiper: swiper,
+                            },
+                        });
+                    </script>
+                    @include(config('core.admin_theme').'.partials.js_common_list')
+
+                    <script>
+                        $(document).ready(function () {
+
+                            function loadAjaxModal(id) {
+                                var luot_xem = $('[data-row="' + id + '"][data-field="luot_xem"]');
+                                var newUrl = window.location.href + '?id=' + id;
+                                var baseUrl = window.location.origin + "/admin/bao_cao_dan_khach";
+
+                                var getID = new URLSearchParams(window.location.search).get('id');
+                                if (getID == null) {
+                                    var newUrl = baseUrl + (baseUrl.includes('?') ? '&' : '?') + 'id=' + id;
+                                    console.log(newUrl);
+                                } else {
+                                    var newUrl = window.location.origin + "/admin/bao_cao_dan_khach" + '?id=' + id;
+                                    console.log(newUrl);
+                                }
+
                                 $.ajax({
                                     url: '/admin/bao_cao_dan_khach/ajax-get-info/' + id,
                                     type: 'GET',
-                                    success: function (res){
+                                    success: function (res) {
                                         var response = res.data;
                                         console.log(response)
-                                        console.log(res.imagePath)
+                                        console.log(res.show);
+                                        if (res.show) {
+                                            $('#contactInfo').show();
+                                        } else {
+                                            $('#contactInfo').hide();
+                                        }
+                                        $('.email_owner').html(res.dauchu.email);
+                                        $('.intro_owner').html(res.dauchu.name);
+                                        $('.phone_owner').html(res.dauchu.tel);
+                                        $('.room_owner').html(res.phongban.name);
+
+
                                         $('.modal-view-code').modal('show');
                                         $('.loai_hinh').html(response.loai_hinh);
+                                        $('.ma_tin').html(response.id);
                                         $('.loai_nha_dat').html(response.loai_nha_dat);
                                         $('.du_an').html(res.service);
-                                        $('#bao-cao-dan-khach').attr('href', '/admin/bao_cao_dan_khach/add?code_id=' + response.id);
-                                        if(response.image == null){
+                                        $('.bao-cao').attr('href', '/admin/bao_cao_dan_khach/add?code_id=' + response.id);
+                                        if (response.image == null) {
                                             $('.image').attr('src', 'https://sehouse.khoweb.top/filemanager/userfiles/_thumbs/se-house-logo-100x.jpg');
-                                        }else{
+                                        } else {
                                             $('.image').attr('src', response.image);
                                         }
-
-                                        if(response.image_extra == null){
+                                        if (res.anhDauChu) {
+                                            $('.anhDauChu').attr('src', res.anhDauChu);
+                                        } else {
+                                            $('.anhDauChu').attr('src', 'https://cdn-icons-png.flaticon.com/512/219/219983.png');
+                                        }
+                                        if (response.image_extra == null) {
                                             $('.image_extra').html('<img src="https://sehouse.khoweb.top/filemanager/userfiles/_thumbs/se-house-logo-100x.jpg" alt="" class="image_extra" style="width: 100px;height: 100px;">');
-                                        }else{
+                                        } else {
                                             var image_extra = response.image_extra.split('|');
                                             var html = '';
-                                            for(var i = 0; i < image_extra.length; i++){
-                                                html += '<img src="https://sehouse.khoweb.top/filemanager/userfiles/'+ image_extra[i] +'" alt="" class="image_extra" style="width: 100px;height: 100px;">';
+                                            for (var i = 0; i < image_extra.length; i++) {
+                                                html += '<img src="https://sehouse.khoweb.top/filemanager/userfiles/' + image_extra[i] + '" alt="" class="image_extra" style="width: 100px;height: 100px;">';
                                             }
                                             $('.image_extra').html(html);
                                         }
                                         $('.address').html(response.address);
+                                        $('.duong').html(response.duong);
                                         $('.intro').html(response.intro);
                                         $('.sdt_chu_nha').html(response.sdt_chu_nha);
                                         $('.so_giay_chung_nhan').html(response.so_giay_chung_nhan);
-                                        $('.row_id'+response.id+' .item-luot_xem').html(response.luot_xem);
-                                        // $('.gia_ha_chao').html(response.gia_ha_chao);
-                                        // $('.gia_ha_chao').html(formatPrice(response.gia_ha_chao));
+                                        $('.row_id' + response.id + ' .item-luot_xem').html(response.luot_xem);
                                         $('.gia_ha_chao').html(formatValue(response.gia_ha_chao));
-                                        // $('.price_setup').html(formatPrice(response.gia_niem_yet));
                                         $('.price_setup').html(formatValue(response.gia_niem_yet));
                                         $('.dien_tich').html(response.dien_tich);
                                         $('.mat_tien').html(response.mat_tien);
                                         $('.so_tang').html(response.so_tang);
-                                        $('.phi_moi_gioi').html(response.phi_moi_gioi);
-                                        $('.toa').html(response.toa);
-                                        $('.tang').html(response.tang);
+                                        $('.phi_moi_gioi').html(formatValue(response.phi_moi_gioi));
+
                                         $('.khoang_tang').html(response.khoang_tang);
                                         $('.so_phong_ngu').html(response.so_phong_ngu);
                                         $('.content').html(response.content);
+                                        $('.created_at').html(response.created_at);
+
                                         $('.dia_chi_tren_so').html(response.dia_chi_tren_so);
                                         $('.img-main').attr('src', res.imagePath);
-                                        // Update the main slide
-                                        $('#myCarousel').empty().append(
-                                            '<div class="carousel-item active">' +
-                                            '<img class="d-block w-100" src="' + res.imagePath + '" alt="Main Slide">' +
-                                            '</div>'
-                                        );
+                                        $('.info__copy').val(newUrl);
+                                        console.log(res.imagePaths);
 
-                                        // Add additional slides
+                                        $('.mySwiper2 .swiper-wrapper').empty();
+
+                                        $('.mySwiper .swiper-wrapper').empty();
+
                                         $.each(res.imagePaths, function (index, path) {
-                                            $('#myCarousel').append(
-                                                '<div class="carousel-item">' +
-                                                '<img class="d-block w-100" src="' + path + '" alt="Slide ' + (index + 1) + '">' +
+                                            $('.mySwiper2 .swiper-wrapper').append(
+                                                '<div class="swiper-slide">' +
+                                                '<img src="' + path + '" alt="Slide ' + (index + 1) + '">' +
                                                 '</div>'
                                             );
                                         });
+
+                                        $.each(res.imagePaths, function (index, path) {
+                                            $('.mySwiper .swiper-wrapper').append(
+                                                '<div class="swiper-slide image-small">' +
+                                                '<img src="' + path + '" alt="Thumb ' + (index + 1) + '">' +
+                                                '</div>'
+                                            );
+                                        });
+
+                                        var imageRedBooksContainer = $('.imglist');
+                                        imageRedBooksContainer.empty();
+                                        console.log(res.imageRedBooks);
+
+                                        res.imageRedBooks.forEach(function (path) {
+                                            var html =
+                                                '<a href="' + path + '" data-fancybox="group" data-caption="Image caption" class="col-md-3 col-3 box-imageRed" >' +
+                                                '<img src="' + path + '" class="image-redbook py-2" style="cursor: pointer;height: 200px;width: auto">' +
+                                                '</a>';
+                                            imageRedBooksContainer.append(html);
+                                        });
+
+                                        // Initialize Fancybox on the entire .imglist container
+                                        $("[data-fancybox]").fancybox({
+                                            buttons: ["close"],
+                                            wheel: false,
+                                            transitionEffect: "slide",
+                                            loop: true,
+                                            toolbar: false,
+                                            clickContent: false,
+                                        });
+
+                                        var mySwiper2 = new Swiper('.mySwiper2', {
+                                            navigation: {
+                                                nextEl: '.swiper-button-next',
+                                                prevEl: '.swiper-button-prev',
+                                            },
+                                            pagination: {
+                                                el: '.swiper-pagination',
+                                                clickable: true,
+                                            },
+                                        });
+
+                                        var mySwiper = new Swiper('.mySwiper', {
+                                            slidesPerView: 5,
+                                            spaceBetween: 10,
+                                            navigation: {
+                                                nextEl: '.swiper-button-next',
+                                                prevEl: '.swiper-button-prev',
+                                            },
+                                            breakpoints: {
+                                                640: {
+                                                    slidesPerView: 2,
+                                                    spaceBetween: 5,
+                                                },
+                                                768: {
+                                                    slidesPerView: 4,
+                                                    spaceBetween: 10,
+                                                },
+                                            },
+                                        });
+
+                                        mySwiper2.controller.control = mySwiper;
+                                        mySwiper.controller.control = mySwiper2;
+
+
                                     }
                                 });
+
+                            }
+
+                            $('.btn-view').click(function () {
+                                var id = $(this).data('id')
+                                loadAjaxModal(id)
+                                window.history.pushState("object or string", "Title", newUrl);
+                                $("#myModal").modal("show");
+
                             });
+
                             function formatPrice(price) {
-                                // Định dạng số tiền theo kiểu tiền tệ, ví dụ: 1,000,000 đ
-                                return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+                                return new Intl.NumberFormat('vi-VN', {
+                                    style: 'currency',
+                                    currency: 'VND'
+                                }).format(price);
                             }
 
                             function formatValue(inputValue) {
-                                if (!isNaN(inputValue)) {
-                                    if (inputValue >= 1000000000) {
-                                        return (inputValue / 1000000000) + ' tỷ';
-                                    } else if (inputValue >= 1000000) {
-                                        return (inputValue / 1000000) + ' triệu';
-                                    } else {
-                                        return number_format(inputValue, 0, '.', ',') + ' đ';
-                                    }
+                                if (inputValue >= 1000000000) {
+                                    return (inputValue / 1000000000) + ' tỷ';
+                                } else if (inputValue >= 1000000) {
+                                    return (inputValue / 1000000) + ' triệu';
                                 } else {
-                                    return '';  // Handle non-numeric input if needed
+                                    return inputValue + ' đ';
                                 }
+
                             }
+
+                            //  tu dong show popup khi dan link
+                            @if(@$_GET['id'] != null)
+                            var id = '{{ @$_GET['id'] }}';
+                            loadAjaxModal(id)
+                            $("#myModal").modal("show");
+
+                            @endif
+                            document.getElementById("copyButton").addEventListener("click", function () {
+                                // Chọn và sao chép giá trị của nút vào clipboard
+                                var valueToCopy = this.value;
+                                console.log(1);
+                                navigator.clipboard
+                                    .writeText(valueToCopy)
+                                    .then(function () {
+                                        console.log("Đã sao chép thành công: " + valueToCopy);
+                                    })
+                                    .catch(function (err) {
+                                        console.error("Lỗi khi sao chép: ", err);
+                                    });
+                            });
+                        });
+
+
+                        $(document).on('click', '.file_image_thumb1111', function () {
+                            var id = $(this).data('id');
+                            $('#imageGallery').remove();
+
+                            $.ajax({
+                                url: '/admin/bao_cao_dan_khach/ajax-get-image/' + id,
+                                type: 'GET',
+                            })
+                                .done(function (res) {
+                                    if (res && res.fullPaths && res.fullPaths.length > 0) {
+                                        var imageArray = res.fullPaths;
+                                        var baseUrl = "<?php echo asset('/filemanager/userfiles/'); ?>";
+                                        var html = '<div id="imageGallery" class="modal" tabindex="-1" role="dialog">';
+                                        html += '<div class="modal-dialog" role="document">';
+                                        html += '<div class="modal-content bbbbbbbb">';
+                                        html += '<div class="modal-body">';
+                                        html += '<div class="row">';
+                                        for (var i = 0; i < imageArray.length; i++) {
+                                            html += '<div class="col-md-4">';
+                                            html += '<img src="' + imageArray[i] + '" class="gallery-image" style="width: 100%; height: 100%" />';
+                                            html += '</div>';
+                                        }
+                                        html += '</div>';
+                                        html += '</div>';
+                                        html += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+                                        html += '</div>';
+                                        html += '</div>';
+                                        html += '</div>';
+
+                                        $('body').append(html);
+                                        $('#imageGallery').modal();
+                                    }
+                                });
                         });
 
                     </script>
-@endpush
+    @endpush

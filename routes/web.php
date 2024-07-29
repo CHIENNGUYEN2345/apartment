@@ -216,3 +216,4 @@ Route::group(['prefix' => 'admin'], function () {
 require base_path('app/CoreERP/routes/web.php');
 require base_path('app/'.env('CRM_CORE').'/routes/web.php');
 require base_path('app/Custom/routes/web.php');
+//require base_path('Modules/EduMarketing/Routes/web.php');

@@ -344,7 +344,7 @@ class AdminController extends CURDBaseController
                 } else {
                     unset($data['image']);
                 }
-
+                $data['phong_ban_id'] = $request->phong_ban_id;
                 //  Tùy chỉnh dữ liệu insert
                 unset($data['status']);
                 unset($data['role_id']);

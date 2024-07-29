@@ -21,7 +21,6 @@
                                 <span class="kt-hidden-mobile">{{trans('admin.back')}}</span>
                             </a>
                             <div class="btn-group">
-                                @if(in_array($module['code'].'_add', $permissions))
                                     <button type="submit" class="btn btn-brand">
                                         <i class="la la-check"></i>
                                         <span class="kt-hidden-mobile">{{trans('admin.save')}}</span>
@@ -52,7 +51,6 @@
                                             </li>
                                         </ul>
                                     </div>
-                                @endif
                             </div>
                         </div>
                     </div>

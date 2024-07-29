@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     @include('admin.themes.metronic1.partials.head_meta')
     @include('admin.themes.metronic1.partials.head_script')
 </head>
@@ -37,10 +39,10 @@
             <!-- begin:: Header -->
             <div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed ">
 
-                    <div class="page-title">
-                        {{ isset($page_title) ? trans(@$page_title) : '' }}
-                    </div>
-                    
+{{--                    <div class="page-title h3 px-3">--}}
+{{--                        {{ isset($page_title) ? trans(@$page_title) : '' }}--}}
+{{--                    </div>--}}
+{{--                    --}}
                     @include('admin.themes.metronic1.partials.nv_xuat_sac')
 
                 <!-- begin: Header Menu -->
@@ -48,7 +50,7 @@
                 <!-- end: Header Menu -->
 
                 <!-- begin:: Header Topbar -->
-                <div class="kt-header__topbar">
+                <div class="kt-header__topbar" style="position: static;">
                     <!--begin: BillPayment Bar -->
                     @include('admin.themes.metronic1.partials.user_bar')
                     <!--end: BillPayment Bar -->

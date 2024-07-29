@@ -15,7 +15,7 @@
                     <div class="kt-portlet__head-wrapper">
                         <div class="">
                             <input type="text" name="quick_search" value="{{ @$_GET['quick_search'] }}"
-                                   class="form-control" title="Chỉ cần enter để thực hiện tìm kiếm"
+                                   class="form-control w-100" title="Chỉ cần enter để thực hiện tìm kiếm"
                                    placeholder="Tìm kiếm nhanh">
                         </div>
                         <div class="kt-portlet__head-actions">
@@ -54,14 +54,12 @@
                                     </ul>
                                 </div>
                             </div>
-                            @if(@in_array($module['code'] . '_add', $permissions))
                                 <a href="{{ url('/admin/'.$module['code'].'/add/') }}"
                                    class="btn btn-brand btn-elevate btn-icon-sm"
                                    title="Tạo {{ @$module['label'] }} mới">
                                     <i class="la la-plus"></i>
                                     {{trans('admin.create_new')}}
                                 </a>
-                            @endif
                         </div>
                     </div>
                 </div>

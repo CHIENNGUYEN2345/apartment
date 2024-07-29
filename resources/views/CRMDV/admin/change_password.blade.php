@@ -1,4 +1,4 @@
-@extends(config('core.admin_theme').'.template')
+@extends('CRMDV.admin.new_header.new_template')
 @section('main')
     <!-- begin:: Content -->
     <form class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid" action="{{ @$action }}"

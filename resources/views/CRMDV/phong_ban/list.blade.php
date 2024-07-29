@@ -1,4 +1,4 @@
-@extends(config('core.admin_theme').'.template')
+@extends('CRMDV.phong_ban.new_header.new_template')
 @section('main')
 
     <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
@@ -17,7 +17,7 @@
                     <div class="kt-portlet__head-wrapper">
                         <div class="">
                             <input type="text" name="quick_search" value="{{ @$_GET['quick_search'] }}"
-                                   class="form-control" title="Chỉ cần enter để thực hiện tìm kiếm"
+                                   class="form-control w-100" title="Chỉ cần enter để thực hiện tìm kiếm"
                                    placeholder="Tìm kiếm nhanh">
                         </div>
                         <div class="kt-portlet__head-actions">

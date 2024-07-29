@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\CRMDV\Controllers\Admin;
 
@@ -32,17 +32,17 @@ class AdminController extends CURDBaseController
         'table_name' => 'admin',
         'list' => [
             ['name' => 'image', 'type' => 'image', 'label' => 'admin.image'],
-            ['name' => 'name', 'type' => 'text_admin_edit', 'label' => 'admin.name'],
+            ['name' => 'name', 'type' => 'custom', 'td' => 'CRMDV.admin.td.ten', 'label' => 'admin.name'],
             ['name' => 'role_id', 'type' => 'role_name', 'label' => 'admin.permission'],
             ['name' => 'tel', 'type' => 'text', 'label' => 'admin.phone'],
             ['name' => 'code', 'type' => 'text', 'label' => 'Mã NV'],
             ['name' => 'email', 'type' => 'text', 'label' => 'admin.email'],
-            ['name' => 'phong_ban_id', 'type' => 'relation_filter','object'=>'room', 'display_field'=>'name','label' => 'Phòng',  'sort' => true],
+            ['name' => 'phong_ban_id', 'type' => 'relation', 'label' => 'Phòng', 'object' => 'room', 'display_field' => 'name'],
+
             ['name' => 'work_time', 'type' => 'select', 'options' => [
                 '' => '',
                 1 => 'Fulltime',
                 2 => 'Parttime',
-                3 => 'Online',
             ], 'label' => 'Thời gian', 'sort' => true],
             ['name' => 'status', 'type' => 'status', 'label' => 'admin.status'],
             ['name' => 'updated_at', 'type' => 'date_vi', 'label' => 'admin.update'],
@@ -52,27 +52,31 @@ class AdminController extends CURDBaseController
             'general_tab' => [
                 ['name' => 'name', 'type' => 'text', 'class' => 'required', 'label' => 'admin.full_name', 'group_class' => 'col-md-6'],
                 ['name' => 'short_name', 'type' => 'text', 'class' => '', 'label' => 'Tên ngắn gọn', 'group_class' => 'col-md-6'],
-                ['name' => 'email', 'type' => 'custom', 'field' => 'CRMDV.admin.form.email', 'class' => 'required', 'label' => 'admin.email', 'group_class' => 'col-md-3'],
-                ['name' => 'tel', 'type' => 'custom', 'class' => 'required', 'field' => 'CRMDV.admin.form.tel', 'label' => 'admin.phone', 'group_class' => 'col-md-2'],
-                ['name' => 'code', 'type' => 'custom', 'class' => 'required', 'field' => 'CRMDV.admin.form.code', 'label' => 'Mã nhân viên', 'group_class' => 'col-md-2'],
-                ['name' => 'may_cham_cong_id', 'type' => 'number', 'class' => '', 'label' => 'ID máy chấm công', 'group_class' => 'col-md-2'],
-                ['name' => 'status', 'type' => 'checkbox', 'label' => 'admin.active', 'value' => 1, 'group_class' => 'col-md-3'],
+                ['name' => 'email', 'type' => 'custom', 'field' => 'CRMDV.admin.form.email', 'class' => 'required', 'label' => 'admin.email', 'group_class' => 'col-md-4'],
+                ['name' => 'tel', 'type' => 'custom', 'class' => 'required', 'field' => 'CRMDV.admin.form.tel', 'label' => 'admin.phone', 'group_class' => 'col-md-4'],
+//                ['name' => 'code', 'type' => 'custom', 'class' => 'required', 'field' => 'CRMDV.admin.form.code', 'label' => 'Mã nhân viên', 'group_class' => 'col-md-3'],
+                ['name' => 'may_cham_cong_id', 'type' => 'number', 'class' => '', 'label' => 'ID máy chấm công', 'group_class' => 'col-md-4'],
+//                ['name' => 'status', 'type' => 'radio', 'options' =>
+//                    [
+//                        'Kích hoạt' => 'Kích hoạt',
+//                        'Tạm dừng' => 'Tạm dừng',
+//                    ], 'class' => 'required', 'multiple' => false, 'value' => 'Kích hoạt', 'label' => 'admin.active', 'group_class' => 'col-md-3',],
                 ['name' => 'password', 'type' => 'password', 'class' => 'required', 'label' => 'admin.password', 'group_class' => 'col-md-6'],
                 ['name' => 'password_confimation', 'type' => 'password', 'class' => 'required', 'label' => 'admin.re_password', 'group_class' => 'col-md-6'],
                 /*['name' => 'role_id', 'type' => 'custom', 'field' => 'CRMDV.admin.partials.select_role', 'label' => 'Quyền', 'class' => 'required', 'model' => \App\Models\Roles::class, 'display_field' => 'display_name', 'group_class' => 'col-md-6'],*/
-                
-                ['name' => 'address', 'type' => 'text', 'class' => '', 'label' => 'admin.address', 'group_class' => 'col-md-3'],
-                ['name' => 'province_id', 'type' => 'select_location', 'label' => 'admin.choose_place', 'group_class' => 'col-md-9'],
-                ['name' => 'maximum_projects', 'type' => 'number', 'class' => '', 'label' => 'Tối đa điểm đang làm', 'group_class' => 'col-md-3'],
+
+                ['name' => 'address', 'type' => 'text', 'class' => 'required', 'label' => 'admin.address', 'group_class' => 'col-md-3'],
+                ['name' => 'province_id', 'type' => 'custom', 'field' => 'CRMDV.hradmin.form.select_location2', 'group_class' => 'col-md-9'],
+//                ['name' => 'maximum_projects', 'type' => 'number', 'class' => '', 'label' => 'Tối đa điểm đang làm', 'group_class' => 'col-md-3'],
 
                 ['name' => 'intro', 'type' => 'textarea', 'class' => '', 'label' => 'admin.introduce'],
                 ['name' => 'note', 'type' => 'textarea', 'class' => '', 'label' => 'admin.note', 'inner' => 'rows=10'],
             ],
             'more_info_tab' => [
-                ['name' => 'image', 'type' => 'file_editor', 'label' => 'Ảnh đại diện'],
-                ['name' => 'facebook', 'type' => 'text', 'class' => '', 'label' => 'facebook'],
+                ['name' => 'image', 'type' => 'file_editor', 'class' => 'required', 'label' => 'Ảnh đại diện'],
+                ['name' => 'facebook', 'type' => 'text', 'label' => 'facebook'],
                 ['name' => 'skype', 'type' => 'text', 'class' => '', 'label' => 'skype'],
-                ['name' => 'zalo', 'type' => 'text', 'class' => '', 'label' => 'zalo'],
+                ['name' => 'zalo', 'type' => 'text', 'class' => 'required', 'label' => 'zalo'],
                 ['name' => 'invite_by', 'type' => 'select2_ajax_model', 'label' => 'admin.presenter', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'tel'],
                 ['name' => 'phong_ban_id',
                     'type' => 'select2_model',
@@ -80,12 +84,12 @@ class AdminController extends CURDBaseController
                     'label' => 'Phòng',
                     'model' => \App\CRMDV\Models\Phong_ban::class,
                     'display_field' => 'name',
+                    'class' => 'required',
                     'group_class' => 'col-md-12'],
-                ['name' => 'work_time', 'type' => 'select', 'options' => [
+                ['name' => 'work_time', 'class' => 'required', 'type' => 'select', 'options' => [
                     '' => '',
                     1 => 'Fulltime',
                     2 => 'Parttime',
-                    3 => 'Online',
                 ], 'label' => 'Thời gian làm', 'group_class' => 'col-md-12'],
             ],
         ]
@@ -156,22 +160,23 @@ class AdminController extends CURDBaseController
 
     public function appendWhere($query, $request)
     {
-        if($request->role_id != null) {
+        if ($request->role_id != null) {
             $admin_ids = RoleAdmin::select('admin_id')->where('role_id', $request->role_id)->pluck('admin_id')->toArray();
             $query = $query->whereIn('id', $admin_ids);
         } else {
             //  Không tìm theo quyền thì mặc định không hiện các quyền không làm việc trực tiếp tại cty
             $admin_ids = RoleAdmin::select('admin_id')->where(function ($query) use ($request) {
-                    $query->orWhere('role_id', 176);    //  CTV sale
-                    // $query->orWhere('role_id', 176);
-                })->pluck('admin_id')->toArray();
+                $query->orWhere('role_id', 176);    //  CTV sale
+                // $query->orWhere('role_id', 176);
+            })->pluck('admin_id')->toArray();
             $query = $query->whereNotIn('id', $admin_ids);
         }
 
         return $query;
     }
 
-    public function ajaxGetInfo(Request $r) {
+    public function ajaxGetInfo(Request $r)
+    {
         $admin = Admin::find($r->id);
         if (!is_object($admin)) {
             return response()->json([
@@ -205,11 +210,13 @@ class AdminController extends CURDBaseController
                 $validator = Validator::make($request->all(), [
                     'name' => 'required',
                     'email' => 'required',
-                    'tel' => 'required',
                     'password' => 'required|min:5',
+                    'tel' => 'required',
+                    'image' => 'required',
                     'password_confimation' => 'required|same:password',
                 ], [
                     'name.required' => 'Bắt buộc phải nhập tên!',
+                    'image.required' => 'Bắt buộc phải nhập ảnh!',
 //                    'email.required' => 'Bắt buộc phải nhập email!',
 //                    'email.unique' => 'Địa chỉ email đã tồn tại!',
                     'password.required' => 'Bắt buộc phải nhập mật khẩu!',
@@ -225,7 +232,6 @@ class AdminController extends CURDBaseController
                     $data['api_token'] = base64_encode(rand(1, 100) . time());
 
                     //  Tùy chỉnh dữ liệu insert
-
 //                    $data['role_id']=1;
                     unset($data['password_confimation']);
                     unset($data['role_id']);
@@ -244,9 +250,9 @@ class AdminController extends CURDBaseController
                     if ($request->role_id == 2 && \Auth::guard('admin')->user()->super_admin == 1) {
                         //  super_admin tao ra admin shop
                         $company_id_max = Admin::orderBy('last_company_id', 'desc')->first()->last_company_id;
-                        $company_id_max ++;
+                        $company_id_max++;
                         $data['last_company_id'] = $company_id_max;
-                    } elseif(\Auth::guard('admin')->user()->super_admin == 0) {
+                    } elseif (\Auth::guard('admin')->user()->super_admin == 0) {
                         //  admin shop tạo tk nhân viên
                         $data['last_company_id'] = \Auth::guard('admin')->user()->last_company_id;
                     }
@@ -257,6 +263,8 @@ class AdminController extends CURDBaseController
                     }
 
                     if ($this->model->save()) {
+                        $this->model->code = $this->model->id;
+                        $this->model->save();
                         if (CommonHelper::has_permission(\Auth::guard('admin')->user()->id, 'role_view')) {
                             //  Nếu có quyền xem phân quyền thì mới được gán tk admin
                             RoleAdmin::create([
@@ -264,7 +272,7 @@ class AdminController extends CURDBaseController
                                 'role_id' => $request->role_id,
                             ]);
                         }
-                        
+
                         CommonHelper::flushCache($this->module['table_name']);
                         CommonHelper::one_time_message('success', 'Tạo mới thành công!');
 
@@ -272,7 +280,7 @@ class AdminController extends CURDBaseController
                         //     //  Nếu ko có quyền xem phân quyền thì là nv tạo tk kh => tạo xong chuyển hướng về trang kh
                         //     return redirect('admin/user');
                         // }
-                    
+
                         return redirect('/admin/admin');
                     } else {
                         CommonHelper::one_time_message('error', 'Lỗi tao mới. Vui lòng load lại trang và thử lại!');
@@ -474,6 +482,8 @@ class AdminController extends CURDBaseController
         if (!$_POST) {
             $data['result'] = $admin;
             $data['module'] = $this->module;
+            $data['phong_ban_id'] = $this->phong_ban_id;
+
             $data['page_title'] = 'Chỉnh sửa ' . $this->module['label'];
             $data['page_type'] = 'update';
             $data['id_user'] = $id;
@@ -553,6 +563,7 @@ class AdminController extends CURDBaseController
 
     public function changePassword(Request $request)
     {
+        dd(2);
         if (!$_POST) {
             $data['result'] = \Auth::guard('admin')->user();
             $data['module'] = [
@@ -603,7 +614,8 @@ class AdminController extends CURDBaseController
         }
     }
 
-    public function checkExist(Request $request) {
+    public function checkExist(Request $request)
+    {
         if ($request->has('email')) {
             $admin = Admin::select('email', 'name', 'tel', 'id', 'code')->where('email', $request->email);
             if ($request->has('id')) {
@@ -613,7 +625,7 @@ class AdminController extends CURDBaseController
             if (is_object($admin)) {
                 return response()->json([
                     'status' => false,
-                    'html' => 'Email này đã được tạo cho <a  target="_blank" href="/admin/admin/edit/'.$admin->id.'">'.$admin->name .' - email: ' . $admin->email.' - sđt: ' . $admin->tel.' - mã: ' . $admin->code.'</a>'
+                    'html' => 'Email này đã được tạo cho <a  target="_blank" href="/admin/admin/edit/' . $admin->id . '">' . $admin->name . ' - email: ' . $admin->email . ' - sđt: ' . $admin->tel . ' - mã: ' . $admin->code . '</a>'
                 ]);
             }
         }
@@ -626,7 +638,7 @@ class AdminController extends CURDBaseController
             if (is_object($admin)) {
                 return response()->json([
                     'status' => false,
-                    'html' => 'SĐT này đã được tạo cho <a target="_blank" href="/admin/admin/edit/'.$admin->id.'">'.$admin->name .' - email: ' . $admin->email.' - sđt: ' . $admin->tel.' - mã: ' . $admin->code.'</a>'
+                    'html' => 'SĐT này đã được tạo cho <a target="_blank" href="/admin/admin/edit/' . $admin->id . '">' . $admin->name . ' - email: ' . $admin->email . ' - sđt: ' . $admin->tel . ' - mã: ' . $admin->code . '</a>'
                 ]);
             }
         }
@@ -639,7 +651,7 @@ class AdminController extends CURDBaseController
             if (is_object($admin)) {
                 return response()->json([
                     'status' => false,
-                    'html' => 'SĐT này đã được tạo cho <a target="_blank" href="/admin/admin/edit/'.$admin->id.'">'.$admin->name .' - email: ' . $admin->email.' - sđt: ' . $admin->tel.' - mã: ' . $admin->code.'</a>'
+                    'html' => 'SĐT này đã được tạo cho <a target="_blank" href="/admin/admin/edit/' . $admin->id . '">' . $admin->name . ' - email: ' . $admin->email . ' - sđt: ' . $admin->tel . ' - mã: ' . $admin->code . '</a>'
                 ]);
             }
         }
@@ -654,15 +666,15 @@ class AdminController extends CURDBaseController
         $col2 = $request->get('col2', '') == '' ? '' : ', ' . $request->get('col2');
 
         $data = $this->model->selectRaw('id, ' . $request->col . $col2)
-        // ->where('status', 1)
-        ->where(function ($query) use ($request) {
-                    $query->orWhere($request->col, 'like', '%' . $request->keyword . '%');
-                    $query->orWhere('name', 'like', '%' . $request->keyword . '%');
-                    $query->orWhere('tel', 'like', '%' . $request->keyword . '%');
-                    $query->orWhere('email', 'like', '%' . $request->keyword . '%');
-                    $query->orWhere('short_name', 'like', '%' . $request->keyword . '%');
-                    $query->orWhere('code', 'like', '%' . $request->keyword . '%');
-                });
+            // ->where('status', 1)
+            ->where(function ($query) use ($request) {
+                $query->orWhere($request->col, 'like', '%' . $request->keyword . '%');
+                $query->orWhere('name', 'like', '%' . $request->keyword . '%');
+                $query->orWhere('tel', 'like', '%' . $request->keyword . '%');
+                $query->orWhere('email', 'like', '%' . $request->keyword . '%');
+                $query->orWhere('short_name', 'like', '%' . $request->keyword . '%');
+                $query->orWhere('code', 'like', '%' . $request->keyword . '%');
+            });
 
         if ($request->where != '') {
             $data = $data->whereRaw(urldecode(str_replace('&#039;', "'", $request->where)));
@@ -676,7 +688,8 @@ class AdminController extends CURDBaseController
         ]);
     }
 
-    public function hieuSuatCongViec() {
+    public function hieuSuatCongViec()
+    {
 
         $rooms = [
             1 => 'Phòng kinh doanh 1',
@@ -689,8 +702,8 @@ class AdminController extends CURDBaseController
         ];
 
         $items = DailyWorkReport::where('date', '>', date('Y-m-d', strtotime("-30 days")))
-                                    ->orderBy('room_id', 'asc');
-                                    
+            ->orderBy('room_id', 'asc');
+
         if (!CommonHelper::has_permission(\Auth::guard('admin')->user()->id, 'daily_work_report_view_all')) {
             //  nếu ko có quyền xem tất cả báo cáo kết quả công việc thì chỉ hiển thị ra công việc của mình
             $items = $items->where('admin_id', \Auth::guard('admin')->user()->id);
@@ -700,12 +713,12 @@ class AdminController extends CURDBaseController
 
         $reports = [];
         $dates = [];
-        
-        foreach($items as $item) {
+
+        foreach ($items as $item) {
             if (!in_array($item->date, $dates)) {
                 $dates[] = $item->date;
             }
-            
+
             $reports[$item->admin_id][$item->date] = $item;
             $reports[$item->admin_id]['admin_id'] = $item->admin_id;
             $reports[$item->admin_id]['name'] = $item->admin_name;
@@ -724,12 +737,13 @@ class AdminController extends CURDBaseController
         //  Set data for seo
         $data['page_title'] = $this->module['label'];
         $data['page_type'] = 'list';
-        
+
         return view('CRMDV.admin.hieu_suat_cong_viec')->with($data);
     }
 
     //  Cập nhật kết quả công việc hằng ngày lưu vào db
-    public function updateDailyWorkReport() {
+    public function updateDailyWorkReport()
+    {
         $room_ids = [
             1 => 'Phòng kinh doanh 1',
             2 => 'Phòng kinh doanh 2',
@@ -741,9 +755,9 @@ class AdminController extends CURDBaseController
         ];
 
         $admins = Admin::select('id', 'name', 'code', 'room_id')->whereIn('room_id', array_keys($room_ids))->where('status', 1)->get();
-        foreach($admins as $admin) {
+        foreach ($admins as $admin) {
             $whereSale = 'admin_id = ' . $admin->id;
-            $whereLikeSale = "saler_ids LIKE '%|".$admin->id."|%'";
+            $whereLikeSale = "saler_ids LIKE '%|" . $admin->id . "|%'";
             $whereCreated_at = "created_at >= '" . date('Y-m-d 00:00:00') . "'";
 
 
@@ -757,8 +771,8 @@ class AdminController extends CURDBaseController
 
             $count_khqt = \App\CRMDV\Models\Lead::whereRaw($whereLikeSale)
                 ->whereIn('rate', ['Đang tìm hiểu', 'Care dài'])->whereNotIn('status', ['Thả nổi', 'Đã ký HĐ'])
-                            // ->where('created_at', '>=', date('Y-'.date('m', strtotime($day)).'-01 00:00:00'))
-                            // ->where('created_at', '<=', date('Y-'.date('m', strtotime($day)).'-t 23:59:59', strtotime($day)))
+                // ->where('created_at', '>=', date('Y-'.date('m', strtotime($day)).'-01 00:00:00'))
+                // ->where('created_at', '<=', date('Y-'.date('m', strtotime($day)).'-t 23:59:59', strtotime($day)))
                 ->count();
 
             $quanTamMoi = \App\CRMDV\Models\LeadContactedLog::whereRaw($whereSale)
@@ -767,24 +781,24 @@ class AdminController extends CURDBaseController
 
             $count_khqt_cao = \App\CRMDV\Models\Lead::whereRaw($whereLikeSale)
                 ->whereIn('rate', ['Quan tâm cao', 'Cơ hội'])->whereNotIn('status', ['Thả nổi', 'Đã ký HĐ'])
-                            // ->where('created_at', '>=', date('Y-'.date('m', strtotime($day)).'-01 00:00:00'))
-                            // ->where('created_at', '<=', date('Y-'.date('m', strtotime($day)).'-t 23:59:59', strtotime($day)))
+                // ->where('created_at', '>=', date('Y-'.date('m', strtotime($day)).'-01 00:00:00'))
+                // ->where('created_at', '<=', date('Y-'.date('m', strtotime($day)).'-t 23:59:59', strtotime($day)))
                 ->count();
 
             DailyWorkReport::updateOrCreate([
-                        'admin_id' => $admin->id,
-                        'date' => date('Y-m-d'),
-                    ], [
-                        'admin_name' => $admin->name,
-                        'admin_code' => $admin->code,
-                        'room_id' => $admin->room_id,
-                        'room_name' => @$room_ids[$admin->room_id],
-                        'tao_moi' => $count_leads_created,
-                        'tuong_tac' => $coun_lead_contacted_logs,
-                        'khqt' => $count_khqt,
-                        'khqt_moi' => $quanTamMoi,
-                        'khqt_cao' => $count_khqt_cao,
-                    ]);
+                'admin_id' => $admin->id,
+                'date' => date('Y-m-d'),
+            ], [
+                'admin_name' => $admin->name,
+                'admin_code' => $admin->code,
+                'room_id' => $admin->room_id,
+                'room_name' => @$room_ids[$admin->room_id],
+                'tao_moi' => $count_leads_created,
+                'tuong_tac' => $coun_lead_contacted_logs,
+                'khqt' => $count_khqt,
+                'khqt_moi' => $quanTamMoi,
+                'khqt_cao' => $count_khqt_cao,
+            ]);
         }
         die('Cập nhật xong báo cáo cho ngày ' . date('d/m/Y'));
     }

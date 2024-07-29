@@ -25,9 +25,9 @@ class TimekeeperController extends CURDBaseController
             ['name' => 'admin_id', 'type' => 'relation', 'label' => 'Mã NV', 'object' => 'admin', 'display_field' => 'code'],
             ['name' => 'may_cham_cong_id', 'type' => 'text', 'label' => 'ID máy chấm công'],
             ['name' => 'time', 'type' => 'datetime_vi', 'label' => 'Thời gian chấm'],
-            ['name' => 'thoi_gian_muon', 'type' => 'custom', 'td' => 'CRMDV.timekeeper.list.td.thoi_gian_muon', 'label' => 'Thời gian muộn'],
-            ['name' => 'ly_do_muon', 'type' => 'text', 'label' => 'Lý do muộn'],
-            ['name' => 'status', 'type' => 'custom', 'td' => 'CRMDV.timekeeper.list.td.ly_do_muon', 'label' => 'Cho phép'],
+            ['name' => 'status', 'type' => 'custom', 'td' => 'CRMDV.timekeeper.list.td.thoi_gian_muon', 'label' => 'Thời gian muộn'],
+//            ['name' => 'ly_do_muon', 'type' => 'text', 'label' => 'Lý do muộn'],
+//            ['name' => 'status', 'type' => 'custom', 'td' => 'CRMDV.timekeeper.list.td.ly_do_muon', 'label' => 'Cho phép'],
         ],
         'form' => [
             'general_tab' => [
@@ -143,6 +143,13 @@ class TimekeeperController extends CURDBaseController
         $data = $this->getDataList($request);
         
         return view('CRMDV.timekeeper.bao_cao')->with($data);
+    }
+
+    public function detail($id) {
+//        dd($id);
+        $data = Timekeeper::query()->where('admin_id',$id)->get();
+//        dd($data);
+        return view('CRMDV.timekeeper.bao_cao_admin', compact('data'));
     }
 
     public function add(Request $request)

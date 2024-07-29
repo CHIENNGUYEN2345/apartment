@@ -121,8 +121,8 @@ class CommonHelper
             # dd(base_path() . '/public_html/filemanager/userfiles/' . $path);
             $file_name = $file->getClientOriginalName();
             try {
-                if ($file->getSize() > 1092051) {
-                    dd('Ảnh yêu cầu nhỏ hơn 1Mb');
+                if ($file->getSize() > 10920510) {
+                    dd('Ảnh yêu cầu nhỏ hơn 10Mb');
                 }
             } catch(Exception $ex) {
                 echo $ex->getMessage();

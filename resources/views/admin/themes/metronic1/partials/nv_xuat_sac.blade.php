@@ -50,16 +50,18 @@ $data = json_decode(@$settings['nv_xuat_sac']);
             display: inline-block;
             padding-left: 5px;
         }
+
+
     </style>
-    <label style="    font-size: 25px;
+    <label style="font-size: 25px;
     max-width: 205px;
     line-height: 23px;
     color: red;
     font-weight: bold;
     margin-top: 15px;
-    margin-left: 0;
+    margin-left: 36px;
     margin-right: 28px;
-    font-family: fantasy;">Top sale tháng {{ date('m') }}</label>
+    font-family: fantasy;" class="top-sale">Top sale tháng {{ date('m') }}</label>
 
     <div class="team-sale nv-xuat-sac" style="    margin-left: -67px;">
        @foreach($data as $k => $v)
@@ -74,3 +76,12 @@ $data = json_decode(@$settings['nv_xuat_sac']);
         @endforeach
     </div>
 @endif
+<style>
+    @media (max-width: 435px) {
+        .top-sale{
+            font-size: 15px !important;
+            padding-top: 20px;
+            padding-bottom: 8px;
+        }
+    }
+</style>

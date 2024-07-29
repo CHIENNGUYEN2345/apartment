@@ -25,4 +25,8 @@ class BaoCaoDanKhach extends Model
     public function code() {    //  tạo cho dự án nào
         return $this->belongsTo(Codes::class, 'code_id');
     }
+
+    public function codes() {
+        return $this->belongsTo(\App\CRMDV\Models\Codes::class, 'code_id', 'id');
+    }
 }

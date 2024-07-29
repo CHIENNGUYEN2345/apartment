@@ -1,4 +1,4 @@
-@extends(config('core.admin_theme').'.template')
+@extends('CRMDV.dashboard.new_header.new_template')
 @section('main')
     <?php
     $this_month = date('m');

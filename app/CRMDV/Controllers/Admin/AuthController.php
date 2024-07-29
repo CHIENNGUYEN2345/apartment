@@ -29,7 +29,7 @@ class AuthController extends Controller
         die('231');
         $data['page_title'] = 'Đăng nhập';
         $data['page_type'] = 'list';
-        return view(config('core.admin_theme') . '.auth.login');
+        return view(config('core.admin_theme') . '.auth.login_sehouse');
     }
 
     public function authenticate(Request $request)

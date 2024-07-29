@@ -18,6 +18,7 @@
 
 namespace App\Models;
 
+use App\CRMDV\Models\Phong_ban;
 use App\Http\Helpers\CommonHelper;
 use DB;
 use Illuminate\Auth\Authenticatable;
@@ -72,5 +73,9 @@ class Admin extends Model implements AuthenticatableContract, CanResetPasswordCo
             $adminId = Admin::max('id');
             $model->may_cham_cong_id = $adminId;
         });
+    }
+
+    public function room() {
+        return $this->belongsTo(Phong_ban::class, 'phong_ban_id', 'id');
     }
 }

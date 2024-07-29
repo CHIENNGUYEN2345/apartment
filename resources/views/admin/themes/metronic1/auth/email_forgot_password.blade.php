@@ -41,12 +41,12 @@
 <!-- begin:: Page -->
 <div class="m-grid m-grid--hor m-grid--root m-page">
     <div class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-1"
-         id="m_login" style="background-image: url({{ asset('/login/images/bg-1.jpg') }}) !important;">
+         id="m_login" style="background-image: url({{asset('/filemanager/userfiles/'.@$settings['background_login'])}}) !important;">
         <div class="m-grid__item m-grid__item--fluid m-login__wrapper">
             <div class="m-login__container">
                 <div class="m-login__logo">
                     <a href="#">
-                        <img style="width: 50%" data-src="{{asset('/filemanager/userfiles/'.@$settings['logo'])}}" class="lazy"
+                        <img style="width: 50%" src="{{asset('/filemanager/userfiles/'.@$settings['logo'])}}" class="lazy"
                              title="{{ @$settings['name'] }}" alt="{{ @$settings['name'] }}"/>
                     </a>
                 </div>

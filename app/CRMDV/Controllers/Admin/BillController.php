@@ -58,8 +58,8 @@ class BillController extends CURDBaseController
                 ['name' => 'registration_date', 'type' => 'date', 'label' => 'Ngày ký HĐ', 'class' => 'required', 'group_class' => 'col-md-3'],
                 ['name' => 'contract_time', 'type' => 'number', 'label' => 'Thời gian sử dụng (tháng)', 'class' => 'required', 'group_class' => 'col-md-3'],
 
-                
-                
+                ['name' => 'bill_cost_id', 'type' => 'custom', 'label' => 'Bảng thống kê', 'field' => 'CRMDV.bill.form.table','group_class' => 'col-md-12'],
+
                 // ['name' => 'curator_ids', 'type' => 'select2_ajax_model', 'label' => 'Người KH phụ trách', 'model' => Admin::class, 'object' => 'admin', 'display_field' => 'name', 'display_field2' => 'email', 'multiple' => true, 'group_class' => 'col-md-6'],
 
                 /*['name' => 'retention_time', 'type' => 'select', 'options' =>
@@ -345,7 +345,7 @@ class BillController extends CURDBaseController
         $billHistory->price=$request->exp_price;
         $billHistory->expiry_date=$request->expiry_date;
         $billHistory->save();*/
-
+//        dd($request->all());
         try {
             if (!$_POST) {
                 $data = $this->getDataAdd($request);
@@ -388,6 +388,18 @@ class BillController extends CURDBaseController
             unset($data['file_ldp']);
             if (isset($data['quick_note'])) unset($data['quick_note']);
             #
+            $input = $request->all(); // Lấy tất cả dữ liệu từ request
+
+            $rowCount = count($input['row_text']); // Số lượng phần tử trong mảng row_text
+            $result = [];
+
+            for ($i = 0; $i < $rowCount; $i++) {
+                $result[] = [
+                    'row_text' => $input['row_text'][$i],
+                    'row_price' => $input['row_price'][$i],
+                    'row_quantity' => $input['row_quantity'][$i],
+                ];
+            }
             foreach ($data as $k => $v) {
                 $this->model->$k = $v;
             }
@@ -426,7 +438,16 @@ class BillController extends CURDBaseController
                     'classify' => $request->customer_classify,
                 ]);
 
-                
+                foreach ($result as $data) {
+//                    dd($data);
+                    \App\CRMDV\Models\BillCostList::updateOrCreate([
+                        'hang_muc' => $data['row_text'],
+                        'don_gia' => $data['row_price'],
+                        'so_luong' => $data['row_quantity'],
+                        'bill_id' => $this->model->id,
+                        'admin_id' => \Auth::guard('admin')->user()->id,
+                    ]);
+                }
 
                 // //  nếu thuê tên miền bên mình thì tạo 1 hóa đơn cho tên miền đó
                 // if ($data['domain_owner'] == 'hobasoft') {

@@ -1,4 +1,4 @@
-@extends(config('core.admin_theme').'.template')
+@extends('CRMDV.admin.new_header.new_template')
 @section('main')
     <form class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid {{ @$module['code'] }}"
           action="" method="POST"
@@ -87,7 +87,7 @@
                                             <div class="col-xs-12">
                                                 @include(config('core.admin_theme').".form.fields.".$field['type'], ['field' => $field])
                                                 <span class="form-text text-muted">{!! @$field['des'] !!}</span>
-                                                <span class="text-danger">{{ $errors->first($field['name']) }}</span>
+{{--                                                <span class="text-danger">{{ $errors->first($field['name']) }}</span>--}}
                                             </div>
                                         @endif
                                     </div>
@@ -105,7 +105,7 @@
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
                             <h3 class="kt-portlet__head-title">
-                                Thời gian
+                                Ảnh
                             </h3>
                         </div>
                         <div class="kt-portlet__head-group pt-3">
@@ -173,12 +173,21 @@
                                         @endif
                                     </div>
                                 @endforeach
+                                    @if(in_array($module['code'].'_add', $permissions))
+                                        <div class="button-mobie text-center">
+                                            <button class="btn btn-primary">Tạo bảng hàng</button>
+                                        </div>
+                                    @endif
                             </div>
+
                         </div>
+
                     </div>
                     <!--end::Form-->
+
                 </div>
                 <!--end::Portlet-->
+
             </div>
         </div>
     </form>
@@ -189,6 +198,32 @@
     <script src="{{asset('ckeditor/ckeditor.js') }}"></script>
     <script src="{{asset('ckfinder/ckfinder.js') }}"></script>
     <script src="{{asset('libs/file-manager.js') }}"></script>
+    <style>
+        .kt-radio-list{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .button-mobie{
+            display: none;
+        }
+        @media (max-width: 435px) {
+            .dropzone .dz-preview .dz-image {
+                width: 80px;
+                height: 80px;
+            }
+            .button-mobie{
+                display: block;
+            }
+            .dropzone .dz-preview {
+                margin: 10px !important;
+            }
+            .dropzone.dropzone-default {
+                padding: 10px;
+
+            }
+        }
+    </style>
     {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>--}}
 @endsection
 @section('custom_footer')

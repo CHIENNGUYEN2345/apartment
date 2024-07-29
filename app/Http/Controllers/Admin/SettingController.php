@@ -28,6 +28,7 @@ class SettingController extends CURDBaseController
                     ['name' => 'address', 'type' => 'textarea', 'label' => 'admin.address_main'],
                     ['name' => 'logo', 'type' => 'file_editor', 'label' => 'admin.logo_admin', 'group_class' => 'col-xs-12 col-md-6'],
                     ['name' => 'favicon', 'type' => 'file_editor', 'label' => 'admin.favicon', 'des' => 'Biểu tượng Site là ảnh icon bạn nhìn thấy ở bên trái tên website ở đầu mỗi tab trên cửa sổ trình duyệt. Icon phải là hình vuông và ít nhất 512 × 512 pixel.', 'group_class' => 'col-xs-12 col-md-6'],
+                    ['name' => 'background_login', 'type' => 'file_editor', 'label' => 'Hình nền màn hình đăng nhập', 'des' => 'Hình ảnh là hình nền mà bạn nhìn thấy ở bên màn hình đăng nhập website ', 'group_class' => 'col-xs-12 col-md-6'],
                 ]
             ],
 

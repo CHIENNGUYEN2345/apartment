@@ -1,5 +1,5 @@
 <?php
-$images = explode('|', @$result->{$field['name']});
+$images = old($field['name']) != null ? old($field['name']) : explode('|', @$result->{$field['name']});
 ?>
 {{--<div class="dropzone-previews-{{$field['name']}} dropzone" style="display: contents;"></div>--}}
 <div class="dropzone dropzone-default dropzone-brand dz-clickable" id="{{ $field['name'] }}_dropzone">

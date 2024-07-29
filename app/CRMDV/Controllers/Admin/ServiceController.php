@@ -21,12 +21,12 @@ class ServiceController extends CURDBaseController
             ['name' => 'name_vi', 'type' => 'text_edit', 'label' => 'Tên', 'sort' => true],
 //            ['name' => 'expiry_date', 'type' => 'date_vi', 'label' => 'Hết hạn'],
             ['name' => 'intro', 'type' => 'text', 'label' => 'Mô tả', 'sort' => true],
-            ['name' => 'type', 'type' => 'select', 'options' => [
-                'bill_receipts' => 'Tài khoản tiền',
-                'lead_rate' => 'Đánh giá đầu mối',
-                'lead_source' => 'Nguồn khách',
-                'user_tick' => 'Đánh dấu khách hàng',
-            ], 'label' => 'Loại dự án',],
+//            ['name' => 'type', 'type' => 'select', 'options' => [
+//                'bill_receipts' => 'Tài khoản tiền',
+//                'lead_rate' => 'Đánh giá đầu mối',
+//                'lead_source' => 'Nguồn khách',
+//                'user_tick' => 'Đánh dấu khách hàng',
+//            ], 'label' => 'Loại dự án',],
         ],
         'form' => [
             'general_tab' => [
@@ -38,13 +38,13 @@ class ServiceController extends CURDBaseController
 //                    'Tuesday' => 3,
 //                    'Friday' => 6
 //                ]],
-                ['name' => 'type', 'type' => 'select', 'model' => \App\Models\Service::class,
-                    'options' => [
-                        'bill_receipts' => 'Tài khoản tiền',
-                        'lead_rate' => 'Đánh giá đầu mối',
-                        'lead_source' => 'Nguồn khách',
-                        'user_tick' => 'Đánh dấu khách hàng',
-                    ],'field' => 'type', 'class' => '', 'label' => 'loại dự án'],
+//                ['name' => 'type', 'type' => 'select', 'model' => \App\Models\Service::class,
+//                    'options' => [
+//                        'bill_receipts' => 'Tài khoản tiền',
+//                        'lead_rate' => 'Đánh giá đầu mối',
+//                        'lead_source' => 'Nguồn khách',
+//                        'user_tick' => 'Đánh dấu khách hàng',
+//                    ],'field' => 'type', 'class' => '', 'label' => 'loại dự án'],
             ],
         ]
     ];

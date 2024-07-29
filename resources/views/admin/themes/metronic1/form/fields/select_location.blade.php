@@ -10,7 +10,7 @@
             <label for="{{ $fd['name'] }}">{{ @$fd['label'] }} @if(strpos(@$fd['class'], 'require') !== false)
                     <span class="color_btd">*</span>@endif</label>
             @include(config('core.admin_theme').".form.fields." . $fd['type'], ['field' => $fd])
-            <span class="text-danger">{{ $errors->first('province_id') }}</span>
+            <span class="text-danger 123">{{ $errors->first('province_id') }}</span>
         </div>
     </div>
 @endif

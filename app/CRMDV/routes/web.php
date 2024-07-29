@@ -10,6 +10,7 @@ Route::get('/', function () {
     return redirect('/admin');
 });
 
+Route::get('admin/codes/view', '\App\CRMDV\Controllers\Admin\CodesController@view');
 
 
 
@@ -55,6 +56,17 @@ Route::get('admin/update-daily-work-report', '\App\CRMDV\Controllers\Admin\Admin
 Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissions']], function () {
 
     Route::get('cancel-extension', '\App\CRMDV\Controllers\Admin\BillController@cancelExtension')->name('dashboard.cancel_extension')->middleware('permission:bill_edit');
+
+    //role-crmdv (mục đích: áp dụng header khác cho sehouse)
+//    Route::group(['prefix' => 'role'], function () {
+//        Route::get('', 'Admin\RoleCrmdvController@getIndex')->name('role')->middleware('permission:role_view');
+//        Route::match(array('GET', 'POST'), 'add', 'Admin\RoleCrmdvController@add')->middleware('permission:role_add');
+//        Route::get('delete/{id}', 'Admin\RoleCrmdvController@delete')->middleware('permission:role_delete');
+//        Route::post('multi-delete', 'Admin\RoleCrmdvController@multiDelete')->middleware('permission:role_delete');
+//        Route::get('search-for-select2', 'Admin\RoleCrmdvController@searchForSelect2')->name('role.search_for_select2')->middleware('permission:role_view');
+//        Route::match(array('GET', 'POST'), 'edit/{id}', 'Admin\RoleCrmdvController@update')->middleware('permission:role_edit');
+//    });
+
     Route::group(['prefix' => 'bill'], function () {
         Route::get('test', '\App\CRMDV\Controllers\Admin\BillController@test');
         Route::get('ko-duy-tri', '\App\CRMDV\Controllers\Admin\BillController@koDuyTri');
@@ -128,7 +140,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
     //  Admin
     Route::group(['prefix' => 'admin'], function () {
 
-
         Route::get('', '\App\CRMDV\Controllers\Admin\AdminController@getIndex')->name('admin')->middleware('permission:admin_view');
         Route::get('publish', '\App\CRMDV\Controllers\Admin\AdminController@getPublish')->name('admin.admin_publish')->middleware('permission:admin_edit');
         Route::match(array('GET', 'POST'), 'add', '\App\CRMDV\Controllers\Admin\AdminController@add')->middleware('permission:admin_add');
@@ -139,10 +150,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
         Route::get('search-for-select2-all', '\App\CRMDV\Controllers\Admin\AdminController@searchForSelect2All')->middleware('permission:admin_view');
         Route::get('ajax-get-info', '\App\CRMDV\Controllers\Admin\AdminController@ajaxGetInfo');
 
-
-
         Route::get('edit/{id}', '\App\CRMDV\Controllers\Admin\AdminController@update')->middleware('permission:admin_view');
         Route::post('edit/{id}', '\App\CRMDV\Controllers\Admin\AdminController@update')->middleware('permission:admin_edit');
+
     });
 
     //  Hr xem tk admin
@@ -190,6 +200,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
     //  Website  da lam
     Route::group(['prefix' => 'codes'], function () {
         Route::get('ajax-get-info/{id}', '\App\CRMDV\Controllers\Admin\CodesController@ajaxGetInfo')->middleware('permission:codes_view');
+        Route::get('ajax-get-image/{id}', '\App\CRMDV\Controllers\Admin\CodesController@ajaxGetImage')->middleware('permission:codes_view');
 
         Route::get('update-bill-to-codes', '\App\CRMDV\Controllers\Admin\CodesController@updateBillToCode');
         Route::get('backup-to-html', '\App\CRMDV\Controllers\Admin\CodesController@backupToHtml');
@@ -357,6 +368,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
     //  chấm công
     Route::group(['prefix' => 'timekeeping'], function () {
         Route::match(array('GET', 'POST'), 'import-excel', '\App\CRMDV\Controllers\Admin\TimekeepingController@importExcel')->middleware('permission:timekeeper_edit');
+        Route::get('{id}', '\App\CRMDV\Controllers\Admin\TimekeepingController@getIndex')->middleware('permission:timekeeping_view');
 
         Route::get('', '\App\CRMDV\Controllers\Admin\TimekeepingController@getIndex')->middleware('permission:timekeeping_view');
         Route::get('publish', '\App\CRMDV\Controllers\Admin\TimekeepingController@getPublish')->name('timekeeping.publish')->middleware('permission:timekeeping_edit');
@@ -453,13 +465,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
     });
 
     //  Dữ liệu chấm công
+
     Route::group(['prefix' => 'timekeeper'], function () {
 
         Route::match(array('GET', 'POST'), 'import-excel', '\App\CRMDV\Controllers\Admin\TimekeeperController@importExcel')->middleware('permission:timekeeper_edit');
+        Route::get('bao-cao/{id}', '\App\CRMDV\Controllers\Admin\TimekeeperController@detail')->name('timekeeper')->middleware('permission:timekeeper_view');
 
         Route::get('', '\App\CRMDV\Controllers\Admin\TimekeeperController@getIndex')->name('timekeeper')->middleware('permission:timekeeper_view');
         Route::get('publish', '\App\CRMDV\Controllers\Admin\TimekeeperController@getPublish')->name('timekeeper.publish')->middleware('permission:timekeeper_edit');
         Route::get('bao-cao', '\App\CRMDV\Controllers\Admin\TimekeeperController@baoCao');
+//        Route::get('bao-cao/{id}', '\App\CRMDV\Controllers\Admin\TimekeeperController@getTimekeeperUser')->name('timekeeper.user')->middleware('permission:timekeeper_view');
+
         Route::match(array('GET', 'POST'), 'add', '\App\CRMDV\Controllers\Admin\TimekeeperController@add')->middleware('permission:timekeeper_edit');
         Route::get('delete/{id}', '\App\CRMDV\Controllers\Admin\TimekeeperController@delete')->middleware('permission:timekeeper_edit');
         Route::post('multi-delete', '\App\CRMDV\Controllers\Admin\TimekeeperController@multiDelete')->middleware('permission:timekeeper_edit');
@@ -511,6 +527,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
 Route::get('/admin/lead/edit', '\App\CRMDV\Controllers\Admin\LeadController@update')->middleware('get_permissions');
 
 Route::get('admin/lead/view', '\App\CRMDV\Controllers\Admin\LeadController@view');
+
 Route::get('demo-wordpress', '\App\CRMDV\Controllers\Admin\BillController@demoWordpress');
 Route::get('demo-ldp', '\App\CRMDV\Controllers\Admin\BillController@demoLdp');
 Route::get('check-exist', '\App\CRMDV\Controllers\Admin\AdminController@checkExist');

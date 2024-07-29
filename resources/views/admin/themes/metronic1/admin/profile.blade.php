@@ -311,6 +311,26 @@
                                                 </div>
                                             </div>
 
+                                            <div class="form-group form-group-role row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Phòng ban</label>
+                                                <div class="col-lg-9 col-xl-6">
+                                                    <?php
+                                                    $Phong_ban = App\CRMDV\Models\Phong_ban::class;
+                                                    $selectedPhongBanId = $result->phong_ban_id;
+                                                    ?>
+                                                    <select name="phong_ban_id" class="form-control"
+                                                            {{ in_array('admin_edit', $permissions) ? '' : 'disabled' }}>
+                                                        @foreach($Phong_ban::all() as $phongBan)
+                                                            <option value="{{ $phongBan->id }}" {{ $selectedPhongBanId == $phongBan->id ? 'selected' : '' }}>
+                                                                {{ $phongBan->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Giới thiệu</label>
                                                 <div class="col-lg-9 col-xl-6">

@@ -58,12 +58,19 @@ class ServiceProvider
                 'icon' => '<i class="flaticon2-time"></i>',
                 'td' => [
                     ['name' => 'cham_cong_xa_toi_da', 'type' => 'number', 'label' => 'Khoảng cách chấm công tối đa (m)'],
-                    ['name' => 'vp_long', 'type' => 'text', 'label' => 'Toạ độ: Lat'],
-                    ['name' => 'vp_lat', 'type' => 'text', 'label' => 'Toạ độ: Long'],
+                    ['name' => 'vp_lat', 'type' => 'text', 'label' => 'Toạ độ: Lat', 'des' => '<a href="https://prnt.sc/gS6VYa4_6-L1" target="_blank">Hướng dẫn lấy lat/long </a>'],
+                    ['name' => 'vp_long', 'type' => 'text', 'label' => 'Toạ độ: Long'],
                 ]
             ];
+            $module['tabs']['gio_lam_tab'] = [
+                'label' => 'Cấu hình thời gian chấm công',
+                'icon' => '<i class="flaticon-time"></i>',
+                'td' => [
+                    ['name' => 'gio_lam_sang', 'type' => 'time', 'label' => 'Giờ vào làm sáng'],
+                    ['name' => 'gio_lam_chieu', 'type' => 'time', 'label' => 'Giờ vào làm chiều'],
 
-
+                ]
+            ];
             return $module;
         }, 1, 1);
     }

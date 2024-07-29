@@ -1,4 +1,4 @@
-@extends(config('core.admin_theme').'.template')
+@extends('CRMDV.admin.new_header.new_template')
 @section('main')
 
     <!-- begin:: Content -->
@@ -302,7 +302,7 @@
                                                     $role_id = @\App\Models\RoleAdmin::where('admin_id', $result->id)->first()->role_id;
                                                     echo @\App\Models\Roles::find($role_id)->display_name;
                                                     ?>
-                                                    <select name="role_id" style="display: none;"  
+                                                    <select name="role_id" style="display: none;"
                                                             class="form-control" {{ in_array('admin_edit', $permissions) ? '' : 'disabled' }}>
                                                         @foreach($roles as $id => $name)
                                                             <option value="{{ $id }}" {{ $role_id == $id ? 'selected' : '' }}>{{ $name }}</option>

@@ -1,4 +1,5 @@
-@extends(config('core.admin_theme').'.template')
+{{--@extends(config('core.admin_theme').'.template')--}}
+@extends(config('core.admin_theme').'.import.new_header.new_template')
 @section('main')
     <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
         <div class="kt-portlet kt-portlet--mobile">

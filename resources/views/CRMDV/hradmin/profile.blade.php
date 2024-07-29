@@ -1,4 +1,4 @@
-@extends(config('core.admin_theme').'.template')
+@extends('CRMDV.hradmin.new_header.new_template')
 @section('main')
 
     <!-- begin:: Content -->

@@ -39,7 +39,8 @@ class DashboardController extends Controller
         if ($request->has('file')) {
             $fileRequest = $request->file;
             if (in_array($fileRequest->getClientOriginalExtension(), ['jpg', 'png', 'gif', 'jpeg'])) {
-                $path = 'upload/' . date('Y/m/d');
+                $path = 'upload/' . date('Y/m/d_His');
+
                 $base_path = public_path() . '/filemanager/userfiles/';
                 $dir_name = $base_path . $path;
                 if (!is_dir($dir_name)) {
@@ -50,7 +51,7 @@ class DashboardController extends Controller
                     $file = CommonHelper::saveFile($request->file('file'), $path);
                     return response()->json([
                         'status' => true,
-                        'file' => '/public/filemanager/userfiles/' . $file,
+                        'file' => '/filemanager/userfiles/' . $file,
                         'value' => $file,
                     ]);
                 }

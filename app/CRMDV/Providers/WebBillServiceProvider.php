@@ -113,6 +113,7 @@ class WebBillServiceProvider extends ServiceProvider
                 'dhbill_view', 'dhbill_edit', 
                 // 'service_view', 'service_add', 'service_edit', 'service_delete',
                 'codes_view', 'codes_add', 'codes_edit', 'codes_delete',
+                'bill_view', 'bill_add', 'bill_edit', 'bill_delete',
                 'dashboard','remind',
                 'bill_histories_delete',
                 'lead_view', 'lead_add', 'lead_edit', 'lead_delete', 'lead_assign', 'lead_float_view', 'lead_import',

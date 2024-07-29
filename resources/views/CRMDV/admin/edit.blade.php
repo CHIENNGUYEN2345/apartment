@@ -1,4 +1,4 @@
-@extends(config('core.admin_theme').'.template')
+@extends('CRMDV.admin.new_header.new_template')
 @section('main')
     <form class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid {{ @$module['code'] }}"
           action="" method="POST"
@@ -17,10 +17,10 @@
                         </div>
                         <div class="kt-portlet__head-toolbar">
                             @if(\Auth::guard('admin')->user()->super_admin == 1)
-                            <a href="/admin/profile/{{ $result->id }}/login" class="btn btn-clean kt-margin-r-10">
-                                <i class="la la-refresh"></i>
-                                <span class="kt-hidden-mobile">Đăng nhập vào TK này</span>
-                            </a>
+                                <a href="/admin/profile/{{ $result->id }}/login" class="btn btn-clean kt-margin-r-10">
+                                    <i class="la la-refresh"></i>
+                                    <span class="kt-hidden-mobile">Đăng nhập vào TK này</span>
+                                </a>
                             @endif
 
                             <a href="/admin/{{ $module['code'] }}" class="btn btn-clean kt-margin-r-10">
@@ -147,11 +147,13 @@
                                         $field = ['name' => 'role_id', 'type' => 'custom', 'field' => 'CRMDV.admin.partials.select_role', 'label' => 'Quyền', 'class' => 'required', 'model' => \App\Models\Roles::class, 'display_field' => 'display_name'];
                                         $field['value'] = @$result->{$field['name']};
                                         ?>
-                                    <div class="form-group-div form-group {{ @$field['group_class'] }}"
-                                         id="form-group-{{ $field['name'] }}">
-                                        @if($field['type'] == 'custom')
-                                            @include('CRMDV.admin.partials.select_role', ['field' => $field])
-                                        @else
+                                    {{--                                    <div class="form-group-div form-group {{ @$field['group_class'] }}"--}}
+                                    {{--                                         id="form-group-{{ $field['name'] }}">--}}
+                                    @if($field['type'] == 'custom')
+                                        @include('CRMDV.admin.partials.select_role', ['field' => $field])
+                                    @else
+                                        <div class="form-group-div form-group {{ @$field['group_class'] }}"
+                                             id="form-group-{{ $field['name'] }}">
                                             <label for="{{ $field['name'] }}">{{ trans(@$field['label']) }} @if(strpos(@$field['class'], 'require') !== false)
                                                     <span class="color_btd">*</span>
                                                 @endif</label>
@@ -159,8 +161,9 @@
                                                 @include(config('core.admin_theme').".form.fields.".$field['type'], ['field' => $field])
                                                 <span class="text-danger">{{ $errors->first($field['name']) }}</span>
                                             </div>
-                                        @endif
-                                    </div>
+                                        </div>
+                                    @endif
+                                    {{--                                    </div>--}}
                                 @endif
                             </div>
                         </div>

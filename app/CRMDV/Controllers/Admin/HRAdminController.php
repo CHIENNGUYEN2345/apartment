@@ -32,7 +32,7 @@ class HRAdminController extends CURDBaseController
         'table_name' => 'admin',
         'list' => [
             ['name' => 'image', 'type' => 'image', 'label' => 'admin.image'],
-            ['name' => 'name', 'type' => 'text_admin_edit', 'label' => 'admin.name', 'sort' => true],
+            ['name' => 'name', 'type' => 'custom', 'td' => 'CRMDV.admin.td.ten', 'label' => 'admin.name','sort' => true],
             ['name' => 'phong_ban_id', 'type' => 'relation_filter','object'=>'room', 'display_field'=>'name','label' => 'Phòng',  'sort' => true],
             ['name' => 'role_id', 'type' => 'role_name', 'label' => 'admin.permission'],
             ['name' => 'tel', 'type' => 'text', 'label' => 'admin.phone', 'sort' => true],
@@ -54,16 +54,16 @@ class HRAdminController extends CURDBaseController
                 ['name' => 'name', 'type' => 'text', 'class' => 'required', 'label' => 'admin.full_name', 'group_class' => 'col-md-6'],
                 ['name' => 'short_name', 'type' => 'text', 'class' => '', 'label' => 'Tên ngắn gọn', 'group_class' => 'col-md-6'],
                 ['name' => 'email', 'type' => 'custom', 'field' => 'CRMDV.admin.form.email', 'class' => 'required', 'label' => 'admin.email', 'group_class' => 'col-md-3'],
-                ['name' => 'tel', 'type' => 'custom', 'class' => 'required', 'field' => 'CRMDV.admin.form.tel', 'label' => 'admin.phone', 'group_class' => 'col-md-2'],
-                ['name' => 'code', 'type' => 'custom', 'class' => 'required', 'field' => 'CRMDV.admin.form.code', 'label' => 'Mã nhân viên', 'group_class' => 'col-md-2'],
-                ['name' => 'may_cham_cong_id', 'type' => 'number', 'class' => '', 'label' => 'ID máy chấm công', 'group_class' => 'col-md-2'],
-                ['name' => 'status', 'type' => 'checkbox', 'label' => 'admin.active', 'value' => 1, 'group_class' => 'col-md-3'],
+                ['name' => 'tel', 'type' => 'custom', 'class' => 'required', 'field' => 'CRMDV.admin.form.tel', 'label' => 'admin.phone', 'group_class' => 'col-md-3'],
+                ['name' => 'code', 'type' => 'custom', 'class' => 'required', 'field' => 'CRMDV.admin.form.code', 'label' => 'Mã nhân viên', 'group_class' => 'col-md-3'],
+                ['name' => 'may_cham_cong_id', 'type' => 'custom', 'field' =>'CRMDV.hradmin.form.number', 'class' => '', 'label' => 'ID máy chấm công', 'group_class' => 'col-md-3'],
+//                ['name' => 'status', 'type' => 'checkbox', 'label' => 'admin.active', 'value' => 1, 'group_class' => 'col-md-3'],
                 ['name' => 'password', 'type' => 'password', 'class' => 'required', 'label' => 'admin.password', 'group_class' => 'col-md-6'],
                 ['name' => 'password_confimation', 'type' => 'password', 'class' => 'required', 'label' => 'admin.re_password', 'group_class' => 'col-md-6'],
                 /*['name' => 'role_id', 'type' => 'custom', 'field' => 'CRMDV.hradmin.partials.select_role', 'label' => 'Quyền', 'class' => 'required', 'model' => \App\Models\Roles::class, 'display_field' => 'display_name', 'group_class' => 'col-md-6'],*/
                 
-                ['name' => 'address', 'type' => 'text', 'class' => '', 'label' => 'admin.address', 'group_class' => 'col-md-3'],
-                ['name' => 'province_id', 'type' => 'select_location', 'label' => 'admin.choose_place', 'group_class' => 'col-md-9'],
+                ['name' => 'address', 'type' => 'custom','field' =>'CRMDV.hradmin.form.text', 'class' => '', 'label' => 'Địa chỉ', 'group_class' => 'col-md-3'],
+                ['name' => 'province_id', 'type' => 'custom', 'field' => 'CRMDV.hradmin.form.select_location2', 'group_class' => 'col-md-9'],
                 ['name' => 'date_start_work', 'type' => 'date', 'class' => '', 'label' => 'Ngày bắt đầu tính lương', 'group_class' => 'col-md-4'],
                 ['name' => 'intro', 'type' => 'textarea', 'class' => '', 'label' => 'admin.introduce'],
                 ['name' => 'note', 'type' => 'textarea', 'class' => '', 'label' => 'admin.note', 'inner' => 'rows=10'],
@@ -216,6 +216,7 @@ class HRAdminController extends CURDBaseController
 
     public function add(Request $request)
     {
+
         try {
 
             if (!$_POST) {

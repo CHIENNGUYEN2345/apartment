@@ -1,4 +1,4 @@
-@extends(config('core.admin_theme').'.template')
+@extends('CRMDV.service.new_header.new_template')
 @section('main')
     <form class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid {{ @$module['code'] }}"
           action="" method="POST"
@@ -62,7 +62,7 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-12 col-md-8">
+            <div class="col-xs-12 col-md-12">
                 <!--begin::Portlet-->
                 <div class="kt-portlet">
                     <div class="kt-portlet__head">
@@ -113,11 +113,11 @@
                 </div>
                 <!--end::Portlet-->
             </div>
-            <div class="col-xs-12 col-md-4">
-                <!--begin::Portlet-->
-                @include('CRMDV.partials.service_price', ['module' => $module])
-                <!--end::Portlet-->
-            </div>
+{{--            <div class="col-xs-12 col-md-4">--}}
+{{--                <!--begin::Portlet-->--}}
+{{--                @include('CRMDV.partials.service_price', ['module' => $module])--}}
+{{--                <!--end::Portlet-->--}}
+{{--            </div>--}}
         </div>
     </form>
 @endsection

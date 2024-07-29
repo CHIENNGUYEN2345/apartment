@@ -1,4 +1,4 @@
-@extends(config('core.admin_theme').'.template')
+@extends('CRMDV.codes.new_header.new_template')
 @section('main')
     <form class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid {{ @$module['code'] }}"
           action="" method="POST"
@@ -182,9 +182,15 @@
                                         @endif
                                     </div>
                                 @endforeach
+                                    @if(in_array($module['code'].'_add', $permissions))
+                                        <div class="button-mobie text-center">
+                                            <button class="btn btn-primary">Sửa bảng hàng</button>
+                                        </div>
+                                    @endif
                             </div>
                         </div>
                     </div>
+
                     <!--end::Form-->
                 </div>
                 <!--end::Portlet-->
@@ -198,6 +204,33 @@
     <script src="{{asset('ckeditor/ckeditor.js') }}"></script>
     <script src="{{asset('ckfinder/ckfinder.js') }}"></script>
     <script src="{{asset('libs/file-manager.js') }}"></script>
+    <style>
+        .kt-radio-list{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .button-mobie{
+            display: none;
+        }
+        @media (max-width: 435px) {
+            .dropzone .dz-preview .dz-image {
+                width: 80px;
+                height: 80px;
+            }
+            .button-mobie{
+                display: block;
+            }
+            .dropzone .dz-preview {
+                margin: 10px !important;
+            }
+            .dropzone.dropzone-default {
+                padding: 10px;
+
+            }
+        }
+    </style>
+
     {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>--}}
 @endsection
 @section('custom_footer')

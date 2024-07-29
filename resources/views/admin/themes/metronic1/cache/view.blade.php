@@ -1,4 +1,5 @@
-@extends('admin.themes.metronic1.template')
+{{--@extends('admin.themes.metronic1.template')--}}
+@extends(config('core.admin_theme').'.cache.new_header.new_template')
 @section('main')
     <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid {{ @$module['code'] }}"
           action="" method="POST"

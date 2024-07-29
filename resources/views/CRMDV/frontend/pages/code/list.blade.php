@@ -256,7 +256,7 @@
             height: 2rem;
             min-width: 2rem;
             vertical-align: middle;
-            padding: 0.5rem;
+            padding: 1.5rem;
             text-align: center;
             position: relative;
             font-size: 1rem;
@@ -284,7 +284,7 @@
             height: 2rem;
             min-width: 2rem;
             vertical-align: middle;
-            padding: 0.5rem;
+            padding: 1.5rem;
             text-align: center;
             position: relative;
             font-size: 1rem;

@@ -1,4 +1,4 @@
-@extends(config('core.admin_theme').'.template')
+@extends('CRMDV.timekeeper.new_header.new_template')
 @section('main')
 <?php
 $cau_hinh = \App\Models\Setting::where('type', 'gio_lam_tab')->pluck('value', 'name')->toArray();
@@ -18,6 +18,28 @@ $rooms = [
     30 => 'CSKH',
 ];
 ?>
+<style>
+    @media (max-width: 767px) {
+
+        /*.last-column {*/
+        /*    position:  absolute;*/
+        /*    width: 5em;*/
+        /*    height: 100%;*/
+        /*    right: -15px;*/
+        /*    top: auto;*/
+        /*    margin-top: -1px;*/
+        /*    background: #fff;*/
+        /*}*/
+
+        /*th, td{*/
+        /*    padding: 1px ;*/
+        /*    text-align: center;*/
+
+        /*}*/
+
+    }
+</style>
+
     <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
         <div class="kt-portlet kt-portlet--mobile">
             <div class="kt-portlet__head kt-portlet__head--lg">
@@ -40,8 +62,8 @@ $rooms = [
             <div class="kt-portlet kt-portlet--height-fluid">
                     <div class="kt-portlet__body">
                         <div class="kt-widget12">
-                            <div class="kt-widget12__content">
-                                <table class="table table-striped">
+                            <div class="kt-widget12__content table-responsive">
+                                <table class="table table-striped ">
                                     <thead class="kt-datatable__head">
                                         <tr>
                                             <th>STT</th>
@@ -52,8 +74,7 @@ $rooms = [
                                             <th>Buổi đi làm</th>
                                             <th>Ngày đi làm</th>
                                             <th>Buổi muộn</th>
-                                            <th>Buổi muộn có phép</th>
-                                            <th>Chờ duyệt</th>
+                                            <th>Về sớm</th>
                                         </tr>
                                     </thead>
                                     <tbody class="kt-datatable__body ps ps--active-y">
@@ -78,6 +99,7 @@ $rooms = [
                                                     'room_name' => @$rooms[$timekeeper->room_id],
                                                     'tong_cong' => [],
                                                     'di_muon' => [],
+                                                    've_som' => [],
                                                     'di_muon_co_phep' => 0,
                                                     'admin_id' => $timekeeper->ad_id,
                                                     'image' => $timekeeper->image,
@@ -85,10 +107,11 @@ $rooms = [
                                             }
                                             
 
-                                    		$val = checkChamCong($timekeeper, [], $admins[$timekeeper->ad_id]['tong_cong'], $admins[$timekeeper->ad_id]['di_muon'], $cau_hinh);
+                                    		$val = checkChamCong($timekeeper, [], $admins[$timekeeper->ad_id]['tong_cong'], $admins[$timekeeper->ad_id]['di_muon'],$admins[$timekeeper->ad_id]['ve_som'], $cau_hinh);
 
                                     		$admins[$timekeeper->ad_id]['tong_cong'] = $val['tong_cong'];
                                             $admins[$timekeeper->ad_id]['di_muon'] = $val['di_muon'];
+                                            $admins[$timekeeper->ad_id]['ve_som'] = $val['ve_som'];
                                             $admins[$timekeeper->ad_id]['di_muon_co_phep'] = $val['di_muon_co_phep'] ? $admins[$timekeeper->ad_id]['di_muon_co_phep'] + 1: $admins[$timekeeper->ad_id]['di_muon_co_phep'];
 
                                     	}
@@ -98,24 +121,17 @@ $rooms = [
                                             <tr data-admin_id="{{ $value['admin_id'] }}">
                                                 <td><?php echo $i; $i++;?></td>
                                                 <td>
-                                                    <div class="kt-media">
+                                                    <div class="kt-media" style="width: 40px;">
                                                         <img data-src="{{ CommonHelper::getUrlImageThumb($value['image'], 80, 80) }}" class="file_image_thumb lazy" title="CLick để phóng to ảnh" style="cursor: pointer;">
                                                     </div>
                                                 </td>
-                                                <td><a href="/admin/profile/{{ $value['admin_id'] }}">{{ $value['name'] }}</a></td>
+                                                <td><a href="/admin/timekeeper/bao-cao/{{ $value['admin_id'] }}">{{ $value['name'] }}</a></td>
                                                 <td>{{ $value['code'] }}</td>
                                                 <td>{{ $value['room_name'] }}</td>
                                                 <td>{{ count($value['tong_cong']) }}</td>
                                                 <td>{{ count($value['tong_cong'])/2 }}</td>
                                                 <td class="{{ count($value['di_muon']) > 3 ? 'text-red' : '' }}">{{ count($value['di_muon']) }}</td>
-                                                <td>{{ $value['di_muon_co_phep'] }}</td>
-                                                <td>
-                                                    <?php
-                                                        $chua_duyet = \App\CRMDV\Models\Timekeeper::where('admin_id', $value['admin_id'])->where('status', '!=', 1)->where('time', '>=', date('Y-m-01 00:00:00', strtotime(date('Y-m')." -0 month")))
-                                                                        ->where('time', '<=', date('Y-m-31 23:59:00', strtotime(date('Y-m')." -0 month")))->count();
-                                                        ?>
-                                                    <a href="/admin/timekeeper?search=true&choose_time=thang_truoc&status=Chờ duyệt&admin_id={{ $value['admin_id'] }}">{{ $chua_duyet }}</a>
-                                                </td>
+                                                <td class="{{ count($value['di_muon']) > 3 ? 'text-red' : '' }}">{{ count($value['ve_som']) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -133,49 +149,49 @@ $rooms = [
           href="{{ asset(config('core.admin_asset').'/css/list.css') }}">
     <style>
         /*fix cứng dòng đầu*/
-        .kt-portlet thead.kt-datatable__head {
-            top: 45px;
-            z-index: 1;
-            background: #ffffff;
-            margin-right: 2%;
-        }
-        .scrolled thead.kt-datatable__head th:nth-child(1) {
-            padding-right: 6vw;
-        }
-        .scrolled thead.kt-datatable__head th:nth-child(2) {
-            width: 9vw;
-        }
-        .scrolled thead.kt-datatable__head th:nth-child(3) {
-            width: 13vw;
-        }
-        .scrolled thead.kt-datatable__head th:nth-child(4) {
-            width: 7vw;
-        }
-        .scrolled thead.kt-datatable__head th:nth-child(5) {
-            width: 8vw;
-        }
-        .scrolled thead.kt-datatable__head th:nth-child(6) {
-            width: 9vw;
-        }
-        .scrolled thead.kt-datatable__head th:nth-child(7) {
-            width: 8vw;
-        }
-        .scrolled thead.kt-datatable__head th:nth-child(8) {
-            width: 9vw;
-        }
-        .kt-portlet .kt-portlet__body {
-            margin-bottom: 300px;
-        }
+        /*.kt-portlet thead.kt-datatable__head {*/
+        /*    top: 45px;*/
+        /*    z-index: 1;*/
+        /*    background: #ffffff;*/
+        /*    margin-right: 2%;*/
+        /*}*/
+        /*.scrolled thead.kt-datatable__head th:nth-child(1) {*/
+        /*    padding-right: 6vw;*/
+        /*}*/
+        /*.scrolled thead.kt-datatable__head th:nth-child(2) {*/
+        /*    width: 9vw;*/
+        /*}*/
+        /*.scrolled thead.kt-datatable__head th:nth-child(3) {*/
+        /*    width: 13vw;*/
+        /*}*/
+        /*.scrolled thead.kt-datatable__head th:nth-child(4) {*/
+        /*    width: 7vw;*/
+        /*}*/
+        /*.scrolled thead.kt-datatable__head th:nth-child(5) {*/
+        /*    width: 8vw;*/
+        /*}*/
+        /*.scrolled thead.kt-datatable__head th:nth-child(6) {*/
+        /*    width: 9vw;*/
+        /*}*/
+        /*.scrolled thead.kt-datatable__head th:nth-child(7) {*/
+        /*    width: 8vw;*/
+        /*}*/
+        /*.scrolled thead.kt-datatable__head th:nth-child(8) {*/
+        /*    width: 9vw;*/
+        /*}*/
+        /*.kt-portlet .kt-portlet__body {*/
+        /*    margin-bottom: 300px;*/
+        /*}*/
 
-        .kt-portlet td {
-            width: 100px; /* Set the desired fixed width for the table cells */
-            white-space: nowrap; /* Prevent line breaks within cells */
-            overflow: hidden; /* Hide any overflowing content */
-            text-overflow: ellipsis; /* Show ellipsis (...) for text that overflows */
-        }
-        .text-red {
-            color: red !important;
-        }
+        /*.kt-portlet td {*/
+        /*    width: 100px; !* Set the desired fixed width for the table cells *!*/
+        /*    white-space: nowrap; !* Prevent line breaks within cells *!*/
+        /*    overflow: hidden; !* Hide any overflowing content *!*/
+        /*    text-overflow: ellipsis; !* Show ellipsis (...) for text that overflows *!*/
+        /*}*/
+        /*.text-red {*/
+        /*    color: red !important;*/
+        /*}*/
     </style>
 @endsection
 @section('custom_footer')
@@ -186,20 +202,20 @@ $rooms = [
 
     <script>
         //  fix cứng dòng đầu
-        window.addEventListener('scroll', function() {
-            var header = document.querySelector('.kt-datatable__head');
-            var container = document.querySelector('.kt-widget12__content');
-            var rect = container.getBoundingClientRect();
-
-            if (rect.top <= 0 && rect.bottom > 0) {
-                header.style.position = 'fixed';
-                header.style.top = '20';
-                container.classList.add('scrolled');
-            } else {
-                header.style.position = 'static';
-                container.classList.remove('scrolled');
-            }
-        });
+        // window.addEventListener('scroll', function() {
+        //     var header = document.querySelector('.kt-datatable__head');
+        //     var container = document.querySelector('.kt-widget12__content');
+        //     var rect = container.getBoundingClientRect();
+        //
+        //     if (rect.top <= 0 && rect.bottom > 0) {
+        //         header.style.position = 'fixed';
+        //         header.style.top = '20';
+        //         container.classList.add('scrolled');
+        //     } else {
+        //         header.style.position = 'static';
+        //         container.classList.remove('scrolled');
+        //     }
+        // });
     </script>
 @endsection
 @push('scripts')

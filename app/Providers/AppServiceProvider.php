@@ -51,7 +51,10 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //  Cấu hình link https
-        $this->app['request']->server->set('HTTPS', env('HTTPS'));
+        //$this->app['request']->server->set('HTTPS', env('HTTPS'));
+		$this->app->bind('path.public', function() {
+       return base_path('public_html');
+    });
     }
 
     public function settings()

@@ -1,4 +1,4 @@
-@extends(config('core.admin_theme').'.template')
+@extends('CRMDV.timekeeper.new_header.new_template')
 @section('main')
 <?php
 $cau_hinh = \App\Models\Setting::where('type', 'gio_lam_tab')->pluck('value', 'name')->toArray();
@@ -23,7 +23,7 @@ require base_path('resources/views/CRMDV/timekeeper/funtions.php');
 
                         <div class="">
                             <input type="text" name="quick_search" value="{{ @$_GET['quick_search'] }}"
-                                   class="form-control" title="Chỉ cần enter để thực hiện tìm kiếm"
+                                   class="form-control w-100" title="Chỉ cần enter để thực hiện tìm kiếm"
                                    placeholder="Tìm kiếm nhanh">
                         </div>
                         <div class="kt-portlet__head-actions">
@@ -171,6 +171,7 @@ require base_path('resources/views/CRMDV/timekeeper/funtions.php');
                         <tbody class="kt-datatable__body ps ps--active-y" style="max-height: 496px;">
                             <?php
                             $di_muon = [];
+                            $ve_som = [];
                             $tong_cong = [];
                             $ls_cham_cong = [];
                             $stt = 1;
@@ -178,10 +179,12 @@ require base_path('resources/views/CRMDV/timekeeper/funtions.php');
                         @foreach($listItem as $item)
                             <?php
                             $cham_cong_trung = false;
-                            $val = checkChamCong($item, $ls_cham_cong, $tong_cong, $di_muon, $cau_hinh);
+                            $val = checkChamCong($item, $ls_cham_cong, $tong_cong, $di_muon,$ve_som, $cau_hinh);
+//                            dd($val);
                             $ls_cham_cong = $val['ls_cham_cong'];
                             $tong_cong = $val['tong_cong'];
                             $di_muon = $val['di_muon'];
+                            $ve_som = $val['ve_som'];
                             $cham_cong_trung = $val['cham_cong_trung'];
 
                             ?>
@@ -247,6 +250,7 @@ require base_path('resources/views/CRMDV/timekeeper/funtions.php');
         </div>
         <div class="lead-chart">
             <span><strong>Đi muộn:</strong> {{ count($di_muon) }} buổi.</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <span><strong>Đi muộn:</strong> {{ count($ve_som) }} buổi.</span> |
             <span><strong>Tổng công:</strong> {{ count($tong_cong) }} buổi = {{ count($tong_cong)/2 }} ngày công.</span>&nbsp;&nbsp;|&nbsp;
         </div>
     </div>

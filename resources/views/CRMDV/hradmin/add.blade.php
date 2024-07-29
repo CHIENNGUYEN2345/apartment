@@ -1,4 +1,4 @@
-@extends(config('core.admin_theme').'.template')
+@extends('CRMDV.hradmin.new_header.new_template')
 @section('main')
     <form class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid {{ @$module['code'] }}"
           action="" method="POST"
@@ -78,21 +78,22 @@
                         <div class="kt-portlet__body">
                             <div class="kt-section kt-section--first">
                                 @foreach($module['form']['general_tab'] as $field)
-                                    
-                                        @if($field['type'] == 'custom')
-                                            @include($field['field'], ['field' => $field])
-                                        @else
-                                            <div class="form-group-div form-group {{ @$field['group_class'] }}"
-                                         id="form-group-{{ $field['name'] }}">
-                                                <label for="{{ $field['name'] }}">{{ trans(@$field['label']) }} @if(strpos(@$field['class'], 'require') !== false)
-                                                        <span class="color_btd">*</span>@endif</label>
-                                                <div class="col-xs-12">
-                                                    @include(config('core.admin_theme').".form.fields.".$field['type'], ['field' => $field])
-                                                    <span class="text-danger">{{ $errors->first($field['name']) }}</span>
-                                                    <span class="form-text text-muted">{!! @$field['des'] !!}</span>
-                                                </div>
+
+                                    @if($field['type'] == 'custom')
+                                        @include($field['field'], ['field' => $field])
+                                    @else
+                                        <div class="form-group-div form-group {{ @$field['group_class'] }}"
+                                             id="form-group-{{ $field['name'] }}">
+                                            <label for="{{ $field['name'] }}">{{ trans(@$field['label']) }} @if(strpos(@$field['class'], 'require') !== false)
+                                                    <span class="color_btd">*</span>
+                                                @endif</label>
+                                            <div class="col-xs-12">
+                                                @include(config('core.admin_theme').".form.fields.".$field['type'], ['field' => $field])
+                                                <span class="text-danger">{{ $errors->first($field['name']) }}</span>
+                                                <span class="form-text text-muted">{!! @$field['des'] !!}</span>
                                             </div>
-                                        @endif
+                                        </div>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
@@ -117,28 +118,31 @@
                         <div class="kt-portlet__body">
                             <div class="kt-section kt-section--first">
                                 @foreach($module['form']['more_info_tab'] as $field)
-                                    
-                                        @if($field['type'] == 'custom')
-                                            @include(config('core.admin_theme').".".$field['field'], ['field' => $field])
-                                        @else
-                                            <div class="form-group-div form-group {{ @$field['group_class'] }}"
-                                            id="form-group-{{ $field['name'] }}">
-                                                <label for="{{ $field['name'] }}">{{ trans(@$field['label']) }} @if(strpos(@$field['class'], 'require') !== false)
-                                                    <span class="color_btd">*</span>@endif</label>
-                                                <div class="col-xs-12">
-                                                    @include(config('core.admin_theme').".form.fields.".$field['type'], ['field' => $field])
-                                                    <span class="text-danger">{{ $errors->first($field['name']) }}</span>
-                                                </div>
+
+                                    @if($field['type'] == 'custom')
+                                        @include(config('core.admin_theme').".".$field['field'], ['field' => $field])
+                                    @else
+                                        <div class="form-group-div form-group {{ @$field['group_class'] }}"
+                                             id="form-group-{{ $field['name'] }}">
+                                            <label for="{{ $field['name'] }}">{{ trans(@$field['label']) }} @if(strpos(@$field['class'], 'require') !== false)
+                                                    <span class="color_btd">*</span>
+                                                @endif</label>
+                                            <div class="col-xs-12">
+                                                @include(config('core.admin_theme').".form.fields.".$field['type'], ['field' => $field])
+                                                <span class="text-danger">{{ $errors->first($field['name']) }}</span>
                                             </div>
-                                        @endif
-                                    
+                                        </div>
+                                    @endif
+
                                 @endforeach
 
                                 <?php
                                 $field = ['name' => 'role_id', 'type' => 'custom', 'field' => 'CRMDV.hradmin.partials.hr_select_role', 'label' => 'Quyền', 'class' => 'required', 'model' => \App\Models\Roles::class, 'display_field' => 'display_name'];
                                 ?>
-                                
-                                @include($field['field'], ['field' => $field])
+{{--                                <div class="111 form-group-div form-group {{ @$field['group_class'] }} mw-100"--}}
+{{--                                     id="form-group-{{ $field['name'] }}" >--}}
+                                    @include($field['field'], ['field' => $field])
+{{--                                </div>--}}
 
                             </div>
                         </div>

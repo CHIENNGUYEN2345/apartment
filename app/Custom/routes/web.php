@@ -10,7 +10,8 @@ Route::get('/', function () {
     return redirect('/admin');
 });
 
-Route::get('diem-danh', function(\Illuminate\Http\Request $r) {
+Route::get('diem-danh', function (\Illuminate\Http\Request $r) {
+//    dd($r);
     $admin = App\Models\Admin::select('id', 'name', 'code', 'may_cham_cong_id')->where('id', $r->admin_id)
         ->where('status', 1)->first();
     if (!is_object($admin)) {
@@ -21,17 +22,27 @@ Route::get('diem-danh', function(\Illuminate\Http\Request $r) {
     $timekeeper = \App\CRMDV\Models\Timekeeper::where('may_cham_cong_id', $admin->may_cham_cong_id)->where('time', '>=', date('Y-m-d 00:00:00'))->first();
 
     if (!is_object($timekeeper)) {
+
         $timekeeper = new \App\CRMDV\Models\Timekeeper();
         $timekeeper->admin_id = $r->admin_id;
         $timekeeper->may_cham_cong_id = $admin->may_cham_cong_id;
         $timekeeper->time = date('Y-m-d H:i:s');
         $timekeeper->create_by = $r->admin_id;
         $timekeeper->save();
-
+        CommonHelper::one_time_message('success', 'Điểm danh buổi sáng lúc ' . date('H:i:s Y-m-d') . '!');
+        return back();
+    } else {
+        $timekeeper = new \App\CRMDV\Models\Timekeeper();
+        $timekeeper->admin_id = $r->admin_id;
+        $timekeeper->may_cham_cong_id = $admin->may_cham_cong_id;
+        $timekeeper->time = date('Y-m-d H:i:s');
+        $timekeeper->create_by = $r->admin_id;
+        $timekeeper->save();
+        CommonHelper::one_time_message('success', 'Đã chấm ra về lúc ' . date('H:i:s Y-m-d') . '!');
+        return back();
     }
 
-    CommonHelper::one_time_message('success', 'Điểm danh thành công!');
-    return back();
+
 });
 
 
@@ -96,6 +107,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin', 'get_permissi
         Route::post('multi-delete', '\App\Custom\Controllers\Admin\BaoCaoDanKhachController@multiDelete')->middleware('permission:super_admin');
         Route::get('publish', '\App\Custom\Controllers\Admin\BaoCaoDanKhachController@getPublish')->name('bao_cao_dan_khach.publish')->middleware('permission:bao_cao_dan_khach_view');
         Route::get('ajax-get-info/{id}', '\App\Custom\Controllers\Admin\BaoCaoDanKhachController@ajaxGetInfo')->middleware('permission:bao_cao_dan_khach_view');
+        Route::get('ajax-get-image/{id}', '\App\Custom\Controllers\Admin\BaoCaoDanKhachController@ajaxGetImage')->middleware('permission:bao_cao_dan_khach_view');
 
 
     });

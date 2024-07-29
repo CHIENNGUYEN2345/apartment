@@ -16,7 +16,7 @@ class DashboardController extends Controller
 
     public function dashboardSoftware()
     {
-        $data['page_title'] = 'Thống kê';
+        $data['page_title'] = 'Thống  kê';
         $data['page_type'] = 'list';
 
         if (CRMDVHelper::getRoleType(\Auth::guard('admin')->user()->id) == 'customer') {
